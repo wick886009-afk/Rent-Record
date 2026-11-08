@@ -1,11 +1,6 @@
 import { google } from 'googleapis';
 import { INITIAL_WORKBOOK_DATA } from '@/lib/data/initial-workbook-data';
-import {
-  Tenant,
-  MonthlyRecord,
-  PaymentTransaction,
-  recalculateTenantLedgerChain,
-} from '@/lib/calculations';
+import { PaymentTransaction } from '@/lib/calculations';
 
 const SPREADSHEET_ID =
   process.env.GOOGLE_SHEETS_SPREADSHEET_ID ||
@@ -31,18 +26,14 @@ export function getGoogleSheetsClient() {
   return google.sheets({ version: 'v4', auth });
 }
 
-/**
- * Reads full workbook state from Google Sheets API v4 (or falls back to
- * verified workbook state when running in local/sandbox preview mode).
- */
 export async function fetchWorkbookStateFromSheets() {
   const sheets = getGoogleSheetsClient();
   if (!sheets) {
     return {
+      ...INITIAL_WORKBOOK_DATA,
       mode: 'hybrid-seed' as const,
       spreadsheetId: SPREADSHEET_ID,
       lastSync: new Date().toISOString(),
-      ...INITIAL_WORKBOOK_DATA,
     };
   }
 
@@ -57,20 +48,16 @@ export async function fetchWorkbookStateFromSheets() {
     valueRenderOption: 'UNFORMATTED_VALUE',
   });
 
-  // Parse live ranges and merge with schema
   const valueRanges = response.data.valueRanges || [];
   return {
+    ...INITIAL_WORKBOOK_DATA,
     mode: 'live-service-account' as const,
     spreadsheetId: SPREADSHEET_ID,
     lastSync: new Date().toISOString(),
     rawRangesCount: valueRanges.length,
-    ...INITIAL_WORKBOOK_DATA,
   };
 }
 
-/**
- * Writes a new payment transaction to 'Payments Ledger' and logs an entry in 'Audit Log & Settings'
- */
 export async function appendPaymentToGoogleSheet(payment: PaymentTransaction) {
   const sheets = getGoogleSheetsClient();
   const webhookUrl = process.env.GOOGLE_APPS_SCRIPT_WEBHOOK_URL;
@@ -116,17 +103,14 @@ export async function appendPaymentToGoogleSheet(payment: PaymentTransaction) {
   return { synced: false, mode: 'in-memory-staged' };
 }
 
-/**
- * Updates a tenant's monthly meter reading directly on their worksheet (Column D, row 3..14)
- */
 export async function updateMeterReadingInGoogleSheet(params: {
   sheetName: string;
-  monthIndex: number; // 1..12
+  monthIndex: number;
   currentReading: number | null;
   waterCharge?: number;
 }) {
   const sheets = getGoogleSheetsClient();
-  const rowNumber = params.monthIndex + 2; // Jan-26 is row 3, Dec-26 is row 14
+  const rowNumber = params.monthIndex + 2;
   const range = `'${params.sheetName}'!D${rowNumber}`;
 
   if (sheets) {
