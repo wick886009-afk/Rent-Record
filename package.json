@@ -1,0 +1,35 @@
+{
+  "name": "rentflow-property-management",
+  "version": "2.0.0",
+  "private": true,
+  "description": "RentFlow \u2014 Automated Rent & Tenant Management System (Next.js + Google Sheets API + A4 PDF Rent Slips)",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test:calculations": "npx tsx scripts/verify-calculations.ts"
+  },
+  "dependencies": {
+    "next": "15.1.0",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "googleapis": "^144.0.0",
+    "jspdf": "^2.5.2",
+    "jspdf-autotable": "^3.8.4",
+    "lucide-react": "^0.468.0",
+    "recharts": "^2.15.0",
+    "framer-motion": "^11.15.0",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.5.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.2",
+    "tsx": "^4.19.2"
+  }
+}
