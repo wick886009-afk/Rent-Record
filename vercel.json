@@ -1,12 +1,4 @@
 {
   "version": 2,
-  "framework": "nextjs",
-  "regions": [
-    "bom1"
-  ],
-  "functions": {
-    "app/api/**/*": {
-      "maxDuration": 30
-    }
-  }
+  "framework": "nextjs"
 }

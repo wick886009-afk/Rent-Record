@@ -1,0 +1,19 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './lib/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  theme: {
+    extend: {
+      colors: {
+        cream: '#FAF8F5',
+        navy: '#0F172A',
+        navyAccent: '#1B365D',
+        charcoal: '#1E293B',
+      },
+    },
+  },
+  plugins: [],
+};
