@@ -30,6 +30,7 @@ export async function fetchWorkbookStateFromSheets() {
   const sheets = getGoogleSheetsClient();
   if (!sheets) {
     return {
+      // Spread seed data first so the configured spreadsheet ID takes precedence.
       ...INITIAL_WORKBOOK_DATA,
       mode: 'hybrid-seed' as const,
       spreadsheetId: SPREADSHEET_ID,
@@ -50,6 +51,7 @@ export async function fetchWorkbookStateFromSheets() {
 
   const valueRanges = response.data.valueRanges || [];
   return {
+    // Keep runtime metadata after the seed data to avoid duplicate-property errors.
     ...INITIAL_WORKBOOK_DATA,
     mode: 'live-service-account' as const,
     spreadsheetId: SPREADSHEET_ID,
