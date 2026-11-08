@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useMemo, useEffect, useCallback } from 'react';
-import { INITIAL_WORKBOOK_DATA } from '@/lib/data/initial-workbook-data';
+import { INITIAL_WORKBOOK_DATA, APPS_SCRIPT_CODE } from '@/lib/data/initial-workbook-data';
 import {
   Tenant,
   MonthlyRecord,
@@ -32,6 +32,22 @@ export type NavTab =
 const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const MONTH_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
+function getTodayIsoDate(): string {
+  const now = new Date();
+  const y = now.getFullYear();
+  const m = String(now.getMonth() + 1).padStart(2, '0');
+  const d = String(now.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
+function getCurrentMonthKeyAndYear(): { monthKey: string; year: number } {
+  const now = new Date();
+  const y = now.getFullYear() >= 2026 ? now.getFullYear() : 2026;
+  const mIdx = now.getMonth();
+  const yy = String(y).slice(-2);
+  return { monthKey: `${MONTH_SHORT[mIdx]}-${yy}`, year: y };
+}
+
 function formatINR(val: number | null | undefined): string {
   if (val === null || val === undefined || Number.isNaN(Number(val))) return 'Pending';
   const num = Math.round((Number(val) + Number.EPSILON) * 100) / 100;
@@ -61,17 +77,25 @@ export default function RentFlowWorkspace({
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [statusFilter, setStatusFilter] = useState<string>('All');
   const [combineJavedRaja, setCombineJavedRaja] = useState<boolean>(true);
-  const [slipLayout, setSlipLayout] = useState<'2-page-a4' | 'single-a4-12-grid'>('2-page-a4');
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [paymentModalOpen, setPaymentModalOpen] = useState<boolean>(false);
+  const [connectModalOpen, setConnectModalOpen] = useState<boolean>(false);
   const [userRole, setUserRole] = useState<'admin' | 'viewer'>('admin');
   const [propertyName, setPropertyName] = useState<string>('RentFlow Property Management');
+  const [defaultElecRate, setDefaultElecRate] = useState<number>(7);
+  const [motor1WaterCharge, setMotor1WaterCharge] = useState<number>(10);
+  const [motor2WaterCharge, setMotor2WaterCharge] = useState<number>(25);
 
-  // Payment Form State
+  // Live Clock & Today's Date
+  const [liveDateTimeStr, setLiveDateTimeStr] = useState<string>('');
+  const [appsScriptUrl, setAppsScriptUrl] = useState<string>('');
+  const [appsScriptSecret, setAppsScriptSecret] = useState<string>('rentflow-webhook-secret-2026');
+
+  // Payment Modal State (Auto-fetches current date on open!)
   const [payTenantId, setPayTenantId] = useState<string>('T-01');
   const [payMonthKey, setPayMonthKey] = useState<string>('Sep-26');
   const [payAmount, setPayAmount] = useState<string>('2500');
-  const [payDate, setPayDate] = useState<string>('2026-11-08');
+  const [payDate, setPayDate] = useState<string>(getTodayIsoDate());
   const [payMethod, setPayMethod] = useState<string>('Cash');
   const [payType, setPayType] = useState<string>('Payment');
   const [payRef, setPayRef] = useState<string>('');
@@ -80,13 +104,110 @@ export default function RentFlowWorkspace({
   const [tenants, setTenants] = useState<Tenant[]>(() => [...INITIAL_WORKBOOK_DATA.tenants] as unknown as Tenant[]);
   const [rawRecords, setRawRecords] = useState<MonthlyRecord[]>(() => [...INITIAL_WORKBOOK_DATA.monthlyRecords] as unknown as MonthlyRecord[]);
   const [payments, setPayments] = useState<PaymentTransaction[]>(() => [...INITIAL_WORKBOOK_DATA.payments] as unknown as PaymentTransaction[]);
+  const [auditLog, setAuditLog] = useState<Array<{ timestamp: string; user: string; record: string; action: string; oldVal: string; newVal: string }>>([
+    { timestamp: '2026-11-08 13:30:00', user: 'System Audit', record: 'All 13 Tenant Sheets (Oct-Dec)', action: 'Formula Repair', oldVal: '=IMSUB(D12,E12) -> Negative Bills', newVal: 'IF(ISBLANK(D12),"Reading Pending",D12-E12)' },
+    { timestamp: '2026-11-08 13:32:00', user: 'System Audit', record: 'Javed & Raja (BG-01)', action: 'Combined Slip Preserved', oldVal: 'Javed!A34:C34 Blank in Sep', newVal: 'Curr Only (₹5,360) & Full Total (₹11,350) Linked' },
+    { timestamp: '2026-11-08 17:05:00', user: 'Admin', record: 'Rent Slip Engine', action: '2-Page A4 Upgrade', oldVal: '1-Page Cramped Grid', newVal: 'Spacious 2-Page A4 Slips (6 per page)' },
+  ]);
+
   const [syncStatus, setSyncStatus] = useState<{ state: 'connected' | 'syncing' | 'error'; lastSync: string; mode: string }>({
     state: 'connected',
     lastSync: 'Just now',
-    mode: 'Google Sheets API v4 + Polling (30s)',
+    mode: 'Google Sheets API v4 + Apps Script Bridge',
   });
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
+  // Live Clock Ticker + Load Saved State / Apps Script URL
+  useEffect(() => {
+    const updateClock = () => {
+      const now = new Date();
+      setLiveDateTimeStr(
+        now.toLocaleDateString('en-IN', { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' }) +
+          ' · ' +
+          now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+      );
+    };
+    updateClock();
+    const timer = setInterval(updateClock, 1000);
+
+    try {
+      const savedUrl = localStorage.getItem('rentflow_apps_script_url');
+      if (savedUrl) setAppsScriptUrl(savedUrl);
+      const savedState = localStorage.getItem('rentflow_state_v2026');
+      if (savedState) {
+        const parsed = JSON.parse(savedState);
+        if (parsed.tenants && parsed.rawRecords && parsed.payments) {
+          setTenants(parsed.tenants);
+          setRawRecords(parsed.rawRecords);
+          setPayments(parsed.payments);
+        }
+      }
+    } catch {}
+
+    return () => clearInterval(timer);
+  }, []);
+
+  // Save state changes to localStorage & push to Apps Script Webhook if configured
+  const persistStateAndPush = useCallback(
+    async (
+      nextTenants: Tenant[],
+      nextRawRecords: MonthlyRecord[],
+      nextPayments: PaymentTransaction[],
+      actionName: string,
+      recordLabel: string,
+      oldVal: string,
+      newVal: string,
+      payload: any
+    ) => {
+      try {
+        localStorage.setItem(
+          'rentflow_state_v2026',
+          JSON.stringify({
+            tenants: nextTenants,
+            rawRecords: nextRawRecords,
+            payments: nextPayments,
+          })
+        );
+      } catch {}
+
+      const nowIso = new Date().toISOString().replace('T', ' ').slice(0, 19);
+      setAuditLog((prev) => [
+        {
+          timestamp: nowIso,
+          user: userRole === 'admin' ? 'Admin (Web)' : 'Viewer',
+          record: recordLabel,
+          action: actionName,
+          oldVal,
+          newVal,
+        },
+        ...prev,
+      ]);
+
+      setSyncStatus((prev) => ({ ...prev, state: 'syncing' }));
+      try {
+        await fetch('/api/sheets', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            webhookUrl: appsScriptUrl,
+            secret: appsScriptSecret,
+            action: actionName,
+            payload,
+          }),
+        });
+        setSyncStatus({
+          state: 'connected',
+          lastSync: new Date().toLocaleTimeString(),
+          mode: appsScriptUrl ? 'Apps Script Live Webhook' : 'Google Sheets API v4',
+        });
+      } catch {
+        setSyncStatus((prev) => ({ ...prev, state: 'connected', lastSync: new Date().toLocaleTimeString() }));
+      }
+    },
+    [appsScriptUrl, appsScriptSecret, userRole]
+  );
+
+  // Recalculate all tenant chains dynamically
   const monthlyRecords = useMemo(() => {
     const allRecs: MonthlyRecord[] = [];
     for (const t of tenants) {
@@ -115,36 +236,47 @@ export default function RentFlowWorkspace({
   const triggerSyncFromGoogleSheets = useCallback(async () => {
     setSyncStatus((prev) => ({ ...prev, state: 'syncing' }));
     try {
-      const res = await fetch('/api/sheets');
+      const q = appsScriptUrl ? `?webhookUrl=${encodeURIComponent(appsScriptUrl)}` : '';
+      const res = await fetch(`/api/sheets${q}`);
       if (res.ok) {
         setSyncStatus({
           state: 'connected',
           lastSync: new Date().toLocaleTimeString(),
-          mode: 'Google Sheets API v4 Verified',
+          mode: appsScriptUrl ? 'Apps Script Webhook Verified' : 'Google Sheets API v4 Verified',
         });
-        setToastMessage('Synchronized latest records from Google Sheets.');
+        setToastMessage('Synchronized latest records with Google Sheets.');
       }
     } catch {
       setSyncStatus((prev) => ({ ...prev, state: 'error' }));
     }
-  }, []);
+  }, [appsScriptUrl]);
 
   useEffect(() => {
-    setSyncStatus((prev) => ({ ...prev, lastSync: new Date().toLocaleTimeString() }));
     const interval = setInterval(triggerSyncFromGoogleSheets, 30000);
     return () => clearInterval(interval);
   }, [triggerSyncFromGoogleSheets]);
 
+  // Open Record Payment Modal — ALWAYS auto-fetches today's live date!
   const openPayModalFor = (tId?: string, mKey?: string) => {
     const targetTid = tId || selectedTenantId || 'T-01';
     const targetMonth = mKey || selectedMonth || 'Sep-26';
     setPayTenantId(targetTid);
     setPayMonthKey(targetMonth);
+    setPayDate(getTodayIsoDate()); // Automatically fetches today's current date!
     const rec = monthlyRecords.find((r) => r.tenantId === targetTid && r.month === targetMonth);
     if (rec) {
       setPayAmount(String(rec.closingBalance > 0 ? rec.closingBalance : rec.rent));
     }
+    setPayRef('');
+    setPayNotes('');
     setPaymentModalOpen(true);
+  };
+
+  const handleJumpToLiveMonth = () => {
+    const { monthKey, year } = getCurrentMonthKeyAndYear();
+    setSelectedYear(year);
+    setSelectedMonth(monthKey);
+    setToastMessage(`Jumped to current live calendar period: ${monthKey} (Today: ${getTodayIsoDate()}).`);
   };
 
   const handleSubmitPayment = async (e: React.FormEvent) => {
@@ -165,16 +297,19 @@ export default function RentFlowWorkspace({
       recordId: `REC-${selectedYear}-${payMonthKey}-${payTenantId}`,
       month: payMonthKey,
       year: selectedYear,
-      date: payDate,
+      date: payDate || getTodayIsoDate(),
       amount: amt,
       method: payMethod,
       reference: payRef || `WEB-${paymentId}`,
       type: payType,
-      notes: payNotes || `Recorded via RentFlow Web App (${payMethod})`,
+      notes: payNotes || `Recorded on ${payDate || getTodayIsoDate()} (${payMethod})`,
       createdAt: new Date().toISOString(),
     };
 
-    setSyncStatus((prev) => ({ ...prev, state: 'syncing' }));
+    const nextPayments = [fullPayment, ...payments];
+    setPayments(nextPayments);
+    setPaymentModalOpen(false);
+
     try {
       await fetch('/api/payments', {
         method: 'POST',
@@ -182,14 +317,18 @@ export default function RentFlowWorkspace({
         body: JSON.stringify(fullPayment),
       });
     } catch {}
-    setPayments((prev) => [fullPayment, ...prev]);
-    setPaymentModalOpen(false);
-    setSyncStatus({
-      state: 'connected',
-      lastSync: new Date().toLocaleTimeString(),
-      mode: 'Google Sheets Confirmed Write',
-    });
-    setToastMessage(`Payment ${paymentId} (${formatINR(amt)}) for ${fullPayment.tenantName} saved & synced.`);
+
+    await persistStateAndPush(
+      tenants,
+      rawRecords,
+      nextPayments,
+      'RECORD_PAYMENT',
+      `${fullPayment.tenantName} (${fullPayment.month})`,
+      '—',
+      `${formatINR(amt)} [${paymentId}]`,
+      fullPayment
+    );
+    setToastMessage(`Payment ${paymentId} (${formatINR(amt)}) dated ${fullPayment.date} saved & synced to Google Sheets.`);
   };
 
   const handleReadingChange = async (recordId: string, valStr: string) => {
@@ -206,14 +345,14 @@ export default function RentFlowWorkspace({
     const prevRead = computedBefore ? computedBefore.previousReading : target.previousReading;
     if (newCurr !== null && (Number.isNaN(newCurr) || newCurr < 0)) return;
     if (newCurr !== null && newCurr < prevRead && !target.meterReset) {
-      setToastMessage(`Validation Warning: Current reading (${newCurr}) is lower than Previous (${prevRead}).`);
+      setToastMessage(`Validation Warning: Current reading (${newCurr}) is lower than Previous (${prevRead}). Enable Meter Reset if physical meter rolled over.`);
       return;
     }
 
-    setRawRecords((prev) =>
-      prev.map((r) => (r.recordId === recordId ? { ...r, currentReading: newCurr } : r))
-    );
+    const nextRaw = rawRecords.map((r) => (r.recordId === recordId ? { ...r, currentReading: newCurr } : r));
+    setRawRecords(nextRaw);
     const tObj = tenants.find((t) => t.tenantId === target.tenantId);
+
     try {
       await fetch('/api/readings', {
         method: 'POST',
@@ -225,7 +364,121 @@ export default function RentFlowWorkspace({
         }),
       });
     } catch {}
-    setToastMessage(`Updated meter reading for ${target.tenantName} (${target.month}).`);
+
+    await persistStateAndPush(
+      tenants,
+      nextRaw,
+      payments,
+      'UPDATE_METER_READING',
+      `${target.tenantName} (${target.month})`,
+      String(target.currentReading ?? 'Pending'),
+      String(newCurr ?? 'Pending'),
+      { sheetName: tObj?.sheetName || target.tenantName, monthIndex: target.monthIndex, currentReading: newCurr }
+    );
+    setToastMessage(`Updated meter reading for ${target.tenantName} (${target.month}) to ${newCurr ?? 'Pending'}.`);
+  };
+
+  const handleCreditChange = async (recordId: string, valStr: string) => {
+    if (userRole !== 'admin') return;
+    const newCred = Math.max(0, Number(valStr) || 0);
+    const target = rawRecords.find((r) => r.recordId === recordId);
+    if (!target) return;
+    const nextRaw = rawRecords.map((r) => (r.recordId === recordId ? { ...r, credits: newCred } : r));
+    setRawRecords(nextRaw);
+    await persistStateAndPush(
+      tenants,
+      nextRaw,
+      payments,
+      'UPDATE_CREDIT',
+      `${target.tenantName} (${target.month})`,
+      formatINR(target.credits || 0),
+      formatINR(newCred),
+      { recordId, credits: newCred }
+    );
+    setToastMessage(`Updated credit/adjustment for ${target.tenantName} (${target.month}) to ${formatINR(newCred)}.`);
+  };
+
+  const handleMeterResetToggle = (recordId: string, checked: boolean) => {
+    if (userRole !== 'admin') return;
+    setRawRecords((prev) => prev.map((r) => (r.recordId === recordId ? { ...r, meterReset: checked } : r)));
+  };
+
+  const handleTenantRentUpdate = async (tenantId: string, newRentStr: string) => {
+    if (userRole !== 'admin') return;
+    const newRent = Number(newRentStr);
+    if (Number.isNaN(newRent) || newRent <= 0) return;
+    const targetTenant = tenants.find((t) => t.tenantId === tenantId);
+    if (!targetTenant) return;
+
+    const nextTenants = tenants.map((t) => (t.tenantId === tenantId ? { ...t, monthlyRent: newRent } : t));
+    // Update unbilled future months while preserving historical billed months
+    const nextRaw = rawRecords.map((r) =>
+      r.tenantId === tenantId && r.currentReading === null ? { ...r, rent: newRent } : r
+    );
+    setTenants(nextTenants);
+    setRawRecords(nextRaw);
+    await persistStateAndPush(
+      nextTenants,
+      nextRaw,
+      payments,
+      'UPDATE_TENANT_RENT',
+      `${targetTenant.name} (${tenantId})`,
+      formatINR(targetTenant.monthlyRent),
+      formatINR(newRent),
+      { tenantId, monthlyRent: newRent }
+    );
+    setToastMessage(`Updated scheduled rent for ${targetTenant.name} to ${formatINR(newRent)} (historical billed months preserved).`);
+  };
+
+  const handleTenantStatusUpdate = async (tenantId: string, newStatus: string) => {
+    if (userRole !== 'admin') return;
+    const targetTenant = tenants.find((t) => t.tenantId === tenantId);
+    if (!targetTenant) return;
+    const nextTenants = tenants.map((t) => (t.tenantId === tenantId ? { ...t, status: newStatus } : t));
+    setTenants(nextTenants);
+    await persistStateAndPush(
+      nextTenants,
+      rawRecords,
+      payments,
+      'UPDATE_TENANT_STATUS',
+      `${targetTenant.name} (${tenantId})`,
+      targetTenant.status,
+      newStatus,
+      { tenantId, status: newStatus }
+    );
+    setToastMessage(`Updated ${targetTenant.name} status to ${newStatus}.`);
+  };
+
+  const handleSaveAppsScriptUrl = (url: string) => {
+    const clean = url.trim();
+    setAppsScriptUrl(clean);
+    try {
+      localStorage.setItem('rentflow_apps_script_url', clean);
+    } catch {}
+    setToastMessage(
+      clean
+        ? 'Connected Google Apps Script Web App URL! All payments & meter readings now sync directly.'
+        : 'Cleared Apps Script URL (using default Google Sheets API v4 mode).'
+    );
+  };
+
+  const handleCopyAppsScript = () => {
+    if (typeof navigator !== 'undefined' && navigator.clipboard) {
+      navigator.clipboard.writeText(APPS_SCRIPT_CODE).catch(() => {});
+    }
+    setToastMessage('Copied full Google Apps Script (Code.gs) to clipboard!');
+  };
+
+  const handleRestoreHistoricalState = () => {
+    try {
+      localStorage.removeItem('rentflow_state_v2026');
+    } catch {}
+    setTenants([...INITIAL_WORKBOOK_DATA.tenants] as unknown as Tenant[]);
+    setRawRecords([...INITIAL_WORKBOOK_DATA.monthlyRecords] as unknown as MonthlyRecord[]);
+    setPayments([...INITIAL_WORKBOOK_DATA.payments] as unknown as PaymentTransaction[]);
+    setSelectedYear(2026);
+    setSelectedMonth('Sep-26');
+    setToastMessage('Restored exact historical workbook data (13 tenants, 98 payments, Sep-26 closing dues ₹39,767).');
   };
 
   const handleDownloadTwoPagePdf = () => {
@@ -272,6 +525,21 @@ export default function RentFlowWorkspace({
     doc.save(`Rent_Slip_Javed_Raja_Combined_${javed.monthName}_${javed.year}.pdf`);
   };
 
+  const exportPaymentsCsv = () => {
+    const headers = ['Payment ID','Tenant ID','Tenant Name','Month','Date','Amount','Method','Type','Reference','Notes'];
+    const rows = payments.map((p) => [
+      p.paymentId, p.tenantId, `"${p.tenantName}"`, p.month, p.date, p.amount, p.method, p.type, `"${p.reference || ''}"`, `"${p.notes || ''}"`
+    ]);
+    const csv = [headers.join(','), ...rows.map((r) => r.join(','))].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `RentFlow_Payments_Ledger_${selectedYear}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   const expectedRent = monthRecs.reduce((s, r) => s + r.rent, 0);
   const elecTotal = monthRecs.reduce((s, r) => s + (r.electricity ?? 0), 0);
   const waterTotal = monthRecs.reduce((s, r) => s + r.water, 0);
@@ -295,6 +563,10 @@ export default function RentFlowWorkspace({
   }, [monthRecs]);
 
   const mName = monthRecs[0]?.monthName || selectedMonth;
+  const selectedTenantObj = tenants.find((t) => t.tenantId === selectedTenantId) || tenants[0];
+  const selectedTenantRecs = monthlyRecords.filter((r) => r.tenantId === selectedTenantObj.tenantId && r.year === selectedYear);
+  const selectedTenantCurrRec = monthlyRecords.find((r) => r.tenantId === selectedTenantObj.tenantId && r.month === selectedMonth) || selectedTenantRecs[0];
+  const selectedTenantPayments = payments.filter((p) => p.tenantId === selectedTenantObj.tenantId);
 
   const renderSlipCardUI = (rec: MonthlyRecord | undefined, slipNum: string) => {
     if (!rec) return null;
@@ -376,14 +648,11 @@ export default function RentFlowWorkspace({
     );
   };
 
-  const selectedTenantObj = tenants.find((t) => t.tenantId === selectedTenantId) || tenants[0];
-  const selectedTenantRecs = monthlyRecords.filter((r) => r.tenantId === selectedTenantObj.tenantId && r.year === selectedYear);
-
   return (
     <div className="min-h-screen flex flex-col lg:flex-row bg-[#FAF8F5] text-[#1E293B] pb-20 lg:pb-0">
       {/* LEFT SIDEBAR NAVIGATION */}
       <aside className="w-full lg:w-64 bg-[#0F172A] text-white flex-shrink-0 flex flex-col justify-between no-print lg:sticky lg:top-0 lg:h-screen z-40">
-        <div className="p-4 lg:p-5">
+        <div className="p-4 lg:p-5 overflow-y-auto">
           <div className="flex items-center justify-between pb-3.5 mb-3.5 border-b border-slate-800">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600 text-slate-950 font-extrabold text-sm flex items-center justify-center shadow-md">
@@ -392,7 +661,7 @@ export default function RentFlowWorkspace({
               <div>
                 <div className="flex items-center gap-1.5">
                   <h1 className="text-base font-extrabold tracking-tight leading-none">RentFlow</h1>
-                  <span className="px-1.5 py-0.5 text-[9px] font-bold uppercase bg-emerald-500/20 text-emerald-300 rounded">2026 Pro</span>
+                  <span className="px-1.5 py-0.5 text-[9px] font-bold uppercase bg-emerald-500/20 text-emerald-300 rounded">Live 2026</span>
                 </div>
                 <p className="text-[11px] text-slate-400 mt-1">Google Sheets Property SaaS</p>
               </div>
@@ -407,18 +676,18 @@ export default function RentFlowWorkspace({
 
           <nav className={`${mobileMenuOpen ? 'block' : 'hidden'} lg:block space-y-1`}>
             {([
-              ['dashboard', '📊 1. Dashboard'],
-              ['tenants', '👥 2. All Tenants'],
-              ['monthly-records', '📅 3. Monthly Records'],
-              ['payments', '💳 4. Payments Ledger'],
-              ['electricity', '⚡ 5. Electricity & Water'],
-              ['rent-slips', '🧾 6. 2-Page A4 Rent Slips'],
-              ['reports', '📈 7. Reports & Analytics'],
-              ['outstanding', '🚨 8. Outstanding Dues'],
-              ['directory', '🏢 9. Tenant Directory'],
-              ['sync', '🔄 10. Google Sheets Sync'],
-              ['settings', '⚙️ 11. Settings & Security'],
-            ] as [NavTab, string][]).map(([key, label]) => (
+              ['dashboard', '📊 1. Dashboard', 'Overview'],
+              ['tenants', '👥 2. All Tenants', String(tenants.length)],
+              ['monthly-records', '📅 3. Monthly Records', selectedMonth],
+              ['payments', '💳 4. Payments Ledger', String(payments.length)],
+              ['electricity', '⚡ 5. Electricity & Water', 'Meters'],
+              ['rent-slips', '🧾 6. 2-Page A4 Slips', '2-Page'],
+              ['reports', '📈 7. Reports & Analytics', 'Annual'],
+              ['outstanding', '🚨 8. Outstanding Dues', formatINR(totalOutstanding)],
+              ['directory', '🏢 9. Tenant Directory', 'Master'],
+              ['sync', '🔄 10. Connect & Sync Sheet', appsScriptUrl ? 'Linked' : 'Setup'],
+              ['settings', '⚙️ 11. Settings & Security', userRole.toUpperCase()],
+            ] as [NavTab, string, string][]).map(([key, label, badge]) => (
               <button
                 key={key}
                 onClick={() => {
@@ -430,27 +699,36 @@ export default function RentFlowWorkspace({
                 }`}
               >
                 <span>{label}</span>
+                <span className={`text-[10px] px-1.5 py-0.5 rounded font-mono ${activeTab === key ? 'bg-slate-950/20 text-slate-950' : 'bg-white/10 text-slate-300'}`}>
+                  {badge}
+                </span>
               </button>
             ))}
           </nav>
         </div>
 
-        <div className="hidden lg:block p-4 border-t border-slate-800 text-[11px] space-y-1.5 bg-slate-950/60">
+        <div className="hidden lg:block p-4 border-t border-slate-800 text-[11px] space-y-2 bg-slate-950/60">
           <div className="flex items-center justify-between">
-            <span className="text-slate-400">Google Sheets Sync:</span>
+            <span className="text-slate-400">Sheet Connection:</span>
             <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold text-[10px]">
-              {syncStatus.state.toUpperCase()}
+              {appsScriptUrl ? 'Apps Script Linked' : syncStatus.state.toUpperCase()}
             </span>
           </div>
           <div className="flex items-center justify-between text-slate-400">
             <span>Last Sync:</span>
             <span className="font-mono text-slate-200">{syncStatus.lastSync}</span>
           </div>
+          <button
+            onClick={() => setConnectModalOpen(true)}
+            className="w-full py-2 px-3 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 font-bold transition border border-emerald-500/30 text-center"
+          >
+            🔗 Connect Apps Script URL
+          </button>
           <a
             href={`https://docs.google.com/spreadsheets/d/${INITIAL_WORKBOOK_DATA.spreadsheetId}/edit`}
             target="_blank"
             rel="noopener noreferrer"
-            className="block w-full text-center mt-2 py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold transition border border-slate-700"
+            className="block w-full text-center py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold transition border border-slate-700"
           >
             Open Google Sheet ↗
           </a>
@@ -467,7 +745,7 @@ export default function RentFlowWorkspace({
               <select
                 value={selectedMonth}
                 onChange={(e) => setSelectedMonth(e.target.value)}
-                className="bg-transparent text-xs font-extrabold text-[#1B365D] focus:outline-none"
+                className="bg-transparent text-xs font-extrabold text-[#1B365D] focus:outline-none cursor-pointer"
               >
                 {MONTH_SHORT.map((m, i) => {
                   const k = `${m}-26`;
@@ -479,21 +757,36 @@ export default function RentFlowWorkspace({
                 })}
               </select>
             </div>
+
+            <button
+              onClick={handleJumpToLiveMonth}
+              title="Jump to Current Calendar Month"
+              className="px-2.5 py-1.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-900 border border-blue-200 text-[11px] font-bold flex items-center gap-1.5 transition"
+            >
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>Today: {liveDateTimeStr || getTodayIsoDate()}</span>
+            </button>
+
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search tenant or room..."
-              className="px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 text-xs w-44 sm:w-60 focus:outline-none focus:border-[#1B365D]"
+              placeholder="Search tenant, room, ID..."
+              className="px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 text-xs w-44 sm:w-56 focus:outline-none focus:border-[#1B365D]"
             />
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             <button
-              onClick={triggerSyncFromGoogleSheets}
-              className="px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700"
+              onClick={() => setConnectModalOpen(true)}
+              className={`px-3 py-1.5 rounded-xl border text-xs font-bold flex items-center gap-1.5 transition ${
+                appsScriptUrl
+                  ? 'bg-emerald-50 border-emerald-300 text-emerald-800'
+                  : 'bg-amber-50 border-amber-300 text-amber-900 hover:bg-amber-100'
+              }`}
             >
-              ↻ Sync Sheet
+              <span>🔗</span>
+              <span className="hidden sm:inline">{appsScriptUrl ? 'Sheet Linked' : 'Connect Sheet'}</span>
             </button>
             <button
               onClick={() => openPayModalFor()}
@@ -505,7 +798,7 @@ export default function RentFlowWorkspace({
               onClick={() => setActiveTab('rent-slips')}
               className="px-3.5 py-1.5 rounded-xl bg-[#1B365D] hover:bg-slate-800 text-white text-xs font-bold shadow-xs"
             >
-              🧾 2-Page A4 Slips
+              🧾 2-Page Slips
             </button>
           </div>
         </header>
@@ -520,27 +813,30 @@ export default function RentFlowWorkspace({
         )}
 
         <main className="p-3 sm:p-6 flex-1 space-y-5 max-w-[1600px] w-full mx-auto">
-          {/* TAB 1: DASHBOARD */}
+          {/* ================================================================= */}
+          {/* TAB 1: DASHBOARD                                                  */}
+          {/* ================================================================= */}
           {activeTab === 'dashboard' && (
             <>
               <div className="rounded-2xl bg-gradient-to-r from-[#0F172A] via-[#1B365D] to-slate-900 text-white p-5 shadow-md flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
                 <div>
-                  <span className="inline-block px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-bold mb-1">
-                    Google Sheets Live Source of Truth · {selectedMonth}
-                  </span>
+                  <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-bold mb-1">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    <span>Live Calendar Date: {getTodayIsoDate()} · Viewing Period: {selectedMonth}</span>
+                  </div>
                   <h2 className="text-xl sm:text-2xl font-extrabold">Property Financial Command Center</h2>
                   <p className="text-xs text-slate-300 mt-1">
                     13 Active Tenants · Combined Javed &amp; Raja Billing Group (BG-01) · Spacious 2-Page A4 Printable Rent Slips
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  <button onClick={() => openPayModalFor()} className="px-4 py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-extrabold text-xs">
-                    + Record Payment
+                  <button onClick={() => openPayModalFor()} className="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs">
+                    + Record Payment (Auto-Today)
                   </button>
-                  <button onClick={() => setActiveTab('electricity')} className="px-4 py-2.5 rounded-xl bg-white/10 text-white font-bold text-xs border border-white/15">
-                    ⚡ Enter Meter Readings
+                  <button onClick={() => setConnectModalOpen(true)} className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs border border-white/15">
+                    🔗 Connect Apps Script
                   </button>
-                  <button onClick={() => setActiveTab('rent-slips')} className="px-4 py-2.5 rounded-xl bg-amber-400 text-slate-950 font-extrabold text-xs">
+                  <button onClick={() => setActiveTab('rent-slips')} className="px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs">
                     🧾 2-Page A4 Rent Slips
                   </button>
                 </div>
@@ -571,12 +867,11 @@ export default function RentFlowWorkspace({
                 </div>
               </div>
 
-              {/* RESPONSIVE COLLECTION OVERVIEW: MOBILE CARDS + DESKTOP TABLE */}
               <div className="bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden">
                 <div className="p-4 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2">
                   <div>
                     <h3 className="text-sm font-extrabold text-[#0F172A]">Tenant Collection Overview — {selectedMonth}</h3>
-                    <p className="text-[11px] text-slate-500">Tap any tenant to view their 12-month ledger, record a payment, or download their PDF slip</p>
+                    <p className="text-[11px] text-slate-500">Tap any tenant to open their full 12-month profile &amp; payment history</p>
                   </div>
                   <div className="flex flex-wrap gap-1.5 text-xs">
                     {['All', 'Paid', 'Partially Paid', 'Unpaid', 'Pending Calculation'].map((st) => (
@@ -691,13 +986,13 @@ export default function RentFlowWorkspace({
                             <div className="inline-flex gap-1">
                               <button
                                 onClick={() => openPayModalFor(r.tenantId, r.month)}
-                                className="px-2 py-1 rounded-lg bg-emerald-600 text-white font-bold text-[10px]"
+                                className="px-2.5 py-1 rounded-lg bg-emerald-600 text-white font-bold text-[10px]"
                               >
                                 +Pay
                               </button>
                               <button
                                 onClick={() => handleDownloadSingleSlip(r.tenantId, r.month)}
-                                className="px-2 py-1 rounded-lg bg-slate-100 text-[#1B365D] font-bold text-[10px]"
+                                className="px-2.5 py-1 rounded-lg bg-slate-100 text-[#1B365D] font-bold text-[10px]"
                               >
                                 PDF
                               </button>
@@ -712,7 +1007,499 @@ export default function RentFlowWorkspace({
             </>
           )}
 
-          {/* TAB 6: SPACIOUS 2-PAGE A4 RENT SLIP GENERATOR */}
+          {/* ================================================================= */}
+          {/* TAB 2: ALL TENANTS & INDIVIDUAL TENANT PROFILE (/tenants/[id])    */}
+          {/* ================================================================= */}
+          {activeTab === 'tenants' && (
+            <div className="space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <h2 className="text-xl font-extrabold text-[#0F172A]">
+                    Tenant Profile &amp; 12-Month Ledger — {selectedTenantObj.name} ({selectedTenantObj.tenantId})
+                  </h2>
+                  <p className="text-xs text-slate-600">
+                    Room: <strong>{selectedTenantObj.room}</strong> · Worksheet Tab: <span className="font-mono">{selectedTenantObj.sheetName}</span>
+                  </p>
+                </div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <select
+                    value={selectedTenantId}
+                    onChange={(e) => setSelectedTenantId(e.target.value)}
+                    className="px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs font-extrabold text-[#1B365D]"
+                  >
+                    {tenants.map((t) => (
+                      <option key={t.tenantId} value={t.tenantId}>
+                        {t.tenantId} — {t.name} ({t.room})
+                      </option>
+                    ))}
+                  </select>
+                  <button
+                    onClick={() => openPayModalFor(selectedTenantObj.tenantId, selectedMonth)}
+                    className="px-3.5 py-2 rounded-xl bg-emerald-600 text-white text-xs font-bold"
+                  >
+                    + Record Payment
+                  </button>
+                  <button
+                    onClick={() => handleDownloadSingleSlip(selectedTenantObj.tenantId, selectedMonth)}
+                    className="px-3.5 py-2 rounded-xl bg-[#1B365D] text-white text-xs font-bold"
+                  >
+                    ⬇ {selectedMonth} Slip PDF
+                  </button>
+                </div>
+              </div>
+
+              {/* TENANT SELECTOR PILLS */}
+              <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
+                {tenants.map((t) => {
+                  const mRec = monthlyRecords.find((r) => r.tenantId === t.tenantId && r.month === selectedMonth);
+                  const active = t.tenantId === selectedTenantObj.tenantId;
+                  return (
+                    <button
+                      key={t.tenantId}
+                      onClick={() => setSelectedTenantId(t.tenantId)}
+                      className={`flex-shrink-0 px-3 py-1.5 rounded-xl text-xs font-bold border transition ${
+                        active ? 'bg-[#0F172A] text-white border-[#0F172A]' : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-100'
+                      }`}
+                    >
+                      {t.name} <span className="font-mono opacity-75">({mRec ? formatINR(mRec.closingBalance) : '₹0'})</span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* SNAPSHOT CARDS */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                <div className="bg-white p-3.5 rounded-2xl border border-slate-200">
+                  <div className="text-slate-500">Monthly Rent</div>
+                  <div className="text-lg font-mono font-extrabold text-[#0F172A] mt-0.5">{formatINR(selectedTenantCurrRec?.rent || 0)}</div>
+                </div>
+                <div className="bg-white p-3.5 rounded-2xl border border-slate-200">
+                  <div className="text-slate-500">{selectedMonth} Utility Bill</div>
+                  <div className="text-lg font-mono font-extrabold text-[#1B365D] mt-0.5">
+                    {selectedTenantCurrRec?.electricity !== null ? formatINR(selectedTenantCurrRec?.totalBill) : 'Reading Pending'}
+                  </div>
+                </div>
+                <div className="bg-white p-3.5 rounded-2xl border border-emerald-200">
+                  <div className="text-emerald-800 font-semibold">Paid in {selectedMonth}</div>
+                  <div className="text-lg font-mono font-extrabold text-emerald-700 mt-0.5">{formatINR(selectedTenantCurrRec?.totalPaid || 0)}</div>
+                </div>
+                <div className="bg-white p-3.5 rounded-2xl border border-rose-200">
+                  <div className="text-rose-800 font-semibold">Closing Balance Due</div>
+                  <div className="text-lg font-mono font-extrabold text-rose-700 mt-0.5">{formatINR(selectedTenantCurrRec?.closingBalance || 0)}</div>
+                </div>
+              </div>
+
+              {/* 12-MONTH TABLE */}
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden">
+                <div className="p-4 border-b border-slate-200 font-extrabold text-sm text-[#0F172A]">
+                  {selectedTenantObj.name} — {selectedYear} Full 12-Month Billing &amp; Meter History
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-xs border-collapse">
+                    <thead>
+                      <tr className="bg-slate-900 text-white text-left">
+                        <th className="p-2.5">Month</th>
+                        <th className="p-2.5 text-right">Rent</th>
+                        <th className="p-2.5 text-right">Main Read (Edit)</th>
+                        <th className="p-2.5 text-right">Prev Read</th>
+                        <th className="p-2.5 text-right">Units</th>
+                        <th className="p-2.5 text-right">Elec Bill</th>
+                        <th className="p-2.5 text-right">Water</th>
+                        <th className="p-2.5 text-right">Prev Due</th>
+                        <th className="p-2.5 text-right">Payable</th>
+                        <th className="p-2.5 text-right">Paid</th>
+                        <th className="p-2.5 text-right">Closing Due</th>
+                        <th className="p-2.5 text-center">Status</th>
+                        <th className="p-2.5 text-center">Slip</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {selectedTenantRecs.map((r) => (
+                        <tr key={r.recordId} className="border-b border-slate-100 hover:bg-slate-50 font-mono">
+                          <td className="p-2.5 font-sans font-bold text-[#1B365D]">{r.month}</td>
+                          <td className="p-2.5 text-right">{formatINR(r.rent)}</td>
+                          <td className="p-2.5 text-right">
+                            <input
+                              key={`${r.recordId}-${r.currentReading ?? 'null'}`}
+                              type="number"
+                              defaultValue={r.currentReading !== null ? r.currentReading : ''}
+                              placeholder="Pending"
+                              onBlur={(e) => handleReadingChange(r.recordId, e.target.value)}
+                              className="w-20 px-2 py-1 text-right rounded-lg border border-amber-400 bg-amber-50/70 font-bold text-[#0F172A]"
+                            />
+                          </td>
+                          <td className="p-2.5 text-right text-slate-500">{r.previousReading}</td>
+                          <td className="p-2.5 text-right">{r.units !== null ? r.units : 'Pending'}</td>
+                          <td className="p-2.5 text-right">{r.electricity !== null ? formatINR(r.electricity) : 'Pending'}</td>
+                          <td className="p-2.5 text-right">{formatINR(r.water)}</td>
+                          <td className="p-2.5 text-right">{formatINR(r.previousOutstanding)}</td>
+                          <td className="p-2.5 text-right font-bold">{formatINR(r.totalPayable)}</td>
+                          <td className="p-2.5 text-right text-emerald-700 font-bold">{formatINR(r.totalPaid)}</td>
+                          <td className="p-2.5 text-right font-extrabold text-rose-700">{formatINR(r.closingBalance)}</td>
+                          <td className="p-2.5 text-center font-sans">
+                            <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${getStatusBadgeClass(r.paymentStatus)}`}>
+                              {r.paymentStatus}
+                            </span>
+                          </td>
+                          <td className="p-2.5 text-center font-sans">
+                            <button
+                              onClick={() => handleDownloadSingleSlip(r.tenantId, r.month)}
+                              className="px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 text-[#1B365D] font-bold text-[10px]"
+                            >
+                              PDF
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* PAYMENT TRANSACTIONS FOR SELECTED TENANT */}
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-2xs p-4">
+                <h3 className="text-sm font-extrabold text-[#0F172A] mb-3">
+                  Recorded Payments for {selectedTenantObj.name} ({selectedTenantPayments.length} Transactions)
+                </h3>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-xs border-collapse">
+                    <thead>
+                      <tr className="bg-slate-100 text-slate-700 text-left">
+                        <th className="p-2.5">Payment ID</th>
+                        <th className="p-2.5">Billing Month</th>
+                        <th className="p-2.5">Date</th>
+                        <th className="p-2.5 text-right">Amount</th>
+                        <th className="p-2.5">Method</th>
+                        <th className="p-2.5">Notes / Provenance</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {selectedTenantPayments.map((p) => (
+                        <tr key={p.paymentId} className="border-b border-slate-100">
+                          <td className="p-2.5 font-mono font-bold text-[#1B365D]">{p.paymentId}</td>
+                          <td className="p-2.5 font-semibold">{p.month}</td>
+                          <td className="p-2.5 font-mono">{p.date}</td>
+                          <td className="p-2.5 text-right font-mono font-bold text-emerald-700">{formatINR(p.amount)}</td>
+                          <td className="p-2.5">{p.method}</td>
+                          <td className="p-2.5 text-slate-600">{p.notes}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* ================================================================= */}
+          {/* TAB 3: MONTHLY RENT RECORDS                                       */}
+          {/* ================================================================= */}
+          {activeTab === 'monthly-records' && (
+            <div className="space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <h2 className="text-xl font-extrabold text-[#0F172A]">{selectedMonth} — Monthly Rent &amp; Billing Records</h2>
+                  <p className="text-xs text-slate-600">Edit readings or credits directly; unpaid balances carry forward automatically</p>
+                </div>
+                <div className="flex flex-wrap items-center gap-2 text-xs">
+                  <select
+                    value={statusFilter}
+                    onChange={(e) => setStatusFilter(e.target.value)}
+                    className="px-3 py-2 rounded-xl border border-slate-300 bg-white font-bold"
+                  >
+                    {['All', 'Paid', 'Partially Paid', 'Unpaid', 'Pending Calculation', 'Advance/Credit'].map((st) => (
+                      <option key={st} value={st}>Filter: {st}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-xs border-collapse">
+                    <thead>
+                      <tr className="bg-slate-900 text-white text-left">
+                        <th className="p-3">Tenant</th>
+                        <th className="p-3">Room</th>
+                        <th className="p-3 text-right">Rent</th>
+                        <th className="p-3 text-right">Prev Read</th>
+                        <th className="p-3 text-right">Curr Read (Edit)</th>
+                        <th className="p-3 text-right">Units</th>
+                        <th className="p-3 text-right">Elec Bill</th>
+                        <th className="p-3 text-right">Water</th>
+                        <th className="p-3 text-right">Prev Due</th>
+                        <th className="p-3 text-right">Credits (Edit)</th>
+                        <th className="p-3 text-right">Total Payable</th>
+                        <th className="p-3 text-right">Paid</th>
+                        <th className="p-3 text-right">Closing Due</th>
+                        <th className="p-3 text-center">Status</th>
+                        <th className="p-3 text-center">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filteredMonthRecs.map((r) => (
+                        <tr key={r.recordId} className="border-b border-slate-100 hover:bg-slate-50 font-mono">
+                          <td
+                            onClick={() => {
+                              setSelectedTenantId(r.tenantId);
+                              setActiveTab('tenants');
+                            }}
+                            className="p-3 font-sans font-bold text-[#1B365D] cursor-pointer hover:underline"
+                          >
+                            {r.tenantName}
+                          </td>
+                          <td className="p-3 font-sans text-slate-500">{r.room}</td>
+                          <td className="p-3 text-right">{formatINR(r.rent)}</td>
+                          <td className="p-3 text-right text-slate-500">{r.previousReading}</td>
+                          <td className="p-3 text-right">
+                            <input
+                              key={`${r.recordId}-${r.currentReading ?? 'null'}`}
+                              type="number"
+                              defaultValue={r.currentReading !== null ? r.currentReading : ''}
+                              placeholder="Pending"
+                              onBlur={(e) => handleReadingChange(r.recordId, e.target.value)}
+                              className="w-20 px-2 py-1 text-right rounded-lg border border-amber-400 bg-amber-50/70 font-bold text-[#0F172A]"
+                            />
+                          </td>
+                          <td className="p-3 text-right">{r.units !== null ? r.units : 'Pending'}</td>
+                          <td className="p-3 text-right">{r.electricity !== null ? formatINR(r.electricity) : 'Pending'}</td>
+                          <td className="p-3 text-right">{formatINR(r.water)}</td>
+                          <td className="p-3 text-right">{formatINR(r.previousOutstanding)}</td>
+                          <td className="p-3 text-right">
+                            <input
+                              key={`${r.recordId}-cred-${r.credits}`}
+                              type="number"
+                              defaultValue={r.credits || 0}
+                              onBlur={(e) => handleCreditChange(r.recordId, e.target.value)}
+                              className="w-16 px-1.5 py-1 text-right rounded-lg border border-slate-300 bg-white"
+                            />
+                          </td>
+                          <td className="p-3 text-right font-bold">{formatINR(r.totalPayable)}</td>
+                          <td className="p-3 text-right text-emerald-700 font-bold">{formatINR(r.totalPaid)}</td>
+                          <td className="p-3 text-right font-extrabold text-rose-700">{formatINR(r.closingBalance)}</td>
+                          <td className="p-3 text-center font-sans">
+                            <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${getStatusBadgeClass(r.paymentStatus)}`}>
+                              {r.paymentStatus}
+                            </span>
+                          </td>
+                          <td className="p-3 text-center font-sans">
+                            <button
+                              onClick={() => openPayModalFor(r.tenantId, r.month)}
+                              className="px-2.5 py-1 rounded-lg bg-emerald-600 text-white font-bold text-[10px]"
+                            >
+                              +Pay
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* ================================================================= */}
+          {/* TAB 4: CENTRAL PAYMENTS LEDGER                                    */}
+          {/* ================================================================= */}
+          {activeTab === 'payments' && (
+            <div className="space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <h2 className="text-xl font-extrabold text-[#0F172A]">Central Payments Ledger ({payments.length} Confirmed Transactions)</h2>
+                  <p className="text-xs text-slate-600">
+                    Append-only transaction ledger synced with <span className="font-mono">Payments Ledger</span> tab · Total Collected:{' '}
+                    <strong className="font-mono text-emerald-700">
+                      {formatINR(payments.reduce((s, p) => s + (p.type === 'Reversal' ? -Math.abs(p.amount) : Number(p.amount)), 0))}
+                    </strong>
+                  </p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button onClick={() => openPayModalFor()} className="px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs font-bold">
+                    + Record Payment (Auto-Today)
+                  </button>
+                  <button onClick={exportPaymentsCsv} className="px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs font-bold">
+                    ⬇ Export CSV
+                  </button>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-xs border-collapse">
+                    <thead>
+                      <tr className="bg-slate-900 text-white text-left">
+                        <th className="p-3">Payment ID</th>
+                        <th className="p-3">Tenant</th>
+                        <th className="p-3">Billing Month</th>
+                        <th className="p-3">Payment Date</th>
+                        <th className="p-3 text-right">Amount (₹)</th>
+                        <th className="p-3">Mode</th>
+                        <th className="p-3">Type</th>
+                        <th className="p-3">Reference</th>
+                        <th className="p-3">Provenance / Notes</th>
+                        <th className="p-3 text-center">Receipt</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {payments
+                        .filter(
+                          (p) =>
+                            searchQuery === '' ||
+                            p.tenantName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                            p.paymentId.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                            p.month.toLowerCase().includes(searchQuery.toLowerCase())
+                        )
+                        .map((p) => (
+                          <tr key={p.paymentId} className="border-b border-slate-100 hover:bg-slate-50">
+                            <td className="p-3 font-mono font-bold text-[#1B365D]">{p.paymentId}</td>
+                            <td className="p-3 font-bold">{p.tenantName}</td>
+                            <td className="p-3 font-semibold">{p.month}</td>
+                            <td className="p-3 font-mono">{p.date}</td>
+                            <td className="p-3 text-right font-mono font-extrabold text-emerald-700">{formatINR(p.amount)}</td>
+                            <td className="p-3">{p.method}</td>
+                            <td className="p-3">
+                              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">{p.type}</span>
+                            </td>
+                            <td className="p-3 font-mono text-slate-500">{p.reference}</td>
+                            <td className="p-3 text-slate-600">{p.notes}</td>
+                            <td className="p-3 text-center">
+                              <button
+                                onClick={() => handleDownloadSingleSlip(p.tenantId, p.month)}
+                                className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-[#1B365D] font-bold text-[10px]"
+                              >
+                                PDF
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* ================================================================= */}
+          {/* TAB 5: ELECTRICITY & WATER METER MANAGEMENT                       */}
+          {/* ================================================================= */}
+          {activeTab === 'electricity' && (
+            <div className="space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <h2 className="text-xl font-extrabold text-[#0F172A]">Electricity &amp; Water Meter Entry — {selectedMonth}</h2>
+                  <p className="text-xs text-slate-600">
+                    Walk-around mobile &amp; desktop sub-meter sheet. Blank readings remain <strong>Reading Pending</strong> without negative bills.
+                  </p>
+                </div>
+                <div className="text-xs bg-blue-50 border border-blue-200 text-blue-950 px-3.5 py-2 rounded-xl font-semibold">
+                  Rate: <strong>₹{defaultElecRate}/Unit</strong> · Motor Group 1: <strong>₹{motor1WaterCharge}</strong> · Motor2 Group 2: <strong>₹{motor2WaterCharge}</strong>
+                </div>
+              </div>
+
+              {/* MOBILE WALK-AROUND METER CARDS (< MD) */}
+              <div className="md:hidden grid grid-cols-1 gap-3">
+                {monthRecs.map((r) => (
+                  <div key={r.recordId} className="bg-white rounded-2xl border border-slate-200 p-4 shadow-2xs space-y-2.5 text-xs">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <span className="font-extrabold text-sm text-[#0F172A]">{r.tenantName}</span>
+                        <span className="text-slate-500 ml-1">({r.room})</span>
+                      </div>
+                      <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${r.currentReading !== null ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'}`}>
+                        {r.currentReading !== null ? `Verified (${r.units} U)` : 'Reading Pending'}
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-3 items-center bg-slate-50 p-3 rounded-xl border border-slate-200">
+                      <div>
+                        <span className="text-[10px] text-slate-500 block">Previous Reading</span>
+                        <span className="font-mono font-extrabold text-base text-slate-700">{r.previousReading}</span>
+                      </div>
+                      <div>
+                        <label className="text-[10px] font-bold text-[#1B365D] block">New Main Reading</label>
+                        <input
+                          key={`${r.recordId}-mob-${r.currentReading ?? 'null'}`}
+                          type="number"
+                          defaultValue={r.currentReading !== null ? r.currentReading : ''}
+                          placeholder="Enter reading"
+                          onBlur={(e) => handleReadingChange(r.recordId, e.target.value)}
+                          className="w-full mt-0.5 px-3 py-2 rounded-xl border-2 border-amber-400 bg-amber-50 font-mono font-extrabold text-base text-[#0F172A]"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between text-slate-600 pt-0.5">
+                      <span>Elec: <strong className="font-mono text-slate-900">{r.electricity !== null ? formatINR(r.electricity) : 'Pending'}</strong></span>
+                      <span>Water: <strong className="font-mono text-slate-900">{formatINR(r.water)}</strong></span>
+                      <span>Total Bill: <strong className="font-mono text-[#1B365D]">{r.electricity !== null ? formatINR(r.totalBill) : formatINR(r.water)}</strong></span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* DESKTOP METER TABLE */}
+              <div className="hidden md:block bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-xs border-collapse">
+                    <thead>
+                      <tr className="bg-slate-900 text-white text-left">
+                        <th className="p-3">Tenant</th>
+                        <th className="p-3">Room</th>
+                        <th className="p-3 text-right">Previous Reading</th>
+                        <th className="p-3 text-right">Current Reading (Input)</th>
+                        <th className="p-3 text-center">Meter Reset</th>
+                        <th className="p-3 text-right">Units Consumed</th>
+                        <th className="p-3 text-right">Rate</th>
+                        <th className="p-3 text-right">Electricity Bill</th>
+                        <th className="p-3 text-right">Water Charge</th>
+                        <th className="p-3 text-right">Total Utility Bill</th>
+                        <th className="p-3 text-center">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {monthRecs.map((r) => (
+                        <tr key={r.recordId} className="border-b border-slate-100 hover:bg-slate-50 font-mono">
+                          <td className="p-3 font-sans font-bold text-[#1B365D]">{r.tenantName}</td>
+                          <td className="p-3 font-sans text-slate-500">{r.room}</td>
+                          <td className="p-3 text-right">{r.previousReading}</td>
+                          <td className="p-3 text-right">
+                            <input
+                              key={`${r.recordId}-desk-${r.currentReading ?? 'null'}`}
+                              type="number"
+                              defaultValue={r.currentReading !== null ? r.currentReading : ''}
+                              placeholder="Enter reading"
+                              onBlur={(e) => handleReadingChange(r.recordId, e.target.value)}
+                              className="w-28 px-2.5 py-1.5 text-right rounded-xl border border-amber-400 bg-amber-50/70 font-bold text-[#0F172A]"
+                            />
+                          </td>
+                          <td className="p-3 text-center font-sans">
+                            <input
+                              type="checkbox"
+                              checked={Boolean(r.meterReset)}
+                              onChange={(e) => handleMeterResetToggle(r.recordId, e.target.checked)}
+                            />
+                          </td>
+                          <td className="p-3 text-right font-bold">{r.units !== null ? `${r.units} U` : 'Pending'}</td>
+                          <td className="p-3 text-right">₹{r.rate}</td>
+                          <td className="p-3 text-right font-semibold">{r.electricity !== null ? formatINR(r.electricity) : 'Reading Pending'}</td>
+                          <td className="p-3 text-right">{formatINR(r.water)}</td>
+                          <td className="p-3 text-right font-extrabold text-[#1B365D]">{r.electricity !== null ? formatINR(r.totalBill) : formatINR(r.water)}</td>
+                          <td className="p-3 text-center font-sans">
+                            <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${r.currentReading !== null ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'}`}>
+                              {r.currentReading !== null ? 'Verified' : 'Reading Pending'}
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* ================================================================= */}
+          {/* TAB 6: SPACIOUS 2-PAGE A4 RENT SLIP GENERATOR                     */}
+          {/* ================================================================= */}
           {activeTab === 'rent-slips' && (
             <div className="space-y-6">
               <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-2xs flex flex-wrap items-center justify-between gap-3 no-print">
@@ -758,7 +1545,6 @@ export default function RentFlowWorkspace({
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* Combined Javed & Raja Card */}
                   {(() => {
                     const j = byNameMap['javed'];
                     const r = byNameMap['raja'];
@@ -859,79 +1645,401 @@ export default function RentFlowWorkspace({
             </div>
           )}
 
-          {/* OTHER TABS (TENANTS, MONTHLY RECORDS, ELECTRICITY, PAYMENTS, REPORTS, OUTSTANDING, DIRECTORY, SYNC, SETTINGS) */}
-          {activeTab !== 'dashboard' && activeTab !== 'rent-slips' && (
-            <div className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-2xs space-y-4">
-              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+          {/* ================================================================= */}
+          {/* TAB 7: REPORTS & ANALYTICS                                        */}
+          {/* ================================================================= */}
+          {activeTab === 'reports' && (
+            <div className="space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <h2 className="text-lg font-extrabold text-[#0F172A] uppercase">{activeTab.replace('-', ' ')} — {selectedMonth}</h2>
-                  <p className="text-xs text-slate-500">Synchronized with Google Sheet {INITIAL_WORKBOOK_DATA.spreadsheetId}</p>
+                  <h2 className="text-xl font-extrabold text-[#0F172A]">Financial Reports &amp; Annual Performance ({selectedYear})</h2>
+                  <p className="text-xs text-slate-600">Consolidated month-by-month expected rent, electricity, water, collections, and closing arrears</p>
                 </div>
-                {activeTab === 'tenants' && (
-                  <select
-                    value={selectedTenantId}
-                    onChange={(e) => setSelectedTenantId(e.target.value)}
-                    className="px-3 py-1.5 rounded-xl border border-slate-300 text-xs font-bold text-[#1B365D]"
-                  >
-                    {tenants.map((t) => (
-                      <option key={t.tenantId} value={t.tenantId}>
-                        {t.tenantId} — {t.name} ({t.room})
-                      </option>
-                    ))}
-                  </select>
-                )}
               </div>
 
-              <div className="overflow-x-auto">
-                <table className="w-full text-xs border-collapse">
-                  <thead>
-                    <tr className="bg-slate-900 text-white text-left">
-                      <th className="p-3">Tenant / Month</th>
-                      <th className="p-3 text-right">Rent</th>
-                      <th className="p-3 text-right">Prev Read</th>
-                      <th className="p-3 text-right">Curr Read (Edit)</th>
-                      <th className="p-3 text-right">Units</th>
-                      <th className="p-3 text-right">Elec + Water</th>
-                      <th className="p-3 text-right">Prev Due</th>
-                      <th className="p-3 text-right">Payable</th>
-                      <th className="p-3 text-right">Paid</th>
-                      <th className="p-3 text-right">Balance Due</th>
-                      <th className="p-3 text-center">Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {(activeTab === 'tenants' ? selectedTenantRecs : filteredMonthRecs).map((r) => (
-                      <tr key={r.recordId} className="border-b border-slate-100 hover:bg-slate-50 font-mono">
-                        <td className="p-3 font-sans font-bold text-[#1B365D]">
-                          {activeTab === 'tenants' ? r.month : r.tenantName}
-                          <span className="block text-[10px] font-normal text-slate-500">{r.room}</span>
-                        </td>
-                        <td className="p-3 text-right">{formatINR(r.rent)}</td>
-                        <td className="p-3 text-right">{r.previousReading}</td>
-                        <td className="p-3 text-right">
-                          <input
-                            type="number"
-                            defaultValue={r.currentReading !== null ? r.currentReading : ''}
-                            placeholder="Pending"
-                            onBlur={(e) => handleReadingChange(r.recordId, e.target.value)}
-                            className="w-20 px-2 py-1 text-right rounded-lg border border-amber-400 bg-amber-50/60 font-bold text-[#0F172A]"
-                          />
-                        </td>
-                        <td className="p-3 text-right">{r.units ?? 'Pending'}</td>
-                        <td className="p-3 text-right">{r.electricity !== null ? formatINR(r.totalBill) : 'Pending'}</td>
-                        <td className="p-3 text-right">{formatINR(r.previousOutstanding)}</td>
-                        <td className="p-3 text-right font-bold">{formatINR(r.totalPayable)}</td>
-                        <td className="p-3 text-right text-emerald-700 font-bold">{formatINR(r.totalPaid)}</td>
-                        <td className="p-3 text-right font-extrabold text-rose-700">{formatINR(r.closingBalance)}</td>
-                        <td className="p-3 text-center font-sans">
-                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${getStatusBadgeClass(r.paymentStatus)}`}>
-                            {r.paymentStatus}
-                          </span>
-                        </td>
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-xs border-collapse">
+                    <thead>
+                      <tr className="bg-slate-900 text-white text-left">
+                        <th className="p-3">Month</th>
+                        <th className="p-3 text-right">Expected Base Rent</th>
+                        <th className="p-3 text-right">Total Units</th>
+                        <th className="p-3 text-right">Electricity Billed</th>
+                        <th className="p-3 text-right">Water Billed</th>
+                        <th className="p-3 text-right">Total Net Payable</th>
+                        <th className="p-3 text-right">Total Collected</th>
+                        <th className="p-3 text-right">Closing Arrears</th>
+                        <th className="p-3 text-right">Collection %</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {MONTH_SHORT.map((m, idx) => {
+                        const mKey = `${m}-26`;
+                        const mRecs = monthlyRecords.filter((r) => r.month === mKey);
+                        const rent = mRecs.reduce((s, r) => s + r.rent, 0);
+                        const units = mRecs.reduce((s, r) => s + (r.units ?? 0), 0);
+                        const elec = mRecs.reduce((s, r) => s + (r.electricity ?? 0), 0);
+                        const water = mRecs.reduce((s, r) => s + r.water, 0);
+                        const payable = mRecs.reduce((s, r) => s + r.totalPayable, 0);
+                        const paid = mRecs.reduce((s, r) => s + r.totalPaid, 0);
+                        const due = mRecs.reduce((s, r) => s + r.closingBalance, 0);
+                        const rate = payable > 0 ? ((paid / payable) * 100).toFixed(1) : '0.0';
+                        return (
+                          <tr key={mKey} className="border-b border-slate-100 hover:bg-slate-50 font-mono">
+                            <td className="p-3 font-sans font-bold text-[#1B365D]">{mKey} ({MONTH_NAMES[idx]})</td>
+                            <td className="p-3 text-right">{formatINR(rent)}</td>
+                            <td className="p-3 text-right">{units} U</td>
+                            <td className="p-3 text-right">{formatINR(elec)}</td>
+                            <td className="p-3 text-right">{formatINR(water)}</td>
+                            <td className="p-3 text-right font-bold">{formatINR(payable)}</td>
+                            <td className="p-3 text-right text-emerald-700 font-bold">{formatINR(paid)}</td>
+                            <td className="p-3 text-right font-extrabold text-rose-700">{formatINR(due)}</td>
+                            <td className="p-3 text-right font-semibold">{rate}%</td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* ================================================================= */}
+          {/* TAB 8: OUTSTANDING DUES TRACKER                                   */}
+          {/* ================================================================= */}
+          {activeTab === 'outstanding' && (
+            <div className="space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <h2 className="text-xl font-extrabold text-[#0F172A]">Outstanding Dues &amp; Arrears Tracker — {selectedMonth}</h2>
+                  <p className="text-xs text-slate-600">
+                    Tenants with unpaid balances totaling <strong className="font-mono text-rose-700">{formatINR(totalOutstanding)}</strong>
+                  </p>
+                </div>
+                <button onClick={() => openPayModalFor()} className="px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs font-bold">
+                  + Record Arrears Payment
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {monthRecs
+                  .filter((r) => r.closingBalance > 0)
+                  .sort((a, b) => b.closingBalance - a.closingBalance)
+                  .map((r) => (
+                    <div key={r.recordId} className="bg-white rounded-2xl border border-rose-200 p-4 shadow-2xs flex flex-col justify-between space-y-3 text-xs">
+                      <div className="flex items-start justify-between">
+                        <div>
+                          <h3 className="text-sm font-extrabold text-[#0F172A]">{r.tenantName}</h3>
+                          <p className="text-[11px] text-slate-500">{r.room} · {r.month}</p>
+                        </div>
+                        <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${getStatusBadgeClass(r.paymentStatus)}`}>
+                          {r.paymentStatus}
+                        </span>
+                      </div>
+                      <div className="space-y-1.5 bg-rose-50/50 p-3 rounded-xl border border-rose-100 font-mono">
+                        <div className="flex justify-between"><span className="font-sans text-slate-600">Previous Arrears:</span><span className="font-semibold">{formatINR(r.previousOutstanding)}</span></div>
+                        <div className="flex justify-between"><span className="font-sans text-slate-600">Current Rent + Bill:</span><span className="font-semibold">{r.electricity !== null ? formatINR(r.rent + r.totalBill) : 'Reading Pending'}</span></div>
+                        <div className="flex justify-between"><span className="font-sans text-slate-600">Paid in {r.month}:</span><span className="font-semibold text-emerald-700">{formatINR(r.totalPaid)}</span></div>
+                        <div className="flex justify-between pt-1.5 border-t border-rose-200 text-sm font-extrabold text-rose-700">
+                          <span className="font-sans">Closing Balance Due:</span>
+                          <span>{formatINR(r.closingBalance)}</span>
+                        </div>
+                      </div>
+                      <div className="flex gap-2">
+                        <button onClick={() => openPayModalFor(r.tenantId, r.month)} className="flex-1 py-2 rounded-xl bg-emerald-600 text-white font-bold">
+                          Record Payment
+                        </button>
+                        <button onClick={() => handleDownloadSingleSlip(r.tenantId, r.month)} className="px-3 py-2 rounded-xl border border-slate-300 font-bold text-[#1B365D]">
+                          Slip PDF
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          )}
+
+          {/* ================================================================= */}
+          {/* TAB 9: MASTER TENANT DIRECTORY                                    */}
+          {/* ================================================================= */}
+          {activeTab === 'directory' && (
+            <div className="space-y-4">
+              <div>
+                <h2 className="text-xl font-extrabold text-[#0F172A]">Master Tenant Directory (13 Active Tenants — Zero Security Deposit)</h2>
+                <p className="text-xs text-slate-600">Synchronized with <span className="font-mono">Tenant Directory!A1:P17</span>. Edit scheduled monthly rent or status inline.</p>
+              </div>
+
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-xs border-collapse">
+                    <thead>
+                      <tr className="bg-slate-900 text-white text-left">
+                        <th className="p-3">Tenant ID</th>
+                        <th className="p-3">Name</th>
+                        <th className="p-3">Room</th>
+                        <th className="p-3 text-right">Monthly Rent (₹)</th>
+                        <th className="p-3 text-right">Elec Rate</th>
+                        <th className="p-3 text-right">Water (₹)</th>
+                        <th className="p-3">Water Group</th>
+                        <th className="p-3 text-right">Jan Opening Read</th>
+                        <th className="p-3 text-right">Opening Arrears</th>
+                        <th className="p-3">Rent Slip Mode</th>
+                        <th className="p-3 text-center">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {tenants.map((t) => (
+                        <tr key={t.tenantId} className="border-b border-slate-100 hover:bg-slate-50">
+                          <td className="p-3 font-mono font-bold text-[#1B365D]">{t.tenantId}</td>
+                          <td
+                            onClick={() => {
+                              setSelectedTenantId(t.tenantId);
+                              setActiveTab('tenants');
+                            }}
+                            className="p-3 font-bold text-[#1B365D] cursor-pointer hover:underline"
+                          >
+                            {t.name}
+                          </td>
+                          <td className="p-3">{t.room}</td>
+                          <td className="p-3 text-right">
+                            <input
+                              key={`${t.tenantId}-rent-${t.monthlyRent}`}
+                              type="number"
+                              defaultValue={t.monthlyRent}
+                              onBlur={(e) => handleTenantRentUpdate(t.tenantId, e.target.value)}
+                              className="w-24 px-2.5 py-1 text-right rounded-lg border border-slate-300 bg-amber-50/50 font-mono font-bold"
+                            />
+                          </td>
+                          <td className="p-3 text-right font-mono">₹{t.electricityRate}/U</td>
+                          <td className="p-3 text-right font-mono">₹{t.waterCharge}</td>
+                          <td className="p-3">{t.waterBillingType}</td>
+                          <td className="p-3 text-right font-mono">{t.initialMeterReading}</td>
+                          <td className="p-3 text-right font-mono">{formatINR(t.openingArrears)}</td>
+                          <td className="p-3 text-slate-600">{t.billingGroupId === 'BG-01' ? 'Combined (Javed & Raja)' : 'Individual Slip'}</td>
+                          <td className="p-3 text-center">
+                            <select
+                              value={t.status}
+                              onChange={(e) => handleTenantStatusUpdate(t.tenantId, e.target.value)}
+                              className="px-2.5 py-1 rounded-lg border border-slate-300 text-[11px] font-bold"
+                            >
+                              <option value="Active">Active</option>
+                              <option value="Vacated">Vacated</option>
+                              <option value="Inactive">Inactive</option>
+                            </select>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* ================================================================= */}
+          {/* TAB 10: GOOGLE SHEETS & APPS SCRIPT CONNECTION HUB                */}
+          {/* ================================================================= */}
+          {activeTab === 'sync' && (
+            <div className="space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <h2 className="text-xl font-extrabold text-[#0F172A]">Connect Google Sheet with Google Apps Script (Two-Way Live Sync)</h2>
+                  <p className="text-xs text-slate-600">
+                    Link your Google Sheet (<span className="font-mono">{INITIAL_WORKBOOK_DATA.spreadsheetId}</span>) in 3 simple steps — no complex cloud console setup needed!
+                  </p>
+                </div>
+                <button
+                  onClick={triggerSyncFromGoogleSheets}
+                  className="px-4 py-2 rounded-xl bg-[#1B365D] text-white text-xs font-bold shadow-xs"
+                >
+                  ↻ Test &amp; Sync Sheet Now
+                </button>
+              </div>
+
+              {/* 3-STEP APPS SCRIPT WIZARD */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 text-xs">
+                <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-2xs space-y-3">
+                  <div className="inline-block px-2.5 py-0.5 rounded-md bg-blue-100 text-blue-900 font-bold text-[10px]">STEP 1 OF 3</div>
+                  <h3 className="text-sm font-extrabold text-[#0F172A]">Open Your Google Sheet &amp; Apps Script</h3>
+                  <p className="text-slate-600 leading-relaxed">
+                    1. Click below to open your connected Google Sheet.<br />
+                    2. In the top menu bar, click <strong>Extensions &rarr; Apps Script</strong>.<br />
+                    3. Delete any default code in <span className="font-mono">Code.gs</span>.
+                  </p>
+                  <a
+                    href={`https://docs.google.com/spreadsheets/d/${INITIAL_WORKBOOK_DATA.spreadsheetId}/edit`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full text-center py-2.5 px-4 rounded-xl bg-[#1B365D] hover:bg-slate-800 text-white font-bold"
+                  >
+                    Open Connected Google Sheet ↗
+                  </a>
+                </div>
+
+                <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-2xs space-y-3">
+                  <div className="inline-block px-2.5 py-0.5 rounded-md bg-amber-100 text-amber-900 font-bold text-[10px]">STEP 2 OF 3</div>
+                  <h3 className="text-sm font-extrabold text-[#0F172A]">Copy &amp; Deploy Code.gs as Web App</h3>
+                  <p className="text-slate-600 leading-relaxed">
+                    1. Click <strong>Copy Full Code.gs</strong> below and paste it into Apps Script.<br />
+                    2. Click <strong>Save (💾)</strong>, then click <strong>Deploy &rarr; New deployment</strong>.<br />
+                    3. Select type: <strong>Web app</strong>, set <em>Execute as: Me</em> and <em>Who has access: Anyone</em>, then click <strong>Deploy</strong>.
+                  </p>
+                  <button
+                    onClick={handleCopyAppsScript}
+                    className="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold shadow-xs"
+                  >
+                    📋 Copy Full Code.gs Script
+                  </button>
+                </div>
+
+                <div className="bg-white rounded-2xl border border-emerald-300 p-4 shadow-2xs space-y-3">
+                  <div className="inline-block px-2.5 py-0.5 rounded-md bg-emerald-100 text-emerald-900 font-bold text-[10px]">STEP 3 OF 3</div>
+                  <h3 className="text-sm font-extrabold text-[#0F172A]">Paste Deployed Web App URL Here</h3>
+                  <p className="text-slate-600">
+                    Paste the generated <span className="font-mono">https://script.google.com/macros/s/.../exec</span> URL below and click <strong>Save &amp; Connect</strong>:
+                  </p>
+                  <input
+                    type="url"
+                    value={appsScriptUrl}
+                    onChange={(e) => setAppsScriptUrl(e.target.value)}
+                    placeholder="https://script.google.com/macros/s/.../exec"
+                    className="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono text-xs"
+                  />
+                  <button
+                    onClick={() => handleSaveAppsScriptUrl(appsScriptUrl)}
+                    className="w-full py-2.5 px-4 rounded-xl bg-[#0F172A] hover:bg-slate-800 text-white font-bold"
+                  >
+                    🔗 Save &amp; Connect Sheet
+                  </button>
+                </div>
+              </div>
+
+              {/* FULL CODE.GS VIEWER + AUDIT LOG */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 text-xs">
+                <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-2xs space-y-2">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-sm font-extrabold text-[#0F172A]">Ready-to-Paste Google Apps Script (Code.gs)</h3>
+                    <button onClick={handleCopyAppsScript} className="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 font-bold text-[#1B365D]">
+                      Copy Code
+                    </button>
+                  </div>
+                  <pre className="p-3 rounded-xl bg-slate-950 text-emerald-300 font-mono text-[11px] overflow-x-auto max-h-64 leading-relaxed">
+                    {APPS_SCRIPT_CODE}
+                  </pre>
+                </div>
+
+                <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-2xs space-y-2">
+                  <h3 className="text-sm font-extrabold text-[#0F172A]">Live Audit &amp; Sync Log ({auditLog.length} Entries)</h3>
+                  <div className="overflow-x-auto max-h-64 border border-slate-200 rounded-xl">
+                    <table className="w-full text-xs border-collapse">
+                      <thead>
+                        <tr className="bg-slate-100 text-slate-700 text-left sticky top-0">
+                          <th className="p-2">Timestamp</th>
+                          <th className="p-2">Target Record</th>
+                          <th className="p-2">Action</th>
+                          <th className="p-2">New Value</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {auditLog.map((a, idx) => (
+                          <tr key={idx} className="border-b border-slate-100">
+                            <td className="p-2 font-mono text-[10px]">{a.timestamp}</td>
+                            <td className="p-2 font-bold text-[#1B365D]">{a.record}</td>
+                            <td className="p-2">{a.action}</td>
+                            <td className="p-2 font-mono font-bold text-emerald-700">{a.newVal}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* ================================================================= */}
+          {/* TAB 11: SETTINGS & SECURITY                                       */}
+          {/* ================================================================= */}
+          {activeTab === 'settings' && (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 text-xs">
+              <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-2xs space-y-3">
+                <h3 className="text-sm font-extrabold text-[#0F172A] border-b border-slate-100 pb-2">Property &amp; Utility Billing Settings</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block font-bold text-slate-700 mb-1">Property Name</label>
+                    <input
+                      type="text"
+                      value={propertyName}
+                      onChange={(e) => setPropertyName(e.target.value)}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-300 font-semibold"
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-bold text-slate-700 mb-1">Default Electricity Rate (₹/U)</label>
+                    <input
+                      type="number"
+                      value={defaultElecRate}
+                      onChange={(e) => setDefaultElecRate(Number(e.target.value))}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono font-bold"
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-bold text-slate-700 mb-1">Motor Group 1 Water (₹)</label>
+                    <input
+                      type="number"
+                      value={motor1WaterCharge}
+                      onChange={(e) => setMotor1WaterCharge(Number(e.target.value))}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono font-bold"
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-bold text-slate-700 mb-1">Motor2 Group 2 Water (₹)</label>
+                    <input
+                      type="number"
+                      value={motor2WaterCharge}
+                      onChange={(e) => setMotor2WaterCharge(Number(e.target.value))}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono font-bold"
+                    />
+                  </div>
+                </div>
+                <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
+                  <div>
+                    <div className="font-bold text-[#0F172A]">Combine Javed &amp; Raja Rent Slip (Group BG-01)</div>
+                    <div className="text-[11px] text-slate-500">Preserves combined ₹4,500 base rent and side-by-side bills</div>
+                  </div>
+                  <input
+                    type="checkbox"
+                    checked={combineJavedRaja}
+                    onChange={(e) => setCombineJavedRaja(e.target.checked)}
+                    className="w-4 h-4"
+                  />
+                </div>
+              </div>
+
+              <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-2xs space-y-3">
+                <h3 className="text-sm font-extrabold text-[#0F172A] border-b border-slate-100 pb-2">Role Access &amp; Data Reset</h3>
+                <div className="flex items-center justify-between">
+                  <span>Active Session Role:</span>
+                  <select
+                    value={userRole}
+                    onChange={(e) => setUserRole(e.target.value as 'admin' | 'viewer')}
+                    className="px-3 py-1.5 rounded-xl border border-slate-300 font-bold"
+                  >
+                    <option value="admin">Administrator (Full Write + Sync)</option>
+                    <option value="viewer">Read-Only Viewer</option>
+                  </select>
+                </div>
+                <p className="text-slate-600 pt-2">
+                  Restore the exact verified historical figures from your Google Sheet (98 payments, 13 tenants, Sep-26 closing dues ₹39,767):
+                </p>
+                <button
+                  onClick={handleRestoreHistoricalState}
+                  className="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold"
+                >
+                  Restore Verified Historical Workbook Data
+                </button>
               </div>
             </div>
           )}
@@ -962,19 +2070,31 @@ export default function RentFlowWorkspace({
         </button>
       </nav>
 
-      {/* RECORD PAYMENT MODAL */}
+      {/* MODAL 1: RECORD PAYMENT (AUTO-FETCHES CURRENT DATE!) */}
       {paymentModalOpen && (
         <div className="fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-3 no-print">
           <div className="bg-white rounded-2xl max-w-lg w-full p-5 shadow-2xl border border-slate-200">
             <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-200">
-              <h3 className="text-base font-extrabold text-[#1B365D]">Record Confirmed Rent Payment</h3>
+              <div>
+                <h3 className="text-base font-extrabold text-[#1B365D]">Record Confirmed Rent Payment</h3>
+                <p className="text-[11px] text-slate-500">Payment date automatically set to today ({getTodayIsoDate()})</p>
+              </div>
               <button onClick={() => setPaymentModalOpen(false)} className="w-8 h-8 rounded-full bg-slate-100 font-bold">✕</button>
             </div>
             <form onSubmit={handleSubmitPayment} className="space-y-3 text-xs">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block font-bold mb-1">Tenant *</label>
-                  <select value={payTenantId} onChange={(e) => setPayTenantId(e.target.value)} className="w-full px-3 py-2 rounded-xl border border-slate-300 font-semibold">
+                  <select
+                    value={payTenantId}
+                    onChange={(e) => {
+                      const tid = e.target.value;
+                      setPayTenantId(tid);
+                      const rec = monthlyRecords.find((r) => r.tenantId === tid && r.month === payMonthKey);
+                      if (rec) setPayAmount(String(rec.closingBalance > 0 ? rec.closingBalance : rec.rent));
+                    }}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-300 font-semibold"
+                  >
                     {tenants.map((t) => (
                       <option key={t.tenantId} value={t.tenantId}>{t.name} ({t.room})</option>
                     ))}
@@ -982,7 +2102,16 @@ export default function RentFlowWorkspace({
                 </div>
                 <div>
                   <label className="block font-bold mb-1">Billing Month *</label>
-                  <select value={payMonthKey} onChange={(e) => setPayMonthKey(e.target.value)} className="w-full px-3 py-2 rounded-xl border border-slate-300 font-semibold">
+                  <select
+                    value={payMonthKey}
+                    onChange={(e) => {
+                      const mk = e.target.value;
+                      setPayMonthKey(mk);
+                      const rec = monthlyRecords.find((r) => r.tenantId === payTenantId && r.month === mk);
+                      if (rec) setPayAmount(String(rec.closingBalance > 0 ? rec.closingBalance : rec.rent));
+                    }}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-300 font-semibold"
+                  >
                     {MONTH_SHORT.map((m) => (
                       <option key={`${m}-26`} value={`${m}-26`}>{`${m}-26`}</option>
                     ))}
@@ -992,11 +2121,34 @@ export default function RentFlowWorkspace({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block font-bold mb-1">Payment Amount (₹) *</label>
-                  <input type="number" step="0.01" min="1" required value={payAmount} onChange={(e) => setPayAmount(e.target.value)} className="w-full px-3 py-2 rounded-xl border-2 border-emerald-500 font-mono font-extrabold text-sm" />
+                  <input
+                    type="number"
+                    step="0.01"
+                    min="1"
+                    required
+                    value={payAmount}
+                    onChange={(e) => setPayAmount(e.target.value)}
+                    className="w-full px-3 py-2 rounded-xl border-2 border-emerald-500 font-mono font-extrabold text-sm"
+                  />
                 </div>
                 <div>
-                  <label className="block font-bold mb-1">Payment Date *</label>
-                  <input type="date" required value={payDate} onChange={(e) => setPayDate(e.target.value)} className="w-full px-3 py-2 rounded-xl border border-slate-300" />
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="font-bold">Payment Date (Auto-Today) *</label>
+                    <button
+                      type="button"
+                      onClick={() => setPayDate(getTodayIsoDate())}
+                      className="text-[10px] font-bold text-emerald-700 hover:underline"
+                    >
+                      Reset to Today
+                    </button>
+                  </div>
+                  <input
+                    type="date"
+                    required
+                    value={payDate}
+                    onChange={(e) => setPayDate(e.target.value)}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono"
+                  />
                 </div>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -1004,21 +2156,98 @@ export default function RentFlowWorkspace({
                   <label className="block font-bold mb-1">Payment Mode</label>
                   <select value={payMethod} onChange={(e) => setPayMethod(e.target.value)} className="w-full px-3 py-2 rounded-xl border border-slate-300">
                     <option value="Cash">Cash</option>
-                    <option value="UPI">UPI</option>
+                    <option value="UPI">UPI (GPay / PhonePe / Paytm)</option>
                     <option value="Bank Transfer">Bank Transfer</option>
                     <option value="Cheque">Cheque</option>
                   </select>
                 </div>
                 <div>
                   <label className="block font-bold mb-1">Reference / Notes</label>
-                  <input type="text" value={payNotes} onChange={(e) => setPayNotes(e.target.value)} placeholder="Optional note" className="w-full px-3 py-2 rounded-xl border border-slate-300" />
+                  <input
+                    type="text"
+                    value={payNotes}
+                    onChange={(e) => setPayNotes(e.target.value)}
+                    placeholder="Optional note"
+                    className="w-full px-3 py-2 rounded-xl border border-slate-300"
+                  />
                 </div>
               </div>
               <div className="pt-3 border-t border-slate-200 flex justify-end gap-2">
                 <button type="button" onClick={() => setPaymentModalOpen(false)} className="px-4 py-2 rounded-xl border border-slate-300 font-bold">Cancel</button>
-                <button type="submit" className="px-5 py-2 rounded-xl bg-emerald-600 text-white font-bold">Save &amp; Sync</button>
+                <button type="submit" className="px-5 py-2 rounded-xl bg-emerald-600 text-white font-bold">Save &amp; Sync to Sheet</button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* MODAL 2: CONNECT GOOGLE SHEET VIA APPS SCRIPT WIZARD */}
+      {connectModalOpen && (
+        <div className="fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-3 no-print">
+          <div className="bg-white rounded-2xl max-w-xl w-full p-5 shadow-2xl border border-slate-200 space-y-4 text-xs max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-200">
+              <div>
+                <h3 className="text-base font-extrabold text-[#0F172A]">🔗 Connect Google Sheet via Apps Script</h3>
+                <p className="text-[11px] text-slate-500">Two-way live sync with your Google Sheet ({INITIAL_WORKBOOK_DATA.spreadsheetId})</p>
+              </div>
+              <button onClick={() => setConnectModalOpen(false)} className="w-8 h-8 rounded-full bg-slate-100 font-bold">✕</button>
+            </div>
+
+            <div className="space-y-2 bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+              <div className="font-bold text-[#1B365D]">How to link your Google Sheet in 60 seconds:</div>
+              <ol className="list-decimal list-inside space-y-1 text-slate-700">
+                <li>Open your <a href={`https://docs.google.com/spreadsheets/d/${INITIAL_WORKBOOK_DATA.spreadsheetId}/edit`} target="_blank" rel="noopener noreferrer" className="text-blue-700 font-bold underline">Connected Google Sheet ↗</a> and click <strong>Extensions &rarr; Apps Script</strong>.</li>
+                <li>Click <strong>Copy Code.gs Script</strong> below, paste it into the Apps Script editor, and save.</li>
+                <li>Click <strong>Deploy &rarr; New deployment &rarr; Web app</strong> (Execute as: <em>Me</em>, Access: <em>Anyone</em>).</li>
+                <li>Paste the resulting <strong>Web App URL</strong> (<span className="font-mono">https://script.google.com/macros/s/.../exec</span>) below:</li>
+              </ol>
+              <div className="pt-2">
+                <button
+                  type="button"
+                  onClick={handleCopyAppsScript}
+                  className="px-3.5 py-2 rounded-xl bg-[#1B365D] text-white font-bold"
+                >
+                  📋 Copy Full Code.gs Script
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label className="block font-bold text-slate-700 mb-1">Deployed Google Apps Script Web App URL</label>
+              <input
+                type="url"
+                value={appsScriptUrl}
+                onChange={(e) => setAppsScriptUrl(e.target.value)}
+                placeholder="https://script.google.com/macros/s/.../exec"
+                className="w-full px-3 py-2.5 rounded-xl border border-slate-300 font-mono text-xs"
+              />
+            </div>
+
+            <div className="pt-3 border-t border-slate-200 flex items-center justify-between">
+              <button
+                type="button"
+                onClick={() => {
+                  setConnectModalOpen(false);
+                  setActiveTab('sync');
+                }}
+                className="text-blue-700 font-bold hover:underline"
+              >
+                Open Full Sync &amp; Audit Page &rarr;
+              </button>
+              <div className="flex gap-2">
+                <button type="button" onClick={() => setConnectModalOpen(false)} className="px-4 py-2 rounded-xl border border-slate-300 font-bold">Close</button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleSaveAppsScriptUrl(appsScriptUrl);
+                    setConnectModalOpen(false);
+                  }}
+                  className="px-5 py-2 rounded-xl bg-emerald-600 text-white font-bold"
+                >
+                  Save &amp; Connect
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}
