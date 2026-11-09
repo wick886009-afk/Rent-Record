@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useEffect, useCallback } from 'react';
+import React, { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { INITIAL_WORKBOOK_DATA, APPS_SCRIPT_CODE } from '@/lib/data/initial-workbook-data';
 import {
   Tenant,
@@ -496,6 +496,174 @@ export default function RentFlowWorkspace({
     return () => clearInterval(interval);
   }, [triggerSyncFromGoogleSheets]);
 
+  const hero3dRef = useRef<HTMLDivElement | null>(null);
+
+  // Interactive 3D Card Tilt & Glare Physics across all cards
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    const timer = setTimeout(() => {
+      const cards = document.querySelectorAll<HTMLElement>('.card-3d-tilt');
+      cards.forEach((card) => {
+        if ((card as any).__tiltBound) return;
+        (card as any).__tiltBound = true;
+        card.addEventListener('mousemove', (e: MouseEvent) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const cx = rect.width / 2;
+          const cy = rect.height / 2;
+          const rx = ((y - cy) / cy) * -4.5;
+          const ry = ((x - cx) / cx) * 4.5;
+          card.style.setProperty('--glare-x', `${(x / rect.width) * 100}%`);
+          card.style.setProperty('--glare-y', `${(y / rect.height) * 100}%`);
+          card.style.transform = `perspective(1000px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translateZ(4px)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+        });
+      });
+    }, 60);
+    return () => clearTimeout(timer);
+  }, [activeTab, selectedMonth, statusFilter]);
+
+  // Interactive Three.js 3D WebGL Architectural Property Twin on Dashboard Hero Banner
+  useEffect(() => {
+    if (activeTab !== 'dashboard' || typeof window === 'undefined') return;
+    let animId: number | null = null;
+    let cleanupFn: (() => void) | null = null;
+
+    const initScene = () => {
+      const THREE = (window as any).THREE;
+      const wrap = hero3dRef.current;
+      if (!THREE || !wrap) return;
+      wrap.innerHTML = '';
+
+      const width = wrap.clientWidth || 800;
+      const height = wrap.clientHeight || 220;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 100);
+      camera.position.set(0, 4.2, 11.5);
+
+      let renderer: any;
+      try {
+        renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+      } catch {
+        return;
+      }
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      wrap.appendChild(renderer.domElement);
+
+      const ambient = new THREE.AmbientLight(0xffffff, 0.75);
+      scene.add(ambient);
+      const dirLight = new THREE.DirectionalLight(0x34d399, 1.3);
+      dirLight.position.set(6, 10, 8);
+      scene.add(dirLight);
+      const rimLight = new THREE.PointLight(0x60a5fa, 1.2, 25);
+      rimLight.position.set(-6, 4, 5);
+      scene.add(rimLight);
+
+      const group = new THREE.Group();
+      group.position.set(2.8, -1.2, 0);
+      scene.add(group);
+
+      const cubes: Array<{ mesh: any; baseH: number; phase: number }> = [];
+      for (let i = 0; i < 13; i++) {
+        const r = monthRecs[i];
+        const isPaid = r && r.paymentStatus === 'Paid';
+        const hasDue = r && r.closingBalance > 0;
+        const h = r ? Math.max(0.9, Math.min(2.8, r.rent / 1800)) : 1.5;
+
+        const geom = new THREE.BoxGeometry(0.55, h, 0.55);
+        const colorHex = isPaid ? 0x10b981 : hasDue ? 0xf59e0b : 0x38bdf8;
+        const mat = new THREE.MeshStandardMaterial({
+          color: colorHex,
+          roughness: 0.25,
+          metalness: 0.35,
+          transparent: true,
+          opacity: 0.85,
+        });
+        const mesh = new THREE.Mesh(geom, mat);
+        const col = i % 5;
+        const row = Math.floor(i / 5);
+        mesh.position.set((col - 2) * 0.85, h / 2, (row - 1) * 0.85);
+        group.add(mesh);
+        cubes.push({ mesh, baseH: h, phase: i * 0.45 });
+      }
+
+      let targetRotY = -0.35;
+      let targetRotX = 0.15;
+      const onMove = (e: MouseEvent) => {
+        const rect = wrap.getBoundingClientRect();
+        const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+        const ny = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+        targetRotY = -0.35 + nx * 0.55;
+        targetRotX = 0.15 + ny * 0.25;
+      };
+      wrap.addEventListener('mousemove', onMove);
+
+      let t = 0;
+      const animate = () => {
+        animId = requestAnimationFrame(animate);
+        t += 0.025;
+        group.rotation.y += (targetRotY + Math.sin(t * 0.5) * 0.18 - group.rotation.y) * 0.06;
+        group.rotation.x += (targetRotX - group.rotation.x) * 0.06;
+        cubes.forEach((c) => {
+          c.mesh.position.y = c.baseH / 2 + Math.sin(t + c.phase) * 0.12;
+        });
+        renderer.render(scene, camera);
+      };
+      animate();
+
+      cleanupFn = () => {
+        wrap.removeEventListener('mousemove', onMove);
+        if (animId) cancelAnimationFrame(animId);
+        try {
+          renderer.dispose();
+        } catch {}
+      };
+    };
+
+    if ((window as any).THREE) {
+      initScene();
+    } else {
+      const existingScript = document.getElementById('rentflow-threejs-cdn') as HTMLScriptElement | null;
+      if (existingScript) {
+        existingScript.addEventListener('load', initScene);
+      } else {
+        const sc = document.createElement('script');
+        sc.id = 'rentflow-threejs-cdn';
+        sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+        sc.async = true;
+        sc.onload = initScene;
+        document.head.appendChild(sc);
+      }
+    }
+
+    return () => {
+      if (cleanupFn) cleanupFn();
+      if (animId) cancelAnimationFrame(animId);
+    };
+  }, [activeTab, monthRecs]);
+
+  const monthlyTrendSummary = useMemo(() => {
+    return MONTH_SHORT.map((m, idx) => {
+      const mk = `${m}-26`;
+      const mList = monthlyRecords.filter((r) => r.month === mk);
+      return {
+        month: mk,
+        short: m,
+        idx: idx + 1,
+        expected: mList.reduce((s, r) => s + r.rent + (r.electricity ?? 0) + r.water, 0),
+        collected: mList.reduce((s, r) => s + r.totalPaid, 0),
+        elec: mList.reduce((s, r) => s + (r.electricity ?? 0), 0),
+        water: mList.reduce((s, r) => s + r.water, 0),
+        closingDue: mList.reduce((s, r) => s + r.closingBalance, 0),
+      };
+    });
+  }, [monthlyRecords]);
+
   // Open Record Payment Modal — ALWAYS auto-fetches today's live date!
   const openPayModalFor = (tId?: string, mKey?: string) => {
     const targetTid = tId || selectedTenantId || 'T-01';
@@ -813,7 +981,7 @@ export default function RentFlowWorkspace({
     const isPaid = rec.paymentStatus === 'Paid';
     const docBadge = isPaid ? 'PAID RECEIPT' : rec.paymentStatus === 'Partially Paid' ? 'PARTIAL RECEIPT' : 'RENT & UTILITY BILL';
     return (
-      <div key={rec.recordId} className="border-2 border-slate-800 bg-white rounded-xl overflow-hidden shadow-xs flex flex-col justify-between">
+      <div key={rec.recordId} className="card-3d-tilt border-2 border-slate-800 bg-white rounded-xl overflow-hidden shadow-sm flex flex-col justify-between">
         <div>
           <div className="bg-[#0F172A] text-white px-3.5 py-2.5 flex items-center justify-between">
             <div>
@@ -889,7 +1057,60 @@ export default function RentFlowWorkspace({
   };
 
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row bg-[#FAF8F5] text-[#1E293B] pb-20 lg:pb-0">
+    <div className="min-h-screen flex flex-col lg:flex-row bg-[#F8FAFC] text-[#0F172A] pb-20 lg:pb-0">
+      <style dangerouslySetInnerHTML={{ __html: `
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap');
+        body {
+          font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+          background: radial-gradient(circle at 15% 10%, rgba(16, 185, 129, 0.07), transparent 35%),
+                      radial-gradient(circle at 85% 15%, rgba(59, 130, 246, 0.07), transparent 40%),
+                      radial-gradient(circle at 50% 90%, rgba(245, 158, 11, 0.05), transparent 40%),
+                      #F8FAFC;
+        }
+        .scene-3d { perspective: 1200px; }
+        .card-3d-tilt {
+          transform-style: preserve-3d;
+          transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+          will-change: transform;
+          position: relative;
+          overflow: hidden;
+        }
+        .card-3d-tilt::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(420px circle at var(--glare-x, 50%) var(--glare-y, 20%), rgba(255, 255, 255, 0.55), transparent 60%);
+          opacity: 0;
+          transition: opacity 0.25s ease;
+          pointer-events: none;
+          z-index: 2;
+        }
+        .card-3d-tilt:hover::before { opacity: 1; }
+        .card-3d-tilt:hover {
+          box-shadow: 0 22px 45px -12px rgba(15, 23, 42, 0.16), 0 4px 16px -2px rgba(16, 185, 129, 0.12);
+        }
+        @keyframes reveal3d {
+          0% { opacity: 0; transform: perspective(1000px) translateY(22px) rotateX(-6deg) scale(0.98); }
+          100% { opacity: 1; transform: perspective(1000px) translateY(0) rotateX(0deg) scale(1); }
+        }
+        .animate-reveal-3d { animation: reveal3d 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+        .glass-panel {
+          background: rgba(255, 255, 255, 0.88);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(226, 232, 240, 0.9);
+          box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.06);
+        }
+        .btn-3d-emerald {
+          background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+          box-shadow: 0 6px 16px -3px rgba(16, 185, 129, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+          transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .btn-3d-emerald:hover {
+          transform: translateY(-2px) scale(1.01);
+          box-shadow: 0 10px 22px -4px rgba(16, 185, 129, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        }
+      ` }} />
       {/* LEFT SIDEBAR NAVIGATION */}
       <aside className="w-full lg:w-64 bg-[#0F172A] text-white flex-shrink-0 flex flex-col justify-between no-print lg:sticky lg:top-0 lg:h-screen z-40">
         <div className="p-4 lg:p-5 overflow-y-auto">
@@ -1063,52 +1284,208 @@ export default function RentFlowWorkspace({
           {/* ================================================================= */}
           {activeTab === 'dashboard' && (
             <>
-              <div className="rounded-2xl bg-gradient-to-r from-[#0F172A] via-[#1B365D] to-slate-900 text-white p-5 shadow-md flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-                <div>
-                  <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-bold mb-1">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                    <span>Live Calendar Date: {getTodayIsoDate()} · Viewing Period: {selectedMonth}</span>
+              {/* INTERACTIVE 3D WEBGL EXECUTIVE HERO BANNER */}
+              <div className="relative rounded-3xl bg-gradient-to-br from-[#070B19] via-[#0F172A] to-[#1E3A8A] text-white p-5 sm:p-7 shadow-2xl overflow-hidden border border-white/10 animate-reveal-3d">
+                <div ref={hero3dRef} className="absolute inset-0 pointer-events-auto opacity-85" />
+                <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-emerald-500/20 blur-3xl pointer-events-none" />
+                <div className="absolute -bottom-24 left-1/3 w-72 h-72 rounded-full bg-blue-500/20 blur-3xl pointer-events-none" />
+
+                <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 pointer-events-none">
+                  <div className="space-y-2 max-w-2xl pointer-events-auto">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 backdrop-blur-md border border-emerald-400/40 text-emerald-300 text-[11px] font-extrabold tracking-wide shadow-sm">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                      <span>LIVE 3D PROPERTY TWIN · {selectedMonth} · 13 ROOMS</span>
+                    </div>
+                    <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-100 to-emerald-200 bg-clip-text text-transparent">
+                      RentFlow 3D Financial Command Center
+                    </h2>
+                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                      Showing active billing period (<strong className="text-white">{selectedMonth}</strong> — month prior to current calendar month). Prior unpaid balances (<strong className="text-amber-300">{formatINR(prevDueTotal)}</strong>) automatically carry forward across months. Move your cursor to interact with the 3D property towers.
+                    </p>
+                    <div className="flex flex-wrap items-center gap-2 pt-1.5 text-[11px]">
+                      <button
+                        onClick={handleJumpToLiveMonth}
+                        className="px-3 py-1.5 rounded-xl bg-emerald-500/25 border border-emerald-400/50 text-emerald-200 font-bold hover:bg-emerald-500/40 backdrop-blur-md transition"
+                      >
+                        📅 Active Billing Month: {getCurrentMonthKeyAndYear().monthKey} (Prior Month)
+                      </button>
+                      <button
+                        onClick={() => {
+                          setAutoFollowCurrentMonth(false);
+                          setSelectedMonth('Sep-26');
+                        }}
+                        className="px-3 py-1.5 rounded-xl bg-white/10 border border-white/20 text-white font-semibold hover:bg-white/25 backdrop-blur-md transition"
+                      >
+                        ⏮ View Sep-26 (Fully Settled)
+                      </button>
+                      <button
+                        onClick={() => {
+                          setAutoFollowCurrentMonth(false);
+                          setSelectedMonth('Nov-26');
+                        }}
+                        className="px-3 py-1.5 rounded-xl bg-white/10 border border-white/20 text-slate-200 font-semibold hover:bg-white/25 backdrop-blur-md transition"
+                      >
+                        📆 View Nov-26 (Next Cycle)
+                      </button>
+                    </div>
                   </div>
-                  <h2 className="text-xl sm:text-2xl font-extrabold">Property Financial Command Center</h2>
-                  <p className="text-xs text-slate-300 mt-1">
-                    13 Active Tenants · Combined Javed &amp; Raja Billing Group (BG-01) · Spacious 2-Page A4 Printable Rent Slips
-                  </p>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <button onClick={() => openPayModalFor()} className="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs">
-                    + Record Payment (Auto-Today)
-                  </button>
-                  <button onClick={() => setConnectModalOpen(true)} className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs border border-white/15">
-                    🔗 Connect Apps Script
-                  </button>
-                  <button onClick={() => setActiveTab('rent-slips')} className="px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs">
-                    🧾 2-Page A4 Rent Slips
-                  </button>
+
+                  <div className="flex flex-wrap items-center gap-2.5 pointer-events-auto">
+                    <button
+                      onClick={() => openPayModalFor()}
+                      className="btn-3d-emerald px-4 py-3 rounded-2xl text-slate-950 font-extrabold text-xs tracking-wide"
+                    >
+                      + Record Rent Payment
+                    </button>
+                    <button
+                      onClick={() => setActiveTab('electricity')}
+                      className="px-4 py-3 rounded-2xl bg-white/10 hover:bg-white/20 backdrop-blur-md text-white font-bold text-xs border border-white/20 transition shadow-lg"
+                    >
+                      ⚡ Enter Meter Readings
+                    </button>
+                    <button
+                      onClick={() => setActiveTab('rent-slips')}
+                      className="px-4 py-3 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-xs shadow-lg shadow-amber-500/25 transition"
+                    >
+                      🧾 2-Page A4 Rent Slips
+                    </button>
+                  </div>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-                <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
-                  <div className="text-xs font-bold text-slate-500 uppercase">Total Payable ({selectedMonth})</div>
-                  <div className="text-xl sm:text-2xl font-extrabold text-[#0F172A] font-mono mt-1">{formatINR(totalPayable)}</div>
-                  <div className="text-[11px] text-slate-500 mt-1">Base Rent: {formatINR(expectedRent)} · Prior: {formatINR(prevDueTotal)}</div>
+              {/* 4 INTERACTIVE 3D TILT KPI CARDS */}
+              <div className="scene-3d grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
+                <div className="card-3d-tilt glass-panel p-4 sm:p-5 rounded-2xl flex flex-col justify-between animate-reveal-3d" style={{ animationDelay: '40ms' }}>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">Total Payable ({selectedMonth})</span>
+                    <span className="w-9 h-9 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-950 text-white flex items-center justify-center font-extrabold text-sm shadow-md">₹</span>
+                  </div>
+                  <div className="text-xl sm:text-2xl font-extrabold text-[#0F172A] font-mono mt-2.5">{formatINR(totalPayable)}</div>
+                  <div className="text-[11px] text-slate-500 mt-1.5 flex justify-between border-t border-slate-100 pt-1.5">
+                    <span>Base Rent: <strong className="text-slate-800">{formatINR(expectedRent)}</strong></span>
+                    <span>Arrears: <strong className="text-rose-700">{formatINR(prevDueTotal)}</strong></span>
+                  </div>
                 </div>
-                <div className="bg-white p-4 rounded-2xl border border-emerald-200 shadow-2xs">
-                  <div className="text-xs font-bold text-emerald-800 uppercase">Rent Collected</div>
-                  <div className="text-xl sm:text-2xl font-extrabold text-emerald-700 font-mono mt-1">{formatINR(totalCollected)}</div>
-                  <div className="text-[11px] text-emerald-800 mt-1">Collection Rate: {collectionRate}% ({paidCount} Paid)</div>
+
+                <div className="card-3d-tilt glass-panel p-4 sm:p-5 rounded-2xl border-emerald-200/90 flex flex-col justify-between animate-reveal-3d" style={{ animationDelay: '90ms' }}>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-extrabold text-emerald-800 uppercase tracking-wider">Rent Collected</span>
+                    <span className="w-9 h-9 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 text-white flex items-center justify-center font-extrabold text-sm shadow-md shadow-emerald-500/25">✓</span>
+                  </div>
+                  <div className="text-xl sm:text-2xl font-extrabold text-emerald-700 font-mono mt-2.5">{formatINR(totalCollected)}</div>
+                  <div className="mt-2">
+                    <div className="flex justify-between text-[11px] font-bold text-emerald-800 mb-1">
+                      <span>Collection Rate</span>
+                      <span>{collectionRate}%</span>
+                    </div>
+                    <div className="w-full bg-emerald-100 h-2 rounded-full overflow-hidden">
+                      <div className="bg-gradient-to-r from-emerald-500 to-teal-400 h-2 rounded-full transition-all duration-700" style={{ width: `${Math.min(100, Number(collectionRate))}%` }} />
+                    </div>
+                  </div>
                 </div>
-                <div className="bg-white p-4 rounded-2xl border border-rose-200 shadow-2xs">
-                  <div className="text-xs font-bold text-rose-800 uppercase">Outstanding Dues</div>
-                  <div className="text-xl sm:text-2xl font-extrabold text-rose-700 font-mono mt-1">{formatINR(totalOutstanding)}</div>
-                  <div className="text-[11px] text-rose-700 mt-1">{unpaidCount} Unpaid · {partialCount} Partial</div>
+
+                <div className="card-3d-tilt glass-panel p-4 sm:p-5 rounded-2xl border-rose-200/90 flex flex-col justify-between animate-reveal-3d" style={{ animationDelay: '140ms' }}>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-extrabold text-rose-800 uppercase tracking-wider">Outstanding Dues</span>
+                    <span className="w-9 h-9 rounded-2xl bg-gradient-to-br from-rose-500 to-red-600 text-white flex items-center justify-center font-extrabold text-sm shadow-md shadow-rose-500/25">!</span>
+                  </div>
+                  <div className="text-xl sm:text-2xl font-extrabold text-rose-700 font-mono mt-2.5">{formatINR(totalOutstanding)}</div>
+                  <div className="text-[11px] text-rose-700 mt-1.5 flex justify-between border-t border-rose-100 pt-1.5">
+                    <span><strong>{unpaidCount}</strong> Unpaid</span>
+                    <span><strong>{partialCount}</strong> Partial</span>
+                  </div>
                 </div>
-                <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
-                  <div className="text-xs font-bold text-slate-500 uppercase">Utilities ({selectedMonth})</div>
-                  <div className="text-xl sm:text-2xl font-extrabold text-[#1B365D] font-mono mt-1">
+
+                <div className="card-3d-tilt glass-panel p-4 sm:p-5 rounded-2xl flex flex-col justify-between animate-reveal-3d" style={{ animationDelay: '190ms' }}>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">Utilities &amp; Meters</span>
+                    <span className="w-9 h-9 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center font-extrabold text-sm shadow-md shadow-blue-500/25">⚡</span>
+                  </div>
+                  <div className="text-xl sm:text-2xl font-extrabold text-[#1B365D] font-mono mt-2.5">
                     {pendingReadingCount === monthRecs.length ? 'Pending' : formatINR(elecTotal + waterTotal)}
                   </div>
-                  <div className="text-[11px] text-slate-500 mt-1">Elec: {formatINR(elecTotal)} · Water: {formatINR(waterTotal)}</div>
+                  <div className="text-[11px] text-slate-500 mt-1.5 flex justify-between border-t border-slate-100 pt-1.5">
+                    <span>Elec: <strong>{pendingReadingCount === monthRecs.length ? 'Pending' : formatINR(elecTotal)}</strong></span>
+                    <span>Water: <strong>{formatINR(waterTotal)}</strong></span>
+                  </div>
+                </div>
+              </div>
+
+              {/* 4 INTERACTIVE 3D FINANCIAL & UTILITY VISUAL CHARTS */}
+              <div className="scene-3d grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div className="card-3d-tilt glass-panel p-4 sm:p-5 rounded-2xl">
+                  <div className="flex items-center justify-between mb-3">
+                    <div>
+                      <h3 className="text-sm font-extrabold text-[#0F172A]">Monthly Expected vs Collected Rent ({selectedYear})</h3>
+                      <p className="text-[11px] text-slate-500">Click any month bar to switch active billing period</p>
+                    </div>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                      YTD Collected: {formatINR(payments.reduce((s, p) => s + p.amount, 0))}
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-12 gap-1.5 items-end h-40 pt-4 px-1 border-b border-slate-200">
+                    {monthlyTrendSummary.map((m) => {
+                      const maxVal = 60000;
+                      const expH = Math.max(8, Math.min(100, Math.round((m.expected / maxVal) * 100)));
+                      const colH = Math.max(4, Math.min(100, Math.round((m.collected / maxVal) * 100)));
+                      const isSel = m.month === selectedMonth;
+                      return (
+                        <div
+                          key={m.month}
+                          onClick={() => {
+                            setAutoFollowCurrentMonth(false);
+                            setSelectedMonth(m.month);
+                          }}
+                          className={`flex flex-col items-center cursor-pointer group ${isSel ? 'opacity-100' : 'opacity-85 hover:opacity-100'}`}
+                          title={`${m.month}: Expected ${formatINR(m.expected)} | Collected ${formatINR(m.collected)}`}
+                        >
+                          <div className="w-full flex items-end justify-center gap-0.5 h-32">
+                            <div className="w-2 sm:w-2.5 bg-slate-300 rounded-t transition-all duration-500" style={{ height: `${expH}%` }} />
+                            <div className={`w-2 sm:w-2.5 rounded-t transition-all duration-500 ${isSel ? 'bg-amber-500' : 'bg-emerald-500'}`} style={{ height: `${colH}%` }} />
+                          </div>
+                          <span className={`text-[9px] mt-1 font-mono ${isSel ? 'font-extrabold text-[#0F172A] underline' : 'text-slate-500'}`}>
+                            {m.short}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div className="card-3d-tilt glass-panel p-4 sm:p-5 rounded-2xl">
+                  <div className="flex items-center justify-between mb-3">
+                    <div>
+                      <h3 className="text-sm font-extrabold text-[#0F172A]">Tenant Balance Ranking — {selectedMonth}</h3>
+                      <p className="text-[11px] text-slate-500">Real-time closing balance distribution across rooms</p>
+                    </div>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200">
+                      Due: {formatINR(totalOutstanding)}
+                    </span>
+                  </div>
+                  <div className="space-y-2 max-h-40 overflow-y-auto pr-1">
+                    {monthRecs
+                      .slice()
+                      .sort((a, b) => b.closingBalance - a.closingBalance)
+                      .map((r) => {
+                        const pct = totalPayable > 0 ? Math.min(100, Math.round((r.closingBalance / 10000) * 100)) : 0;
+                        return (
+                          <div key={r.recordId} className="text-xs space-y-0.5">
+                            <div className="flex justify-between">
+                              <span className="font-bold text-slate-700">{r.tenantName} <span className="text-[10px] font-normal text-slate-400">({r.room})</span></span>
+                              <span className={`font-mono font-bold ${r.closingBalance > 0 ? 'text-rose-700' : 'text-emerald-700'}`}>
+                                {formatINR(r.closingBalance)}
+                              </span>
+                            </div>
+                            <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                              <div
+                                className={`h-1.5 rounded-full ${r.closingBalance > 0 ? 'bg-gradient-to-r from-rose-500 to-amber-500' : 'bg-emerald-500'}`}
+                                style={{ width: `${r.closingBalance > 0 ? Math.max(8, pct) : 100}%` }}
+                              />
+                            </div>
+                          </div>
+                        );
+                      })}
+                  </div>
                 </div>
               </div>
 
