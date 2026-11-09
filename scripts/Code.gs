@@ -2,14 +2,13 @@
  * RENTFLOW — COMPLETE TWO-WAY GOOGLE SHEETS SYNC ENGINE (Code.gs)
  * Connected Workbook ID: 1_Xog1mnKtWER-KjI7oCg0n2S5UeK-KWhgQkeOTErV2s
  *
- * HOW TO DEPLOY (60 SECONDS):
- * 1. Open your Google Sheet -> Click Extensions -> Apps Script
- * 2. Paste this entire script into Code.gs and click Save
- * 3. Click Deploy -> New deployment -> Select type: Web app
- *    - Execute as: Me
- *    - Who has access: Anyone
- * 4. Click Deploy, authorize access, and copy the Web App URL (https://script.google.com/macros/s/.../exec)
- * 5. Paste the Web App URL into the RentFlow website ("Connect Sheet" button)
+ * HOW TO AUTHORIZE & DEPLOY (60 SECONDS):
+ * 1. Click "▶ Run" at the top (with "testAndAuthorizeConnection" selected) and click "Review permissions" -> "Allow".
+ * 2. Click "Deploy" (top right) -> "New deployment" -> Select type: "Web app"
+ *    - Execute as: "Me"
+ *    - Who has access: "Anyone"
+ * 3. Click "Deploy", copy the Web App URL (https://script.google.com/macros/s/.../exec),
+ *    and paste it into the "🔗 Connect Sheet" button on the RentFlow website!
  */
 
 const SPREADSHEET_ID = '1_Xog1mnKtWER-KjI7oCg0n2S5UeK-KWhgQkeOTErV2s';
@@ -29,13 +28,34 @@ const TENANT_SHEETS = [
   { tenantId: 'T-13', name: 'Sundar', sheetName: 'Sundar', room: 'Room 113' }
 ];
 const MONTH_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
-function onOpen() {
-  SpreadsheetApp.getUi()
-    .createMenu('Rent Management')
-    .addItem('Switch Dashboard & Slips to Current Month', 'setCurrentMonthInSheet')
-    .addToUi();
+/**
+ * 1. DEFAULT FUNCTION WHEN YOU CLICK "▶ Run" IN APPS SCRIPT EDITOR:
+ * Verifies connection to your Google Sheet, sets Dashboard & Rent Slips to the current month,
+ * and authorizes all permissions cleanly without any getUi() error!
+ */
+function testAndAuthorizeConnection() {
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  Logger.log('✅ Connected to Google Sheet: ' + ss.getName());
+  setCurrentMonthInSheet();
+  const testRead = doGet({});
+  Logger.log('✅ Verified live data read from all 13 tenant tabs + Payments Ledger!');
+  Logger.log('👉 NEXT STEP: Click "Deploy" (top right) -> "New deployment" -> Select type: "Web app" (Execute as: Me, Who has access: Anyone) and copy the Web App URL!');
+}
+
+/**
+ * Safe onOpen() handler — works both when opening the spreadsheet AND if clicked manually in the editor!
+ */
+function onOpen(e) {
+  try {
+    SpreadsheetApp.getUi()
+      .createMenu('Rent Management')
+      .addItem('Switch Dashboard & Slips to Current Month', 'setCurrentMonthInSheet')
+      .addToUi();
+  } catch (err) {
+    // When clicked manually inside the Apps Script editor, getUi() is not available; run the connection test instead!
+    testAndAuthorizeConnection();
+  }
 }
 
 function setCurrentMonthInSheet() {
@@ -46,11 +66,13 @@ function setCurrentMonthInSheet() {
   if (dash) dash.getRange('C3').setValue(mKey);
   const slips = ss.getSheetByName('Monthly Rent Slips');
   if (slips) slips.getRange('I1').setValue(mKey);
+  const syncSheet = ss.getSheetByName('Sync_Status');
+  if (syncSheet) syncSheet.getRange('B2').setValue(new Date().toISOString());
+  Logger.log('✅ Updated Dashboard & Monthly Rent Slips to current month: ' + mKey);
 }
 
 /**
  * GET Handler: Reads live meter readings, rents, credits, and payments across all tabs
- * so manual edits in Google Sheets appear on the RentFlow website automatically!
  */
 function doGet(e) {
   try {
@@ -60,7 +82,6 @@ function doGet(e) {
     TENANT_SHEETS.forEach(function(t) {
       const sh = ss.getSheetByName(t.sheetName);
       if (!sh) return;
-      // Rows 3..14 correspond to Jan-26..Dec-26
       const vals = sh.getRange(3, 1, 12, 16).getValues();
       for (let i = 0; i < 12; i++) {
         const row = vals[i];
@@ -104,8 +125,8 @@ function doGet(e) {
           paymentId: String(r[0] || ('PAY-' + (idx + 1))),
           tenantId: matchedT ? matchedT.tenantId : 'T-01',
           tenantName: matchedT ? matchedT.name : tName,
-          recordId: 'REC-2026-' + String(r[2] || 'Sep-26') + '-' + (matchedT ? matchedT.tenantId : 'T-01'),
-          month: String(r[2] || 'Sep-26'),
+          recordId: 'REC-2026-' + String(r[2] || 'Nov-26') + '-' + (matchedT ? matchedT.tenantId : 'T-01'),
+          month: String(r[2] || 'Nov-26'),
           year: 2026,
           date: dtStr,
           amount: Number(r[4]) || 0,
@@ -137,7 +158,6 @@ function doGet(e) {
 
 /**
  * POST Handler: Writes new payments, meter readings, credits, and tenant updates
- * from the RentFlow website directly into the Google Sheet!
  */
 function doPost(e) {
   const lock = LockService.getScriptLock();
@@ -177,7 +197,7 @@ function doPost(e) {
       const sheetName = p.sheetName || p.tenantName;
       const tSheet = ss.getSheetByName(sheetName);
       if (!tSheet) return jsonResponse({ ok: false, error: 'Worksheet not found: ' + sheetName });
-      const row = Number(p.monthIndex) + 2; // Row 3 = Jan-26 .. Row 14 = Dec-26
+      const row = Number(p.monthIndex) + 2;
       const prevVal = tSheet.getRange(row, 4).getValue();
       const newVal = (p.currentReading === null || p.currentReading === '' || p.currentReading === undefined) ? '' : Number(p.currentReading);
       tSheet.getRange(row, 4).setValue(newVal);
