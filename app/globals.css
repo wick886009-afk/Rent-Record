@@ -2,16 +2,117 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap');
+
 :root {
   --bg-cream: #FAF8F5;
-  --navy-primary: #1B365D;
-  --charcoal-text: #1E293B;
+  --navy: #0F172A;
+  --navy-accent: #1B365D;
+  --charcoal: #1E293B;
 }
 
 body {
-  background-color: var(--bg-cream);
-  color: var(--charcoal-text);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: radial-gradient(circle at 15% 10%, rgba(16, 185, 129, 0.07), transparent 35%),
+              radial-gradient(circle at 85% 15%, rgba(59, 130, 246, 0.07), transparent 40%),
+              radial-gradient(circle at 50% 90%, rgba(245, 158, 11, 0.05), transparent 40%),
+              #F8FAFC;
+  color: #0F172A;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+
+/* 3D Perspective & Interactive Tilt Cards */
+.scene-3d {
+  perspective: 1200px;
+}
+
+.card-3d-tilt {
+  transform-style: preserve-3d;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-3d-tilt::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(420px circle at var(--glare-x, 50%) var(--glare-y, 20%), rgba(255, 255, 255, 0.55), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.card-3d-tilt:hover::before {
+  opacity: 1;
+}
+
+.card-3d-tilt:hover {
+  box-shadow: 0 22px 45px -12px rgba(15, 23, 42, 0.16), 0 4px 16px -2px rgba(16, 185, 129, 0.12);
+}
+
+/* 3D Staggered Entrance Animations */
+@keyframes float3d {
+  0%, 100% { transform: translate3d(0, 0px, 0) rotateX(0deg); }
+  50% { transform: translate3d(0, -6px, 8px) rotateX(1.5deg); }
+}
+
+@keyframes reveal3d {
+  0% {
+    opacity: 0;
+    transform: perspective(1000px) translateY(22px) rotateX(-6deg) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(1000px) translateY(0) rotateX(0deg) scale(1);
+  }
+}
+
+.animate-reveal-3d {
+  animation: reveal3d 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-float-slow {
+  animation: float3d 5s ease-in-out infinite;
+}
+
+/* Glassmorphic Luxury Panels */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.06);
+}
+
+/* 3D Tactile Buttons */
+.btn-3d-emerald {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  box-shadow: 0 6px 16px -3px rgba(16, 185, 129, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-3d-emerald:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 10px 22px -4px rgba(16, 185, 129, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.btn-3d-emerald:active {
+  transform: translateY(1px);
+}
+
+.btn-3d-navy {
+  background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+  box-shadow: 0 6px 16px -3px rgba(15, 23, 42, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-3d-navy:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px -4px rgba(15, 23, 42, 0.5);
 }
 
 @media print {
