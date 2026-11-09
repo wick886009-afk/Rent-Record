@@ -71,8 +71,9 @@ export default function RentFlowWorkspace({
   initialTenantId?: string;
 }) {
   const [activeTab, setActiveTab] = useState<NavTab>(initialTab);
-  const [selectedMonth, setSelectedMonth] = useState<string>('Sep-26');
-  const [selectedYear, setSelectedYear] = useState<number>(2026);
+  const [autoFollowCurrentMonth, setAutoFollowCurrentMonth] = useState<boolean>(true);
+  const [selectedMonth, setSelectedMonth] = useState<string>(() => getCurrentMonthKeyAndYear().monthKey);
+  const [selectedYear, setSelectedYear] = useState<number>(() => getCurrentMonthKeyAndYear().year);
   const [selectedTenantId, setSelectedTenantId] = useState<string>(initialTenantId || 'T-01');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [statusFilter, setStatusFilter] = useState<string>('All');
@@ -93,7 +94,7 @@ export default function RentFlowWorkspace({
 
   // Payment Modal State (Auto-fetches current date on open!)
   const [payTenantId, setPayTenantId] = useState<string>('T-01');
-  const [payMonthKey, setPayMonthKey] = useState<string>('Sep-26');
+  const [payMonthKey, setPayMonthKey] = useState<string>(() => getCurrentMonthKeyAndYear().monthKey);
   const [payAmount, setPayAmount] = useState<string>('2500');
   const [payDate, setPayDate] = useState<string>(getTodayIsoDate());
   const [payMethod, setPayMethod] = useState<string>('Cash');
@@ -233,23 +234,83 @@ export default function RentFlowWorkspace({
     );
   }, [monthRecs, statusFilter, searchQuery]);
 
+  const applyRemoteSyncData = useCallback((remote: any, sourceLabel: string) => {
+    if (!remote) return false;
+    let updated = false;
+    if (Array.isArray(remote.liveReadings) && remote.liveReadings.length > 0) {
+      setRawRecords((prev) => {
+        const byId = new Map<string, any>();
+        remote.liveReadings.forEach((lr: any) => byId.set(lr.recordId, lr));
+        return prev.map((r) => {
+          const match = byId.get(r.recordId);
+          if (!match) return r;
+          return {
+            ...r,
+            rent: match.rent !== undefined ? Number(match.rent) : r.rent,
+            currentReading: match.currentReading,
+            water: match.water !== undefined ? Number(match.water) : r.water,
+            credits: match.credits !== undefined ? Number(match.credits) : r.credits,
+          };
+        });
+      });
+      updated = true;
+    }
+    if (Array.isArray(remote.payments) && remote.payments.length > 0) {
+      setPayments(remote.payments);
+      updated = true;
+    }
+    setSyncStatus({
+      state: 'connected',
+      lastSync: new Date().toLocaleTimeString(),
+      mode: sourceLabel,
+    });
+    return updated;
+  }, []);
+
   const triggerSyncFromGoogleSheets = useCallback(async () => {
     setSyncStatus((prev) => ({ ...prev, state: 'syncing' }));
     try {
+      // 1. If Apps Script Web App URL is configured, also try direct CORS fetch from browser first for instant sync
+      if (appsScriptUrl && appsScriptUrl.startsWith('https://script.google.com/')) {
+        try {
+          const directRes = await fetch(appsScriptUrl, { method: 'GET', cache: 'no-store' });
+          if (directRes.ok) {
+            const directJson = await directRes.json();
+            if (directJson && directJson.ok) {
+              applyRemoteSyncData(directJson, 'Apps Script Live Two-Way Sync');
+              setToastMessage('Pulled latest live meter readings & payments from Google Sheet via Apps Script!');
+              return;
+            }
+          }
+        } catch {}
+      }
+
+      // 2. Query Next.js Server API Route (/api/sheets)
       const q = appsScriptUrl ? `?webhookUrl=${encodeURIComponent(appsScriptUrl)}` : '';
-      const res = await fetch(`/api/sheets${q}`);
+      const res = await fetch(`/api/sheets${q}`, { cache: 'no-store' });
       if (res.ok) {
+        const json = await res.json();
+        const remotePayload = json.remoteData || json.data;
+        if (remotePayload && (remotePayload.liveReadings || remotePayload.mode === 'live-service-account')) {
+          applyRemoteSyncData(remotePayload, json.mode === 'apps-script-live' ? 'Apps Script Live Sync' : 'Service Account Live Sync');
+          setToastMessage('Synchronized live records from Google Sheets.');
+          return;
+        }
         setSyncStatus({
           state: 'connected',
           lastSync: new Date().toLocaleTimeString(),
-          mode: appsScriptUrl ? 'Apps Script Webhook Verified' : 'Google Sheets API v4 Verified',
+          mode: appsScriptUrl ? 'Apps Script Linked' : 'Local Cache (Connect Apps Script for Live Sheet Sync)',
         });
-        setToastMessage('Synchronized latest records with Google Sheets.');
+        setToastMessage(
+          appsScriptUrl
+            ? 'Checked Google Sheet sync status.'
+            : 'Local state active. Click "🔗 Connect Sheet" and paste your Apps Script Web App URL for live 2-way Google Sheet sync.'
+        );
       }
     } catch {
       setSyncStatus((prev) => ({ ...prev, state: 'error' }));
     }
-  }, [appsScriptUrl]);
+  }, [appsScriptUrl, applyRemoteSyncData]);
 
   useEffect(() => {
     const interval = setInterval(triggerSyncFromGoogleSheets, 30000);
@@ -818,7 +879,7 @@ export default function RentFlowWorkspace({
           {/* ================================================================= */}
           {activeTab === 'dashboard' && (
             <>
-              <div className="rounded-2xl bg-gradient-to-r from-[#0F172A] via-[#1B365D] to-slate-900 text-white p-5 shadow-md flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+              <div className="animate-reveal-3d relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#070B19] via-[#0F172A] to-[#1E3A8A] text-white p-6 shadow-2xl border border-white/10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
                 <div>
                   <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-bold mb-1">
                     <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
@@ -843,22 +904,22 @@ export default function RentFlowWorkspace({
               </div>
 
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-                <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
+                <div className="card-3d-tilt animate-reveal-3d bg-white/90 backdrop-blur-md p-5 rounded-2xl border border-slate-200/90 shadow-sm">
                   <div className="text-xs font-bold text-slate-500 uppercase">Total Payable ({selectedMonth})</div>
                   <div className="text-xl sm:text-2xl font-extrabold text-[#0F172A] font-mono mt-1">{formatINR(totalPayable)}</div>
                   <div className="text-[11px] text-slate-500 mt-1">Base Rent: {formatINR(expectedRent)} · Prior: {formatINR(prevDueTotal)}</div>
                 </div>
-                <div className="bg-white p-4 rounded-2xl border border-emerald-200 shadow-2xs">
+                <div className="card-3d-tilt animate-reveal-3d bg-white/90 backdrop-blur-md p-5 rounded-2xl border border-emerald-200/90 shadow-sm">
                   <div className="text-xs font-bold text-emerald-800 uppercase">Rent Collected</div>
                   <div className="text-xl sm:text-2xl font-extrabold text-emerald-700 font-mono mt-1">{formatINR(totalCollected)}</div>
                   <div className="text-[11px] text-emerald-800 mt-1">Collection Rate: {collectionRate}% ({paidCount} Paid)</div>
                 </div>
-                <div className="bg-white p-4 rounded-2xl border border-rose-200 shadow-2xs">
+                <div className="card-3d-tilt animate-reveal-3d bg-white/90 backdrop-blur-md p-5 rounded-2xl border border-rose-200/90 shadow-sm">
                   <div className="text-xs font-bold text-rose-800 uppercase">Outstanding Dues</div>
                   <div className="text-xl sm:text-2xl font-extrabold text-rose-700 font-mono mt-1">{formatINR(totalOutstanding)}</div>
                   <div className="text-[11px] text-rose-700 mt-1">{unpaidCount} Unpaid · {partialCount} Partial</div>
                 </div>
-                <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
+                <div className="card-3d-tilt animate-reveal-3d bg-white/90 backdrop-blur-md p-5 rounded-2xl border border-slate-200/90 shadow-sm">
                   <div className="text-xs font-bold text-slate-500 uppercase">Utilities ({selectedMonth})</div>
                   <div className="text-xl sm:text-2xl font-extrabold text-[#1B365D] font-mono mt-1">
                     {pendingReadingCount === monthRecs.length ? 'Pending' : formatINR(elecTotal + waterTotal)}
