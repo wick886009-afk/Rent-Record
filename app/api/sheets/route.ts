@@ -1,9 +1,41 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { fetchWorkbookStateFromSheets } from '@/lib/google-sheets';
+import fs from 'fs';
+
+const CONFIG_PATH = '/tmp/rentflow_permanent_webhook.json';
+
+function getPersistedWebhookUrl(queryUrl?: string | null): string {
+  if (queryUrl && queryUrl.startsWith('https://script.google.com/')) {
+    savePersistedWebhookUrl(queryUrl);
+    return queryUrl;
+  }
+  if ((globalThis as any).__rentflowWebhookUrl) {
+    return (globalThis as any).__rentflowWebhookUrl;
+  }
+  try {
+    if (fs.existsSync(CONFIG_PATH)) {
+      const parsed = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf-8'));
+      if (parsed?.webhookUrl) {
+        (globalThis as any).__rentflowWebhookUrl = parsed.webhookUrl;
+        return parsed.webhookUrl;
+      }
+    }
+  } catch {}
+  return process.env.NEXT_PUBLIC_GOOGLE_APPS_SCRIPT_URL || process.env.GOOGLE_APPS_SCRIPT_WEBHOOK_URL || '';
+}
+
+function savePersistedWebhookUrl(url: string) {
+  const clean = String(url || '').trim();
+  if (!clean.startsWith('https://script.google.com/')) return;
+  (globalThis as any).__rentflowWebhookUrl = clean;
+  try {
+    fs.writeFileSync(CONFIG_PATH, JSON.stringify({ webhookUrl: clean, updatedAt: new Date().toISOString() }), 'utf-8');
+  } catch {}
+}
 
 export async function GET(req: NextRequest) {
   try {
-    const webhookUrl = req.nextUrl.searchParams.get('webhookUrl') || process.env.GOOGLE_APPS_SCRIPT_WEBHOOK_URL;
+    const webhookUrl = getPersistedWebhookUrl(req.nextUrl.searchParams.get('webhookUrl'));
     if (webhookUrl && webhookUrl.startsWith('https://script.google.com/')) {
       const res = await fetch(webhookUrl, { method: 'GET', cache: 'no-store' });
       if (res.ok) {
@@ -11,6 +43,7 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({
           ok: true,
           mode: 'apps-script-live',
+          webhookUrl,
           remoteData,
         });
       }
@@ -19,6 +52,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({
       ok: true,
       mode: state.mode,
+      webhookUrl,
       data: state,
     });
   } catch (error: any) {
@@ -32,7 +66,7 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const webhookUrl = body.webhookUrl || process.env.GOOGLE_APPS_SCRIPT_WEBHOOK_URL;
+    const webhookUrl = getPersistedWebhookUrl(body.webhookUrl);
     if (webhookUrl && webhookUrl.startsWith('https://script.google.com/')) {
       const res = await fetch(webhookUrl, {
         method: 'POST',
@@ -47,6 +81,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({
         ok: true,
         syncedVia: 'apps-script-webhook',
+        webhookUrl,
         response: data,
       });
     }

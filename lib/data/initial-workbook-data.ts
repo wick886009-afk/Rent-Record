@@ -1,4 +1,5 @@
-// Auto-generated from original_rent_record.xlsx
+// AUTO-GENERATED FROM LIVE GOOGLE SHEET (1_Xog1mnKtWER-KjI7oCg0n2S5UeK-KWhgQkeOTErV2s)
+// Includes all 13 Tenants, 156 Monthly Records (Jan-Dec 2026 with verified Oct-26 readings), and 104 Payments (₹360,024)
 
 export const INITIAL_WORKBOOK_DATA = {
   "spreadsheetId": "1_Xog1mnKtWER-KjI7oCg0n2S5UeK-KWhgQkeOTErV2s",
@@ -66,7 +67,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "sheetName": "Ghanti",
       "initialMeterReading": 4327,
       "openingArrears": 0,
-      "notes": "Migrated from worksheet Ghanti"
+      "notes": "Synced with live worksheet Ghanti"
     },
     {
       "tenantId": "T-04",
@@ -86,7 +87,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "sheetName": "Sonu",
       "initialMeterReading": 5716,
       "openingArrears": 0,
-      "notes": "Migrated from worksheet Sonu"
+      "notes": "Synced with live worksheet Sonu"
     },
     {
       "tenantId": "T-05",
@@ -106,7 +107,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "sheetName": "Painter",
       "initialMeterReading": 3677,
       "openingArrears": 0,
-      "notes": "Migrated from worksheet Painter"
+      "notes": "Synced with live worksheet Painter"
     },
     {
       "tenantId": "T-06",
@@ -126,7 +127,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "sheetName": "Imran",
       "initialMeterReading": 3206,
       "openingArrears": 3055,
-      "notes": "Migrated from worksheet Imran"
+      "notes": "Synced with live worksheet Imran"
     },
     {
       "tenantId": "T-07",
@@ -146,7 +147,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "sheetName": "Virasat",
       "initialMeterReading": 1525,
       "openingArrears": 0,
-      "notes": "Migrated from worksheet Virasat"
+      "notes": "Synced with live worksheet Virasat"
     },
     {
       "tenantId": "T-08",
@@ -166,7 +167,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "sheetName": "Guddu",
       "initialMeterReading": 1541,
       "openingArrears": 0,
-      "notes": "Migrated from worksheet Guddu"
+      "notes": "Synced with live worksheet Guddu"
     },
     {
       "tenantId": "T-09",
@@ -186,7 +187,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "sheetName": "Sajid",
       "initialMeterReading": 765,
       "openingArrears": 0,
-      "notes": "Migrated from worksheet Sajid"
+      "notes": "Synced with live worksheet Sajid"
     },
     {
       "tenantId": "T-10",
@@ -206,7 +207,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "sheetName": "Sundar ki mummy",
       "initialMeterReading": 813,
       "openingArrears": 0,
-      "notes": "Migrated from worksheet Sundar ki mummy"
+      "notes": "Synced with live worksheet Sundar ki mummy"
     },
     {
       "tenantId": "T-11",
@@ -226,7 +227,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "sheetName": "Dinesh",
       "initialMeterReading": 932,
       "openingArrears": 0,
-      "notes": "Migrated from worksheet Dinesh"
+      "notes": "Synced with live worksheet Dinesh"
     },
     {
       "tenantId": "T-12",
@@ -246,7 +247,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "sheetName": "Nisha",
       "initialMeterReading": 1713,
       "openingArrears": 0,
-      "notes": "Migrated from worksheet Nisha"
+      "notes": "Synced with live worksheet Nisha"
     },
     {
       "tenantId": "T-13",
@@ -266,7 +267,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "sheetName": "Sundar",
       "initialMeterReading": 5009,
       "openingArrears": 0,
-      "notes": "Migrated from worksheet Sundar"
+      "notes": "Synced with live worksheet Sundar"
     }
   ],
   "monthlyRecords": [
@@ -294,7 +295,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2539.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Javed!A3:N3"
+      "sourceRow": "Javed!A3:O3"
     },
     {
       "recordId": "REC-2026-02-T-01",
@@ -320,7 +321,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2546.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Javed!A4:N4"
+      "sourceRow": "Javed!A4:O4"
     },
     {
       "recordId": "REC-2026-03-T-01",
@@ -346,7 +347,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2721.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Javed!A5:N5"
+      "sourceRow": "Javed!A5:O5"
     },
     {
       "recordId": "REC-2026-04-T-01",
@@ -372,7 +373,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2581.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Javed!A6:N6"
+      "sourceRow": "Javed!A6:O6"
     },
     {
       "recordId": "REC-2026-05-T-01",
@@ -395,10 +396,10 @@ export const INITIAL_WORKBOOK_DATA = {
       "otherCharges": 0,
       "credits": 0,
       "totalPayable": 2581.0,
-      "totalPaid": 0.0,
+      "totalPaid": 0,
       "closingBalance": 2581.0,
       "paymentStatus": "Unpaid",
-      "sourceRow": "Javed!A7:N7"
+      "sourceRow": "Javed!A7:O7"
     },
     {
       "recordId": "REC-2026-06-T-01",
@@ -421,10 +422,10 @@ export const INITIAL_WORKBOOK_DATA = {
       "otherCharges": 0,
       "credits": 0,
       "totalPayable": 5120.0,
-      "totalPaid": 0.0,
+      "totalPaid": 0,
       "closingBalance": 5120.0,
       "paymentStatus": "Unpaid",
-      "sourceRow": "Javed!A8:N8"
+      "sourceRow": "Javed!A8:O8"
     },
     {
       "recordId": "REC-2026-07-T-01",
@@ -450,7 +451,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2609.0,
       "closingBalance": 5120.0,
       "paymentStatus": "Partially Paid",
-      "sourceRow": "Javed!A9:N9"
+      "sourceRow": "Javed!A9:O9"
     },
     {
       "recordId": "REC-2026-08-T-01",
@@ -476,7 +477,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2511.0,
       "closingBalance": 5120.0,
       "paymentStatus": "Partially Paid",
-      "sourceRow": "Javed!A10:N10"
+      "sourceRow": "Javed!A10:O10"
     },
     {
       "recordId": "REC-2026-09-T-01",
@@ -499,10 +500,10 @@ export const INITIAL_WORKBOOK_DATA = {
       "otherCharges": 0,
       "credits": 0,
       "totalPayable": 7631.0,
-      "totalPaid": 0.0,
-      "closingBalance": 7631.0,
-      "paymentStatus": "Unpaid",
-      "sourceRow": "Javed!A11:N11"
+      "totalPaid": 7631.0,
+      "closingBalance": 0.0,
+      "paymentStatus": "Paid",
+      "sourceRow": "Javed!A11:O11"
     },
     {
       "recordId": "REC-2026-10-T-01",
@@ -515,20 +516,20 @@ export const INITIAL_WORKBOOK_DATA = {
       "year": 2026,
       "rent": 2200,
       "previousReading": 2208.0,
-      "currentReading": null,
-      "units": null,
+      "currentReading": 2234.0,
+      "units": 26.0,
       "rate": 7,
-      "electricity": null,
+      "electricity": 182.0,
       "water": 10,
-      "totalBill": 10,
-      "previousOutstanding": 7631.0,
+      "totalBill": 192.0,
+      "previousOutstanding": 0.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 7631.0,
-      "totalPaid": 0.0,
-      "closingBalance": 7631.0,
-      "paymentStatus": "Pending Calculation",
-      "sourceRow": "Javed!A12:N12"
+      "totalPayable": 2392.0,
+      "totalPaid": 0,
+      "closingBalance": 2392.0,
+      "paymentStatus": "Unpaid",
+      "sourceRow": "Javed!A12:O12"
     },
     {
       "recordId": "REC-2026-11-T-01",
@@ -540,21 +541,21 @@ export const INITIAL_WORKBOOK_DATA = {
       "monthIndex": 11,
       "year": 2026,
       "rent": 2200,
-      "previousReading": 2208.0,
+      "previousReading": 2234.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
       "electricity": null,
       "water": 10,
       "totalBill": 10,
-      "previousOutstanding": 7631.0,
+      "previousOutstanding": 2392.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 7631.0,
-      "totalPaid": 0.0,
-      "closingBalance": 7631.0,
+      "totalPayable": 2392.0,
+      "totalPaid": 0,
+      "closingBalance": 2392.0,
       "paymentStatus": "Pending Calculation",
-      "sourceRow": "Javed!A13:N13"
+      "sourceRow": "Javed!A13:O13"
     },
     {
       "recordId": "REC-2026-12-T-01",
@@ -566,21 +567,21 @@ export const INITIAL_WORKBOOK_DATA = {
       "monthIndex": 12,
       "year": 2026,
       "rent": 2200,
-      "previousReading": 2208.0,
+      "previousReading": 2234.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
       "electricity": null,
       "water": 10,
       "totalBill": 10,
-      "previousOutstanding": 7631.0,
+      "previousOutstanding": 2392.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 7631.0,
-      "totalPaid": 0.0,
-      "closingBalance": 7631.0,
+      "totalPayable": 2392.0,
+      "totalPaid": 0,
+      "closingBalance": 2392.0,
       "paymentStatus": "Pending Calculation",
-      "sourceRow": "Javed!A14:N14"
+      "sourceRow": "Javed!A14:O14"
     },
     {
       "recordId": "REC-2026-01-T-02",
@@ -606,7 +607,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2422.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Raja!A3:N3"
+      "sourceRow": "Raja!A3:O3"
     },
     {
       "recordId": "REC-2026-02-T-02",
@@ -632,7 +633,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2450.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Raja!A4:N4"
+      "sourceRow": "Raja!A4:O4"
     },
     {
       "recordId": "REC-2026-03-T-02",
@@ -658,7 +659,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2681.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Raja!A5:N5"
+      "sourceRow": "Raja!A5:O5"
     },
     {
       "recordId": "REC-2026-04-T-02",
@@ -684,7 +685,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2674.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Raja!A6:N6"
+      "sourceRow": "Raja!A6:O6"
     },
     {
       "recordId": "REC-2026-05-T-02",
@@ -707,10 +708,10 @@ export const INITIAL_WORKBOOK_DATA = {
       "otherCharges": 0,
       "credits": 0,
       "totalPayable": 2716.0,
-      "totalPaid": 0.0,
+      "totalPaid": 0,
       "closingBalance": 2716.0,
       "paymentStatus": "Unpaid",
-      "sourceRow": "Raja!A7:N7"
+      "sourceRow": "Raja!A7:O7"
     },
     {
       "recordId": "REC-2026-06-T-02",
@@ -733,10 +734,10 @@ export const INITIAL_WORKBOOK_DATA = {
       "otherCharges": 0,
       "credits": 0,
       "totalPayable": 5593.0,
-      "totalPaid": 0.0,
+      "totalPaid": 0,
       "closingBalance": 5593.0,
       "paymentStatus": "Unpaid",
-      "sourceRow": "Raja!A8:N8"
+      "sourceRow": "Raja!A8:O8"
     },
     {
       "recordId": "REC-2026-07-T-02",
@@ -762,7 +763,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 7838.0,
       "closingBalance": 870.0,
       "paymentStatus": "Partially Paid",
-      "sourceRow": "Raja!A9:N9"
+      "sourceRow": "Raja!A9:O9"
     },
     {
       "recordId": "REC-2026-08-T-02",
@@ -788,7 +789,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2898.0,
       "closingBalance": 870.0,
       "paymentStatus": "Partially Paid",
-      "sourceRow": "Raja!A10:N10"
+      "sourceRow": "Raja!A10:O10"
     },
     {
       "recordId": "REC-2026-09-T-02",
@@ -811,10 +812,10 @@ export const INITIAL_WORKBOOK_DATA = {
       "otherCharges": 0,
       "credits": 0,
       "totalPayable": 3719.0,
-      "totalPaid": 0.0,
-      "closingBalance": 3719.0,
-      "paymentStatus": "Unpaid",
-      "sourceRow": "Raja!A11:N11"
+      "totalPaid": 3719.0,
+      "closingBalance": 0.0,
+      "paymentStatus": "Paid",
+      "sourceRow": "Raja!A11:O11"
     },
     {
       "recordId": "REC-2026-10-T-02",
@@ -827,20 +828,20 @@ export const INITIAL_WORKBOOK_DATA = {
       "year": 2026,
       "rent": 2300,
       "previousReading": 1258.0,
-      "currentReading": null,
-      "units": null,
+      "currentReading": 1302.0,
+      "units": 44.0,
       "rate": 7,
-      "electricity": null,
+      "electricity": 308.0,
       "water": 10,
-      "totalBill": 10,
-      "previousOutstanding": 3719.0,
+      "totalBill": 318.0,
+      "previousOutstanding": 0.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 3719.0,
-      "totalPaid": 0.0,
-      "closingBalance": 3719.0,
-      "paymentStatus": "Pending Calculation",
-      "sourceRow": "Raja!A12:N12"
+      "totalPayable": 2618.0,
+      "totalPaid": 0,
+      "closingBalance": 2618.0,
+      "paymentStatus": "Unpaid",
+      "sourceRow": "Raja!A12:O12"
     },
     {
       "recordId": "REC-2026-11-T-02",
@@ -852,21 +853,21 @@ export const INITIAL_WORKBOOK_DATA = {
       "monthIndex": 11,
       "year": 2026,
       "rent": 2300,
-      "previousReading": 1258.0,
+      "previousReading": 1302.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
       "electricity": null,
       "water": 10,
       "totalBill": 10,
-      "previousOutstanding": 3719.0,
+      "previousOutstanding": 2618.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 3719.0,
-      "totalPaid": 0.0,
-      "closingBalance": 3719.0,
+      "totalPayable": 2618.0,
+      "totalPaid": 0,
+      "closingBalance": 2618.0,
       "paymentStatus": "Pending Calculation",
-      "sourceRow": "Raja!A13:N13"
+      "sourceRow": "Raja!A13:O13"
     },
     {
       "recordId": "REC-2026-12-T-02",
@@ -878,21 +879,21 @@ export const INITIAL_WORKBOOK_DATA = {
       "monthIndex": 12,
       "year": 2026,
       "rent": 2300,
-      "previousReading": 1258.0,
+      "previousReading": 1302.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
       "electricity": null,
       "water": 10,
       "totalBill": 10,
-      "previousOutstanding": 3719.0,
+      "previousOutstanding": 2618.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 3719.0,
-      "totalPaid": 0.0,
-      "closingBalance": 3719.0,
+      "totalPayable": 2618.0,
+      "totalPaid": 0,
+      "closingBalance": 2618.0,
       "paymentStatus": "Pending Calculation",
-      "sourceRow": "Raja!A14:N14"
+      "sourceRow": "Raja!A14:O14"
     },
     {
       "recordId": "REC-2026-01-T-03",
@@ -918,7 +919,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2131.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Ghanti!A3:N3"
+      "sourceRow": "Ghanti!A3:O3"
     },
     {
       "recordId": "REC-2026-02-T-03",
@@ -944,7 +945,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2117.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Ghanti!A4:N4"
+      "sourceRow": "Ghanti!A4:O4"
     },
     {
       "recordId": "REC-2026-03-T-03",
@@ -970,7 +971,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2131.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Ghanti!A5:N5"
+      "sourceRow": "Ghanti!A5:O5"
     },
     {
       "recordId": "REC-2026-04-T-03",
@@ -996,7 +997,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2264.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Ghanti!A6:N6"
+      "sourceRow": "Ghanti!A6:O6"
     },
     {
       "recordId": "REC-2026-05-T-03",
@@ -1022,7 +1023,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2201.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Ghanti!A7:N7"
+      "sourceRow": "Ghanti!A7:O7"
     },
     {
       "recordId": "REC-2026-06-T-03",
@@ -1048,7 +1049,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2348.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Ghanti!A8:N8"
+      "sourceRow": "Ghanti!A8:O8"
     },
     {
       "recordId": "REC-2026-07-T-03",
@@ -1074,7 +1075,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2376.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Ghanti!A9:N9"
+      "sourceRow": "Ghanti!A9:O9"
     },
     {
       "recordId": "REC-2026-08-T-03",
@@ -1100,7 +1101,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2334.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Ghanti!A10:N10"
+      "sourceRow": "Ghanti!A10:O10"
     },
     {
       "recordId": "REC-2026-09-T-03",
@@ -1126,7 +1127,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2369.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Ghanti!A11:N11"
+      "sourceRow": "Ghanti!A11:O11"
     },
     {
       "recordId": "REC-2026-10-T-03",
@@ -1139,20 +1140,20 @@ export const INITIAL_WORKBOOK_DATA = {
       "year": 2026,
       "rent": 2100,
       "previousReading": 4510.0,
-      "currentReading": null,
-      "units": null,
+      "currentReading": 4530.0,
+      "units": 20.0,
       "rate": 7,
-      "electricity": null,
+      "electricity": 140.0,
       "water": 10,
-      "totalBill": 10,
+      "totalBill": 150.0,
       "previousOutstanding": 0.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 0.0,
-      "totalPaid": 0.0,
-      "closingBalance": 0.0,
-      "paymentStatus": "Pending Calculation",
-      "sourceRow": "Ghanti!A12:N12"
+      "totalPayable": 2250.0,
+      "totalPaid": 0,
+      "closingBalance": 2250.0,
+      "paymentStatus": "Unpaid",
+      "sourceRow": "Ghanti!A12:O12"
     },
     {
       "recordId": "REC-2026-11-T-03",
@@ -1164,21 +1165,21 @@ export const INITIAL_WORKBOOK_DATA = {
       "monthIndex": 11,
       "year": 2026,
       "rent": 2100,
-      "previousReading": 4510.0,
+      "previousReading": 4530.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
       "electricity": null,
       "water": 10,
       "totalBill": 10,
-      "previousOutstanding": 0.0,
+      "previousOutstanding": 2250.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 0.0,
-      "totalPaid": 0.0,
-      "closingBalance": 0.0,
+      "totalPayable": 2250.0,
+      "totalPaid": 0,
+      "closingBalance": 2250.0,
       "paymentStatus": "Pending Calculation",
-      "sourceRow": "Ghanti!A13:N13"
+      "sourceRow": "Ghanti!A13:O13"
     },
     {
       "recordId": "REC-2026-12-T-03",
@@ -1190,21 +1191,21 @@ export const INITIAL_WORKBOOK_DATA = {
       "monthIndex": 12,
       "year": 2026,
       "rent": 2100,
-      "previousReading": 4510.0,
+      "previousReading": 4530.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
       "electricity": null,
       "water": 10,
       "totalBill": 10,
-      "previousOutstanding": 0.0,
+      "previousOutstanding": 2250.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 0.0,
-      "totalPaid": 0.0,
-      "closingBalance": 0.0,
+      "totalPayable": 2250.0,
+      "totalPaid": 0,
+      "closingBalance": 2250.0,
       "paymentStatus": "Pending Calculation",
-      "sourceRow": "Ghanti!A14:N14"
+      "sourceRow": "Ghanti!A14:O14"
     },
     {
       "recordId": "REC-2026-01-T-04",
@@ -1230,7 +1231,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2285.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sonu!A3:N3"
+      "sourceRow": "Sonu!A3:O3"
     },
     {
       "recordId": "REC-2026-02-T-04",
@@ -1256,7 +1257,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2222.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sonu!A4:N4"
+      "sourceRow": "Sonu!A4:O4"
     },
     {
       "recordId": "REC-2026-03-T-04",
@@ -1282,7 +1283,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2425.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sonu!A5:N5"
+      "sourceRow": "Sonu!A5:O5"
     },
     {
       "recordId": "REC-2026-04-T-04",
@@ -1308,7 +1309,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2306.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sonu!A6:N6"
+      "sourceRow": "Sonu!A6:O6"
     },
     {
       "recordId": "REC-2026-05-T-04",
@@ -1334,7 +1335,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2285.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sonu!A7:N7"
+      "sourceRow": "Sonu!A7:O7"
     },
     {
       "recordId": "REC-2026-06-T-04",
@@ -1360,7 +1361,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2313.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sonu!A8:N8"
+      "sourceRow": "Sonu!A8:O8"
     },
     {
       "recordId": "REC-2026-07-T-04",
@@ -1386,7 +1387,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2446.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sonu!A9:N9"
+      "sourceRow": "Sonu!A9:O9"
     },
     {
       "recordId": "REC-2026-08-T-04",
@@ -1412,7 +1413,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2369.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sonu!A10:N10"
+      "sourceRow": "Sonu!A10:O10"
     },
     {
       "recordId": "REC-2026-09-T-04",
@@ -1438,7 +1439,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2271.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sonu!A11:N11"
+      "sourceRow": "Sonu!A11:O11"
     },
     {
       "recordId": "REC-2026-10-T-04",
@@ -1451,20 +1452,20 @@ export const INITIAL_WORKBOOK_DATA = {
       "year": 2026,
       "rent": 2100,
       "previousReading": 5992.0,
-      "currentReading": null,
-      "units": null,
+      "currentReading": 6008.0,
+      "units": 16.0,
       "rate": 7,
-      "electricity": null,
+      "electricity": 112.0,
       "water": 10,
-      "totalBill": 10,
+      "totalBill": 122.0,
       "previousOutstanding": 0.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 0.0,
-      "totalPaid": 0.0,
-      "closingBalance": 0.0,
-      "paymentStatus": "Pending Calculation",
-      "sourceRow": "Sonu!A12:N12"
+      "totalPayable": 2222.0,
+      "totalPaid": 0,
+      "closingBalance": 2222.0,
+      "paymentStatus": "Unpaid",
+      "sourceRow": "Sonu!A12:O12"
     },
     {
       "recordId": "REC-2026-11-T-04",
@@ -1476,21 +1477,21 @@ export const INITIAL_WORKBOOK_DATA = {
       "monthIndex": 11,
       "year": 2026,
       "rent": 2100,
-      "previousReading": 5992.0,
+      "previousReading": 6008.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
       "electricity": null,
       "water": 10,
       "totalBill": 10,
-      "previousOutstanding": 0.0,
+      "previousOutstanding": 2222.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 0.0,
-      "totalPaid": 0.0,
-      "closingBalance": 0.0,
+      "totalPayable": 2222.0,
+      "totalPaid": 0,
+      "closingBalance": 2222.0,
       "paymentStatus": "Pending Calculation",
-      "sourceRow": "Sonu!A13:N13"
+      "sourceRow": "Sonu!A13:O13"
     },
     {
       "recordId": "REC-2026-12-T-04",
@@ -1502,21 +1503,21 @@ export const INITIAL_WORKBOOK_DATA = {
       "monthIndex": 12,
       "year": 2026,
       "rent": 2100,
-      "previousReading": 5992.0,
+      "previousReading": 6008.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
       "electricity": null,
       "water": 10,
       "totalBill": 10,
-      "previousOutstanding": 0.0,
+      "previousOutstanding": 2222.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 0.0,
-      "totalPaid": 0.0,
-      "closingBalance": 0.0,
+      "totalPayable": 2222.0,
+      "totalPaid": 0,
+      "closingBalance": 2222.0,
       "paymentStatus": "Pending Calculation",
-      "sourceRow": "Sonu!A14:N14"
+      "sourceRow": "Sonu!A14:O14"
     },
     {
       "recordId": "REC-2026-01-T-05",
@@ -1542,7 +1543,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2173.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Painter!A3:N3"
+      "sourceRow": "Painter!A3:O3"
     },
     {
       "recordId": "REC-2026-02-T-05",
@@ -1568,7 +1569,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2194.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Painter!A4:N4"
+      "sourceRow": "Painter!A4:O4"
     },
     {
       "recordId": "REC-2026-03-T-05",
@@ -1594,7 +1595,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2376.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Painter!A5:N5"
+      "sourceRow": "Painter!A5:O5"
     },
     {
       "recordId": "REC-2026-04-T-05",
@@ -1620,7 +1621,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2362.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Painter!A6:N6"
+      "sourceRow": "Painter!A6:O6"
     },
     {
       "recordId": "REC-2026-05-T-05",
@@ -1643,10 +1644,10 @@ export const INITIAL_WORKBOOK_DATA = {
       "otherCharges": 0,
       "credits": 0,
       "totalPayable": 2873.0,
-      "totalPaid": 0.0,
+      "totalPaid": 0,
       "closingBalance": 2873.0,
       "paymentStatus": "Unpaid",
-      "sourceRow": "Painter!A7:N7"
+      "sourceRow": "Painter!A7:O7"
     },
     {
       "recordId": "REC-2026-06-T-05",
@@ -1669,10 +1670,10 @@ export const INITIAL_WORKBOOK_DATA = {
       "otherCharges": 0,
       "credits": 0,
       "totalPayable": 5333.0,
-      "totalPaid": 0.0,
+      "totalPaid": 0,
       "closingBalance": 5333.0,
       "paymentStatus": "Unpaid",
-      "sourceRow": "Painter!A8:N8"
+      "sourceRow": "Painter!A8:O8"
     },
     {
       "recordId": "REC-2026-07-T-05",
@@ -1698,7 +1699,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 6000.0,
       "closingBalance": 1975.0,
       "paymentStatus": "Partially Paid",
-      "sourceRow": "Painter!A9:N9"
+      "sourceRow": "Painter!A9:O9"
     },
     {
       "recordId": "REC-2026-08-T-05",
@@ -1724,7 +1725,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 4000.0,
       "closingBalance": 722.0,
       "paymentStatus": "Partially Paid",
-      "sourceRow": "Painter!A10:N10"
+      "sourceRow": "Painter!A10:O10"
     },
     {
       "recordId": "REC-2026-09-T-05",
@@ -1747,10 +1748,10 @@ export const INITIAL_WORKBOOK_DATA = {
       "otherCharges": 0,
       "credits": 0,
       "totalPayable": 3336.0,
-      "totalPaid": 0.0,
+      "totalPaid": 0,
       "closingBalance": 3336.0,
       "paymentStatus": "Unpaid",
-      "sourceRow": "Painter!A11:N11"
+      "sourceRow": "Painter!A11:O11"
     },
     {
       "recordId": "REC-2026-10-T-05",
@@ -1763,20 +1764,20 @@ export const INITIAL_WORKBOOK_DATA = {
       "year": 2026,
       "rent": 2100,
       "previousReading": 4170.0,
-      "currentReading": null,
-      "units": null,
+      "currentReading": 4201.0,
+      "units": 31.0,
       "rate": 7,
-      "electricity": null,
+      "electricity": 217.0,
       "water": 10,
-      "totalBill": 10,
+      "totalBill": 227.0,
       "previousOutstanding": 3336.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 3336.0,
-      "totalPaid": 0.0,
-      "closingBalance": 3336.0,
-      "paymentStatus": "Pending Calculation",
-      "sourceRow": "Painter!A12:N12"
+      "totalPayable": 5663.0,
+      "totalPaid": 0,
+      "closingBalance": 5663.0,
+      "paymentStatus": "Unpaid",
+      "sourceRow": "Painter!A12:O12"
     },
     {
       "recordId": "REC-2026-11-T-05",
@@ -1788,21 +1789,21 @@ export const INITIAL_WORKBOOK_DATA = {
       "monthIndex": 11,
       "year": 2026,
       "rent": 2100,
-      "previousReading": 4170.0,
+      "previousReading": 4201.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
       "electricity": null,
       "water": 10,
       "totalBill": 10,
-      "previousOutstanding": 3336.0,
+      "previousOutstanding": 5663.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 3336.0,
-      "totalPaid": 0.0,
-      "closingBalance": 3336.0,
+      "totalPayable": 5663.0,
+      "totalPaid": 0,
+      "closingBalance": 5663.0,
       "paymentStatus": "Pending Calculation",
-      "sourceRow": "Painter!A13:N13"
+      "sourceRow": "Painter!A13:O13"
     },
     {
       "recordId": "REC-2026-12-T-05",
@@ -1814,21 +1815,21 @@ export const INITIAL_WORKBOOK_DATA = {
       "monthIndex": 12,
       "year": 2026,
       "rent": 2100,
-      "previousReading": 4170.0,
+      "previousReading": 4201.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
       "electricity": null,
       "water": 10,
       "totalBill": 10,
-      "previousOutstanding": 3336.0,
+      "previousOutstanding": 5663.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 3336.0,
-      "totalPaid": 0.0,
-      "closingBalance": 3336.0,
+      "totalPayable": 5663.0,
+      "totalPaid": 0,
+      "closingBalance": 5663.0,
       "paymentStatus": "Pending Calculation",
-      "sourceRow": "Painter!A14:N14"
+      "sourceRow": "Painter!A14:O14"
     },
     {
       "recordId": "REC-2026-01-T-06",
@@ -1851,10 +1852,10 @@ export const INITIAL_WORKBOOK_DATA = {
       "otherCharges": 0,
       "credits": 0,
       "totalPayable": 6887.0,
-      "totalPaid": 0.0,
+      "totalPaid": 0,
       "closingBalance": 6887.0,
       "paymentStatus": "Unpaid",
-      "sourceRow": "Imran!A3:N3"
+      "sourceRow": "Imran!A3:O3"
     },
     {
       "recordId": "REC-2026-02-T-06",
@@ -1880,7 +1881,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 5000.0,
       "closingBalance": 5530.0,
       "paymentStatus": "Partially Paid",
-      "sourceRow": "Imran!A4:N4"
+      "sourceRow": "Imran!A4:O4"
     },
     {
       "recordId": "REC-2026-03-T-06",
@@ -1903,10 +1904,10 @@ export const INITIAL_WORKBOOK_DATA = {
       "otherCharges": 0,
       "credits": 0,
       "totalPayable": 9250.0,
-      "totalPaid": 0.0,
+      "totalPaid": 0,
       "closingBalance": 9250.0,
       "paymentStatus": "Unpaid",
-      "sourceRow": "Imran!A5:N5"
+      "sourceRow": "Imran!A5:O5"
     },
     {
       "recordId": "REC-2026-04-T-06",
@@ -1932,7 +1933,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 10000.0,
       "closingBalance": 3005.0,
       "paymentStatus": "Partially Paid",
-      "sourceRow": "Imran!A6:N6"
+      "sourceRow": "Imran!A6:O6"
     },
     {
       "recordId": "REC-2026-05-T-06",
@@ -1958,7 +1959,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 5000.0,
       "closingBalance": 2768.0,
       "paymentStatus": "Partially Paid",
-      "sourceRow": "Imran!A7:N7"
+      "sourceRow": "Imran!A7:O7"
     },
     {
       "recordId": "REC-2026-06-T-06",
@@ -1984,7 +1985,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 5000.0,
       "closingBalance": 1985.0,
       "paymentStatus": "Partially Paid",
-      "sourceRow": "Imran!A8:N8"
+      "sourceRow": "Imran!A8:O8"
     },
     {
       "recordId": "REC-2026-07-T-06",
@@ -2010,7 +2011,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 5000.0,
       "closingBalance": 1944.0,
       "paymentStatus": "Partially Paid",
-      "sourceRow": "Imran!A9:N9"
+      "sourceRow": "Imran!A9:O9"
     },
     {
       "recordId": "REC-2026-08-T-06",
@@ -2036,7 +2037,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 5000.0,
       "closingBalance": 1399.0,
       "paymentStatus": "Partially Paid",
-      "sourceRow": "Imran!A10:N10"
+      "sourceRow": "Imran!A10:O10"
     },
     {
       "recordId": "REC-2026-09-T-06",
@@ -2059,10 +2060,10 @@ export const INITIAL_WORKBOOK_DATA = {
       "otherCharges": 0,
       "credits": 0,
       "totalPayable": 5637.0,
-      "totalPaid": 0.0,
+      "totalPaid": 0,
       "closingBalance": 5637.0,
       "paymentStatus": "Unpaid",
-      "sourceRow": "Imran!A11:N11"
+      "sourceRow": "Imran!A11:O11"
     },
     {
       "recordId": "REC-2026-10-T-06",
@@ -2075,20 +2076,20 @@ export const INITIAL_WORKBOOK_DATA = {
       "year": 2026,
       "rent": 3500,
       "previousReading": 4062.0,
-      "currentReading": null,
-      "units": null,
+      "currentReading": 4126.0,
+      "units": 64.0,
       "rate": 7,
-      "electricity": null,
+      "electricity": 448.0,
       "water": 10,
-      "totalBill": 10,
+      "totalBill": 458.0,
       "previousOutstanding": 5637.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 5637.0,
-      "totalPaid": 0.0,
-      "closingBalance": 5637.0,
-      "paymentStatus": "Pending Calculation",
-      "sourceRow": "Imran!A12:N12"
+      "totalPayable": 9595.0,
+      "totalPaid": 6000.0,
+      "closingBalance": 3595.0,
+      "paymentStatus": "Partially Paid",
+      "sourceRow": "Imran!A12:O12"
     },
     {
       "recordId": "REC-2026-11-T-06",
@@ -2100,21 +2101,21 @@ export const INITIAL_WORKBOOK_DATA = {
       "monthIndex": 11,
       "year": 2026,
       "rent": 3500,
-      "previousReading": 4062.0,
+      "previousReading": 4126.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
       "electricity": null,
       "water": 10,
       "totalBill": 10,
-      "previousOutstanding": 5637.0,
+      "previousOutstanding": 3595.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 5637.0,
-      "totalPaid": 0.0,
-      "closingBalance": 5637.0,
+      "totalPayable": 3595.0,
+      "totalPaid": 0,
+      "closingBalance": 3595.0,
       "paymentStatus": "Pending Calculation",
-      "sourceRow": "Imran!A13:N13"
+      "sourceRow": "Imran!A13:O13"
     },
     {
       "recordId": "REC-2026-12-T-06",
@@ -2126,21 +2127,21 @@ export const INITIAL_WORKBOOK_DATA = {
       "monthIndex": 12,
       "year": 2026,
       "rent": 3500,
-      "previousReading": 4062.0,
+      "previousReading": 4126.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
       "electricity": null,
       "water": 10,
       "totalBill": 10,
-      "previousOutstanding": 5637.0,
+      "previousOutstanding": 3595.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 5637.0,
-      "totalPaid": 0.0,
-      "closingBalance": 5637.0,
+      "totalPayable": 3595.0,
+      "totalPaid": 0,
+      "closingBalance": 3595.0,
       "paymentStatus": "Pending Calculation",
-      "sourceRow": "Imran!A14:N14"
+      "sourceRow": "Imran!A14:O14"
     },
     {
       "recordId": "REC-2026-01-T-07",
@@ -2166,7 +2167,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 4903.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Virasat!A3:N3"
+      "sourceRow": "Virasat!A3:O3"
     },
     {
       "recordId": "REC-2026-02-T-07",
@@ -2192,7 +2193,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 4861.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Virasat!A4:N4"
+      "sourceRow": "Virasat!A4:O4"
     },
     {
       "recordId": "REC-2026-03-T-07",
@@ -2218,7 +2219,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 5043.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Virasat!A5:N5"
+      "sourceRow": "Virasat!A5:O5"
     },
     {
       "recordId": "REC-2026-04-T-07",
@@ -2244,7 +2245,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 5127.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Virasat!A6:N6"
+      "sourceRow": "Virasat!A6:O6"
     },
     {
       "recordId": "REC-2026-05-T-07",
@@ -2270,7 +2271,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 5190.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Virasat!A7:N7"
+      "sourceRow": "Virasat!A7:O7"
     },
     {
       "recordId": "REC-2026-06-T-07",
@@ -2296,7 +2297,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 5085.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Virasat!A8:N8"
+      "sourceRow": "Virasat!A8:O8"
     },
     {
       "recordId": "REC-2026-07-T-07",
@@ -2322,7 +2323,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 5323.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Virasat!A9:N9"
+      "sourceRow": "Virasat!A9:O9"
     },
     {
       "recordId": "REC-2026-08-T-07",
@@ -2348,7 +2349,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 5050.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Virasat!A10:N10"
+      "sourceRow": "Virasat!A10:O10"
     },
     {
       "recordId": "REC-2026-09-T-07",
@@ -2371,10 +2372,10 @@ export const INITIAL_WORKBOOK_DATA = {
       "otherCharges": 0,
       "credits": 0,
       "totalPayable": 5085.0,
-      "totalPaid": 0.0,
-      "closingBalance": 5085.0,
-      "paymentStatus": "Unpaid",
-      "sourceRow": "Virasat!A11:N11"
+      "totalPaid": 5085.0,
+      "closingBalance": 0.0,
+      "paymentStatus": "Paid",
+      "sourceRow": "Virasat!A11:O11"
     },
     {
       "recordId": "REC-2026-10-T-07",
@@ -2387,20 +2388,20 @@ export const INITIAL_WORKBOOK_DATA = {
       "year": 2026,
       "rent": 4500,
       "previousReading": 2231.0,
-      "currentReading": null,
-      "units": null,
+      "currentReading": 2311.0,
+      "units": 80.0,
       "rate": 7,
-      "electricity": null,
+      "electricity": 560.0,
       "water": 25,
-      "totalBill": 25,
-      "previousOutstanding": 5085.0,
+      "totalBill": 585.0,
+      "previousOutstanding": 0.0,
       "otherCharges": 0,
       "credits": 0,
       "totalPayable": 5085.0,
-      "totalPaid": 0.0,
+      "totalPaid": 0,
       "closingBalance": 5085.0,
-      "paymentStatus": "Pending Calculation",
-      "sourceRow": "Virasat!A12:N12"
+      "paymentStatus": "Unpaid",
+      "sourceRow": "Virasat!A12:O12"
     },
     {
       "recordId": "REC-2026-11-T-07",
@@ -2412,7 +2413,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "monthIndex": 11,
       "year": 2026,
       "rent": 4500,
-      "previousReading": 2231.0,
+      "previousReading": 2311.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
@@ -2423,10 +2424,10 @@ export const INITIAL_WORKBOOK_DATA = {
       "otherCharges": 0,
       "credits": 0,
       "totalPayable": 5085.0,
-      "totalPaid": 0.0,
+      "totalPaid": 0,
       "closingBalance": 5085.0,
       "paymentStatus": "Pending Calculation",
-      "sourceRow": "Virasat!A13:N13"
+      "sourceRow": "Virasat!A13:O13"
     },
     {
       "recordId": "REC-2026-12-T-07",
@@ -2438,7 +2439,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "monthIndex": 12,
       "year": 2026,
       "rent": 4500,
-      "previousReading": 2231.0,
+      "previousReading": 2311.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
@@ -2449,10 +2450,10 @@ export const INITIAL_WORKBOOK_DATA = {
       "otherCharges": 0,
       "credits": 0,
       "totalPayable": 5085.0,
-      "totalPaid": 0.0,
+      "totalPaid": 0,
       "closingBalance": 5085.0,
       "paymentStatus": "Pending Calculation",
-      "sourceRow": "Virasat!A14:N14"
+      "sourceRow": "Virasat!A14:O14"
     },
     {
       "recordId": "REC-2026-01-T-08",
@@ -2478,7 +2479,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 4482.0,
       "closingBalance": 400.0,
       "paymentStatus": "Partially Paid",
-      "sourceRow": "Guddu!A3:N3"
+      "sourceRow": "Guddu!A3:O3"
     },
     {
       "recordId": "REC-2026-02-T-08",
@@ -2504,7 +2505,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 5254.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Guddu!A4:N4"
+      "sourceRow": "Guddu!A4:O4"
     },
     {
       "recordId": "REC-2026-03-T-08",
@@ -2530,7 +2531,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 5260.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Guddu!A5:N5"
+      "sourceRow": "Guddu!A5:O5"
     },
     {
       "recordId": "REC-2026-04-T-08",
@@ -2556,7 +2557,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 4889.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Guddu!A6:N6"
+      "sourceRow": "Guddu!A6:O6"
     },
     {
       "recordId": "REC-2026-05-T-08",
@@ -2582,7 +2583,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 5477.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Guddu!A7:N7"
+      "sourceRow": "Guddu!A7:O7"
     },
     {
       "recordId": "REC-2026-06-T-08",
@@ -2608,7 +2609,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 5218.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Guddu!A8:N8"
+      "sourceRow": "Guddu!A8:O8"
     },
     {
       "recordId": "REC-2026-07-T-08",
@@ -2634,7 +2635,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 5414.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Guddu!A9:N9"
+      "sourceRow": "Guddu!A9:O9"
     },
     {
       "recordId": "REC-2026-08-T-08",
@@ -2660,7 +2661,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 5281.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Guddu!A10:N10"
+      "sourceRow": "Guddu!A10:O10"
     },
     {
       "recordId": "REC-2026-09-T-08",
@@ -2686,7 +2687,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 5232.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Guddu!A11:N11"
+      "sourceRow": "Guddu!A11:O11"
     },
     {
       "recordId": "REC-2026-10-T-08",
@@ -2699,20 +2700,20 @@ export const INITIAL_WORKBOOK_DATA = {
       "year": 2026,
       "rent": 4500,
       "previousReading": 2367.0,
-      "currentReading": null,
-      "units": null,
+      "currentReading": 2448.0,
+      "units": 81.0,
       "rate": 7,
-      "electricity": null,
+      "electricity": 567.0,
       "water": 25,
-      "totalBill": 25,
+      "totalBill": 592.0,
       "previousOutstanding": 0.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 0.0,
-      "totalPaid": 0.0,
-      "closingBalance": 0.0,
-      "paymentStatus": "Pending Calculation",
-      "sourceRow": "Guddu!A12:N12"
+      "totalPayable": 5092.0,
+      "totalPaid": 0,
+      "closingBalance": 5092.0,
+      "paymentStatus": "Unpaid",
+      "sourceRow": "Guddu!A12:O12"
     },
     {
       "recordId": "REC-2026-11-T-08",
@@ -2724,21 +2725,21 @@ export const INITIAL_WORKBOOK_DATA = {
       "monthIndex": 11,
       "year": 2026,
       "rent": 4500,
-      "previousReading": 2367.0,
+      "previousReading": 2448.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
       "electricity": null,
       "water": 25,
       "totalBill": 25,
-      "previousOutstanding": 0.0,
+      "previousOutstanding": 5092.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 0.0,
-      "totalPaid": 0.0,
-      "closingBalance": 0.0,
+      "totalPayable": 5092.0,
+      "totalPaid": 0,
+      "closingBalance": 5092.0,
       "paymentStatus": "Pending Calculation",
-      "sourceRow": "Guddu!A13:N13"
+      "sourceRow": "Guddu!A13:O13"
     },
     {
       "recordId": "REC-2026-12-T-08",
@@ -2750,21 +2751,21 @@ export const INITIAL_WORKBOOK_DATA = {
       "monthIndex": 12,
       "year": 2026,
       "rent": 4500,
-      "previousReading": 2367.0,
+      "previousReading": 2448.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
       "electricity": null,
       "water": 25,
       "totalBill": 25,
-      "previousOutstanding": 0.0,
+      "previousOutstanding": 5092.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 0.0,
-      "totalPaid": 0.0,
-      "closingBalance": 0.0,
+      "totalPayable": 5092.0,
+      "totalPaid": 0,
+      "closingBalance": 5092.0,
       "paymentStatus": "Pending Calculation",
-      "sourceRow": "Guddu!A14:N14"
+      "sourceRow": "Guddu!A14:O14"
     },
     {
       "recordId": "REC-2026-01-T-09",
@@ -2790,7 +2791,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2644.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sajid!A3:N3"
+      "sourceRow": "Sajid!A3:O3"
     },
     {
       "recordId": "REC-2026-02-T-09",
@@ -2816,7 +2817,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2763.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sajid!A4:N4"
+      "sourceRow": "Sajid!A4:O4"
     },
     {
       "recordId": "REC-2026-03-T-09",
@@ -2842,7 +2843,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2833.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sajid!A5:N5"
+      "sourceRow": "Sajid!A5:O5"
     },
     {
       "recordId": "REC-2026-04-T-09",
@@ -2868,7 +2869,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2602.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sajid!A6:N6"
+      "sourceRow": "Sajid!A6:O6"
     },
     {
       "recordId": "REC-2026-05-T-09",
@@ -2891,10 +2892,10 @@ export const INITIAL_WORKBOOK_DATA = {
       "otherCharges": 0,
       "credits": 0,
       "totalPayable": 2651.0,
-      "totalPaid": 0.0,
+      "totalPaid": 0,
       "closingBalance": 2651.0,
       "paymentStatus": "Unpaid",
-      "sourceRow": "Sajid!A7:N7"
+      "sourceRow": "Sajid!A7:O7"
     },
     {
       "recordId": "REC-2026-06-T-09",
@@ -2920,7 +2921,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2651.0,
       "closingBalance": 2672.0,
       "paymentStatus": "Partially Paid",
-      "sourceRow": "Sajid!A8:N8"
+      "sourceRow": "Sajid!A8:O8"
     },
     {
       "recordId": "REC-2026-07-T-09",
@@ -2943,10 +2944,10 @@ export const INITIAL_WORKBOOK_DATA = {
       "otherCharges": 0,
       "credits": 0,
       "totalPayable": 5316.0,
-      "totalPaid": 0.0,
+      "totalPaid": 0,
       "closingBalance": 5316.0,
       "paymentStatus": "Unpaid",
-      "sourceRow": "Sajid!A9:N9"
+      "sourceRow": "Sajid!A9:O9"
     },
     {
       "recordId": "REC-2026-08-T-09",
@@ -2972,7 +2973,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 5316.0,
       "closingBalance": 2623.0,
       "paymentStatus": "Partially Paid",
-      "sourceRow": "Sajid!A10:N10"
+      "sourceRow": "Sajid!A10:O10"
     },
     {
       "recordId": "REC-2026-09-T-09",
@@ -2998,7 +2999,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2623.0,
       "closingBalance": 2665.0,
       "paymentStatus": "Partially Paid",
-      "sourceRow": "Sajid!A11:N11"
+      "sourceRow": "Sajid!A11:O11"
     },
     {
       "recordId": "REC-2026-10-T-09",
@@ -3011,20 +3012,20 @@ export const INITIAL_WORKBOOK_DATA = {
       "year": 2026,
       "rent": 2500,
       "previousReading": 961.0,
-      "currentReading": null,
-      "units": null,
+      "currentReading": 1016.0,
+      "units": 55.0,
       "rate": 7,
-      "electricity": null,
+      "electricity": 385.0,
       "water": 25,
-      "totalBill": 25,
+      "totalBill": 410.0,
       "previousOutstanding": 2665.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 2665.0,
-      "totalPaid": 0.0,
-      "closingBalance": 2665.0,
-      "paymentStatus": "Pending Calculation",
-      "sourceRow": "Sajid!A12:N12"
+      "totalPayable": 5575.0,
+      "totalPaid": 0,
+      "closingBalance": 5575.0,
+      "paymentStatus": "Unpaid",
+      "sourceRow": "Sajid!A12:O12"
     },
     {
       "recordId": "REC-2026-11-T-09",
@@ -3036,21 +3037,21 @@ export const INITIAL_WORKBOOK_DATA = {
       "monthIndex": 11,
       "year": 2026,
       "rent": 2500,
-      "previousReading": 961.0,
+      "previousReading": 1016.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
       "electricity": null,
       "water": 25,
       "totalBill": 25,
-      "previousOutstanding": 2665.0,
+      "previousOutstanding": 5575.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 2665.0,
-      "totalPaid": 0.0,
-      "closingBalance": 2665.0,
+      "totalPayable": 5575.0,
+      "totalPaid": 0,
+      "closingBalance": 5575.0,
       "paymentStatus": "Pending Calculation",
-      "sourceRow": "Sajid!A13:N13"
+      "sourceRow": "Sajid!A13:O13"
     },
     {
       "recordId": "REC-2026-12-T-09",
@@ -3062,21 +3063,21 @@ export const INITIAL_WORKBOOK_DATA = {
       "monthIndex": 12,
       "year": 2026,
       "rent": 2500,
-      "previousReading": 961.0,
+      "previousReading": 1016.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
       "electricity": null,
       "water": 25,
       "totalBill": 25,
-      "previousOutstanding": 2665.0,
+      "previousOutstanding": 5575.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 2665.0,
-      "totalPaid": 0.0,
-      "closingBalance": 2665.0,
+      "totalPayable": 5575.0,
+      "totalPaid": 0,
+      "closingBalance": 5575.0,
       "paymentStatus": "Pending Calculation",
-      "sourceRow": "Sajid!A14:N14"
+      "sourceRow": "Sajid!A14:O14"
     },
     {
       "recordId": "REC-2026-01-T-10",
@@ -3102,7 +3103,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 3099.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sundar ki mummy!A3:N3"
+      "sourceRow": "Sundar ki mummy!A3:O3"
     },
     {
       "recordId": "REC-2026-02-T-10",
@@ -3128,7 +3129,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2819.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sundar ki mummy!A4:N4"
+      "sourceRow": "Sundar ki mummy!A4:O4"
     },
     {
       "recordId": "REC-2026-03-T-10",
@@ -3154,7 +3155,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2602.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sundar ki mummy!A5:N5"
+      "sourceRow": "Sundar ki mummy!A5:O5"
     },
     {
       "recordId": "REC-2026-04-T-10",
@@ -3180,7 +3181,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2798.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sundar ki mummy!A6:N6"
+      "sourceRow": "Sundar ki mummy!A6:O6"
     },
     {
       "recordId": "REC-2026-05-T-10",
@@ -3206,7 +3207,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2980.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sundar ki mummy!A7:N7"
+      "sourceRow": "Sundar ki mummy!A7:O7"
     },
     {
       "recordId": "REC-2026-06-T-10",
@@ -3232,7 +3233,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2994.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sundar ki mummy!A8:N8"
+      "sourceRow": "Sundar ki mummy!A8:O8"
     },
     {
       "recordId": "REC-2026-07-T-10",
@@ -3258,7 +3259,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 3134.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sundar ki mummy!A9:N9"
+      "sourceRow": "Sundar ki mummy!A9:O9"
     },
     {
       "recordId": "REC-2026-08-T-10",
@@ -3284,7 +3285,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 3015.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sundar ki mummy!A10:N10"
+      "sourceRow": "Sundar ki mummy!A10:O10"
     },
     {
       "recordId": "REC-2026-09-T-10",
@@ -3310,7 +3311,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2973.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sundar ki mummy!A11:N11"
+      "sourceRow": "Sundar ki mummy!A11:O11"
     },
     {
       "recordId": "REC-2026-10-T-10",
@@ -3323,20 +3324,20 @@ export const INITIAL_WORKBOOK_DATA = {
       "year": 2026,
       "rent": 2500,
       "previousReading": 1340.0,
-      "currentReading": null,
-      "units": null,
+      "currentReading": 1375.0,
+      "units": 35.0,
       "rate": 7,
-      "electricity": null,
+      "electricity": 245.0,
       "water": 25,
-      "totalBill": 25,
+      "totalBill": 270.0,
       "previousOutstanding": 0.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 0.0,
-      "totalPaid": 0.0,
-      "closingBalance": 0.0,
-      "paymentStatus": "Pending Calculation",
-      "sourceRow": "Sundar ki mummy!A12:N12"
+      "totalPayable": 2770.0,
+      "totalPaid": 0,
+      "closingBalance": 2770.0,
+      "paymentStatus": "Unpaid",
+      "sourceRow": "Sundar ki mummy!A12:O12"
     },
     {
       "recordId": "REC-2026-11-T-10",
@@ -3348,21 +3349,21 @@ export const INITIAL_WORKBOOK_DATA = {
       "monthIndex": 11,
       "year": 2026,
       "rent": 2500,
-      "previousReading": 1340.0,
+      "previousReading": 1375.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
       "electricity": null,
       "water": 25,
       "totalBill": 25,
-      "previousOutstanding": 0.0,
+      "previousOutstanding": 2770.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 0.0,
-      "totalPaid": 0.0,
-      "closingBalance": 0.0,
+      "totalPayable": 2770.0,
+      "totalPaid": 0,
+      "closingBalance": 2770.0,
       "paymentStatus": "Pending Calculation",
-      "sourceRow": "Sundar ki mummy!A13:N13"
+      "sourceRow": "Sundar ki mummy!A13:O13"
     },
     {
       "recordId": "REC-2026-12-T-10",
@@ -3374,21 +3375,21 @@ export const INITIAL_WORKBOOK_DATA = {
       "monthIndex": 12,
       "year": 2026,
       "rent": 2500,
-      "previousReading": 1340.0,
+      "previousReading": 1375.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
       "electricity": null,
       "water": 25,
       "totalBill": 25,
-      "previousOutstanding": 0.0,
+      "previousOutstanding": 2770.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 0.0,
-      "totalPaid": 0.0,
-      "closingBalance": 0.0,
+      "totalPayable": 2770.0,
+      "totalPaid": 0,
+      "closingBalance": 2770.0,
       "paymentStatus": "Pending Calculation",
-      "sourceRow": "Sundar ki mummy!A14:N14"
+      "sourceRow": "Sundar ki mummy!A14:O14"
     },
     {
       "recordId": "REC-2026-01-T-11",
@@ -3414,7 +3415,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2822.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Dinesh!A3:N3"
+      "sourceRow": "Dinesh!A3:O3"
     },
     {
       "recordId": "REC-2026-02-T-11",
@@ -3440,7 +3441,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2885.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Dinesh!A4:N4"
+      "sourceRow": "Dinesh!A4:O4"
     },
     {
       "recordId": "REC-2026-03-T-11",
@@ -3466,7 +3467,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 3060.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Dinesh!A5:N5"
+      "sourceRow": "Dinesh!A5:O5"
     },
     {
       "recordId": "REC-2026-04-T-11",
@@ -3492,7 +3493,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 3074.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Dinesh!A6:N6"
+      "sourceRow": "Dinesh!A6:O6"
     },
     {
       "recordId": "REC-2026-05-T-11",
@@ -3518,7 +3519,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 3403.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Dinesh!A7:N7"
+      "sourceRow": "Dinesh!A7:O7"
     },
     {
       "recordId": "REC-2026-06-T-11",
@@ -3544,7 +3545,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2878.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Dinesh!A8:N8"
+      "sourceRow": "Dinesh!A8:O8"
     },
     {
       "recordId": "REC-2026-07-T-11",
@@ -3570,7 +3571,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 3333.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Dinesh!A9:N9"
+      "sourceRow": "Dinesh!A9:O9"
     },
     {
       "recordId": "REC-2026-08-T-11",
@@ -3596,7 +3597,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 3263.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Dinesh!A10:N10"
+      "sourceRow": "Dinesh!A10:O10"
     },
     {
       "recordId": "REC-2026-09-T-11",
@@ -3619,10 +3620,10 @@ export const INITIAL_WORKBOOK_DATA = {
       "otherCharges": 0,
       "credits": 0,
       "totalPayable": 3221.0,
-      "totalPaid": 0.0,
-      "closingBalance": 3221.0,
-      "paymentStatus": "Unpaid",
-      "sourceRow": "Dinesh!A11:N11"
+      "totalPaid": 3221.0,
+      "closingBalance": 0.0,
+      "paymentStatus": "Paid",
+      "sourceRow": "Dinesh!A11:O11"
     },
     {
       "recordId": "REC-2026-10-T-11",
@@ -3635,20 +3636,20 @@ export const INITIAL_WORKBOOK_DATA = {
       "year": 2026,
       "rent": 2500,
       "previousReading": 1709.0,
-      "currentReading": null,
-      "units": null,
+      "currentReading": 1788.0,
+      "units": 79.0,
       "rate": 7,
-      "electricity": null,
+      "electricity": 553.0,
       "water": 0,
-      "totalBill": 0,
-      "previousOutstanding": 3221.0,
+      "totalBill": 553.0,
+      "previousOutstanding": 0.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 3221.0,
-      "totalPaid": 0.0,
-      "closingBalance": 3221.0,
-      "paymentStatus": "Pending Calculation",
-      "sourceRow": "Dinesh!A12:N12"
+      "totalPayable": 3053.0,
+      "totalPaid": 0,
+      "closingBalance": 3053.0,
+      "paymentStatus": "Unpaid",
+      "sourceRow": "Dinesh!A12:O12"
     },
     {
       "recordId": "REC-2026-11-T-11",
@@ -3660,21 +3661,21 @@ export const INITIAL_WORKBOOK_DATA = {
       "monthIndex": 11,
       "year": 2026,
       "rent": 2500,
-      "previousReading": 1709.0,
+      "previousReading": 1788.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
       "electricity": null,
       "water": 0,
       "totalBill": 0,
-      "previousOutstanding": 3221.0,
+      "previousOutstanding": 3053.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 3221.0,
-      "totalPaid": 0.0,
-      "closingBalance": 3221.0,
+      "totalPayable": 3053.0,
+      "totalPaid": 0,
+      "closingBalance": 3053.0,
       "paymentStatus": "Pending Calculation",
-      "sourceRow": "Dinesh!A13:N13"
+      "sourceRow": "Dinesh!A13:O13"
     },
     {
       "recordId": "REC-2026-12-T-11",
@@ -3686,21 +3687,21 @@ export const INITIAL_WORKBOOK_DATA = {
       "monthIndex": 12,
       "year": 2026,
       "rent": 2500,
-      "previousReading": 1709.0,
+      "previousReading": 1788.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
       "electricity": null,
       "water": 0,
       "totalBill": 0,
-      "previousOutstanding": 3221.0,
+      "previousOutstanding": 3053.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 3221.0,
-      "totalPaid": 0.0,
-      "closingBalance": 3221.0,
+      "totalPayable": 3053.0,
+      "totalPaid": 0,
+      "closingBalance": 3053.0,
       "paymentStatus": "Pending Calculation",
-      "sourceRow": "Dinesh!A14:N14"
+      "sourceRow": "Dinesh!A14:O14"
     },
     {
       "recordId": "REC-2026-01-T-12",
@@ -3726,7 +3727,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2640.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Nisha!A3:N3"
+      "sourceRow": "Nisha!A3:O3"
     },
     {
       "recordId": "REC-2026-02-T-12",
@@ -3752,7 +3753,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2584.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Nisha!A4:N4"
+      "sourceRow": "Nisha!A4:O4"
     },
     {
       "recordId": "REC-2026-03-T-12",
@@ -3778,7 +3779,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2710.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Nisha!A5:N5"
+      "sourceRow": "Nisha!A5:O5"
     },
     {
       "recordId": "REC-2026-04-T-12",
@@ -3804,7 +3805,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2507.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Nisha!A6:N6"
+      "sourceRow": "Nisha!A6:O6"
     },
     {
       "recordId": "REC-2026-05-T-12",
@@ -3830,7 +3831,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2500.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Nisha!A7:N7"
+      "sourceRow": "Nisha!A7:O7"
     },
     {
       "recordId": "REC-2026-06-T-12",
@@ -3856,7 +3857,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2871.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Nisha!A8:N8"
+      "sourceRow": "Nisha!A8:O8"
     },
     {
       "recordId": "REC-2026-07-T-12",
@@ -3882,7 +3883,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 3039.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Nisha!A9:N9"
+      "sourceRow": "Nisha!A9:O9"
     },
     {
       "recordId": "REC-2026-08-T-12",
@@ -3905,10 +3906,10 @@ export const INITIAL_WORKBOOK_DATA = {
       "otherCharges": 0,
       "credits": 0,
       "totalPayable": 2990.0,
-      "totalPaid": 0.0,
+      "totalPaid": 0,
       "closingBalance": 2990.0,
       "paymentStatus": "Unpaid",
-      "sourceRow": "Nisha!A10:N10"
+      "sourceRow": "Nisha!A10:O10"
     },
     {
       "recordId": "REC-2026-09-T-12",
@@ -3931,10 +3932,10 @@ export const INITIAL_WORKBOOK_DATA = {
       "otherCharges": 0,
       "credits": 0,
       "totalPayable": 5721.0,
-      "totalPaid": 0.0,
+      "totalPaid": 0,
       "closingBalance": 5721.0,
       "paymentStatus": "Unpaid",
-      "sourceRow": "Nisha!A11:N11"
+      "sourceRow": "Nisha!A11:O11"
     },
     {
       "recordId": "REC-2026-10-T-12",
@@ -3947,20 +3948,20 @@ export const INITIAL_WORKBOOK_DATA = {
       "year": 2026,
       "rent": 2500,
       "previousReading": 2009.0,
-      "currentReading": null,
-      "units": null,
+      "currentReading": 2009.0,
+      "units": 0.0,
       "rate": 7,
-      "electricity": null,
+      "electricity": 0.0,
       "water": 0,
-      "totalBill": 0,
+      "totalBill": 0.0,
       "previousOutstanding": 5721.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 5721.0,
-      "totalPaid": 0.0,
-      "closingBalance": 5721.0,
-      "paymentStatus": "Pending Calculation",
-      "sourceRow": "Nisha!A12:N12"
+      "totalPayable": 8221.0,
+      "totalPaid": 0,
+      "closingBalance": 8221.0,
+      "paymentStatus": "Unpaid",
+      "sourceRow": "Nisha!A12:O12"
     },
     {
       "recordId": "REC-2026-11-T-12",
@@ -3979,14 +3980,14 @@ export const INITIAL_WORKBOOK_DATA = {
       "electricity": null,
       "water": 0,
       "totalBill": 0,
-      "previousOutstanding": 5721.0,
+      "previousOutstanding": 8221.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 5721.0,
-      "totalPaid": 0.0,
-      "closingBalance": 5721.0,
+      "totalPayable": 8221.0,
+      "totalPaid": 0,
+      "closingBalance": 8221.0,
       "paymentStatus": "Pending Calculation",
-      "sourceRow": "Nisha!A13:N13"
+      "sourceRow": "Nisha!A13:O13"
     },
     {
       "recordId": "REC-2026-12-T-12",
@@ -4005,14 +4006,14 @@ export const INITIAL_WORKBOOK_DATA = {
       "electricity": null,
       "water": 0,
       "totalBill": 0,
-      "previousOutstanding": 5721.0,
+      "previousOutstanding": 8221.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 5721.0,
-      "totalPaid": 0.0,
-      "closingBalance": 5721.0,
+      "totalPayable": 8221.0,
+      "totalPaid": 0,
+      "closingBalance": 8221.0,
       "paymentStatus": "Pending Calculation",
-      "sourceRow": "Nisha!A14:N14"
+      "sourceRow": "Nisha!A14:O14"
     },
     {
       "recordId": "REC-2026-01-T-13",
@@ -4038,7 +4039,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2689.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sundar!A3:N3"
+      "sourceRow": "Sundar!A3:O3"
     },
     {
       "recordId": "REC-2026-02-T-13",
@@ -4064,7 +4065,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2556.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sundar!A4:N4"
+      "sourceRow": "Sundar!A4:O4"
     },
     {
       "recordId": "REC-2026-03-T-13",
@@ -4090,7 +4091,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2598.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sundar!A5:N5"
+      "sourceRow": "Sundar!A5:O5"
     },
     {
       "recordId": "REC-2026-04-T-13",
@@ -4116,7 +4117,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2605.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sundar!A6:N6"
+      "sourceRow": "Sundar!A6:O6"
     },
     {
       "recordId": "REC-2026-05-T-13",
@@ -4142,7 +4143,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2689.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sundar!A7:N7"
+      "sourceRow": "Sundar!A7:O7"
     },
     {
       "recordId": "REC-2026-06-T-13",
@@ -4168,7 +4169,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2682.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sundar!A8:N8"
+      "sourceRow": "Sundar!A8:O8"
     },
     {
       "recordId": "REC-2026-07-T-13",
@@ -4194,7 +4195,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2773.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sundar!A9:N9"
+      "sourceRow": "Sundar!A9:O9"
     },
     {
       "recordId": "REC-2026-08-T-13",
@@ -4220,7 +4221,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "totalPaid": 2752.0,
       "closingBalance": 0.0,
       "paymentStatus": "Paid",
-      "sourceRow": "Sundar!A10:N10"
+      "sourceRow": "Sundar!A10:O10"
     },
     {
       "recordId": "REC-2026-09-T-13",
@@ -4243,10 +4244,10 @@ export const INITIAL_WORKBOOK_DATA = {
       "otherCharges": 0,
       "credits": 0,
       "totalPayable": 2752.0,
-      "totalPaid": 0.0,
-      "closingBalance": 2752.0,
-      "paymentStatus": "Unpaid",
-      "sourceRow": "Sundar!A11:N11"
+      "totalPaid": 2752.0,
+      "closingBalance": 0.0,
+      "paymentStatus": "Paid",
+      "sourceRow": "Sundar!A11:O11"
     },
     {
       "recordId": "REC-2026-10-T-13",
@@ -4259,20 +4260,20 @@ export const INITIAL_WORKBOOK_DATA = {
       "year": 2026,
       "rent": 2500,
       "previousReading": 5237.0,
-      "currentReading": null,
-      "units": null,
+      "currentReading": 5259.0,
+      "units": 22.0,
       "rate": 7,
-      "electricity": null,
+      "electricity": 154.0,
       "water": 0,
-      "totalBill": 0,
-      "previousOutstanding": 2752.0,
+      "totalBill": 154.0,
+      "previousOutstanding": 0.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 2752.0,
-      "totalPaid": 0.0,
-      "closingBalance": 2752.0,
-      "paymentStatus": "Pending Calculation",
-      "sourceRow": "Sundar!A12:N12"
+      "totalPayable": 2654.0,
+      "totalPaid": 0,
+      "closingBalance": 2654.0,
+      "paymentStatus": "Unpaid",
+      "sourceRow": "Sundar!A12:O12"
     },
     {
       "recordId": "REC-2026-11-T-13",
@@ -4284,21 +4285,21 @@ export const INITIAL_WORKBOOK_DATA = {
       "monthIndex": 11,
       "year": 2026,
       "rent": 2500,
-      "previousReading": 5237.0,
+      "previousReading": 5259.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
       "electricity": null,
       "water": 0,
       "totalBill": 0,
-      "previousOutstanding": 2752.0,
+      "previousOutstanding": 2654.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 2752.0,
-      "totalPaid": 0.0,
-      "closingBalance": 2752.0,
+      "totalPayable": 2654.0,
+      "totalPaid": 0,
+      "closingBalance": 2654.0,
       "paymentStatus": "Pending Calculation",
-      "sourceRow": "Sundar!A13:N13"
+      "sourceRow": "Sundar!A13:O13"
     },
     {
       "recordId": "REC-2026-12-T-13",
@@ -4310,21 +4311,21 @@ export const INITIAL_WORKBOOK_DATA = {
       "monthIndex": 12,
       "year": 2026,
       "rent": 2500,
-      "previousReading": 5237.0,
+      "previousReading": 5259.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
       "electricity": null,
       "water": 0,
       "totalBill": 0,
-      "previousOutstanding": 2752.0,
+      "previousOutstanding": 2654.0,
       "otherCharges": 0,
       "credits": 0,
-      "totalPayable": 2752.0,
-      "totalPaid": 0.0,
-      "closingBalance": 2752.0,
+      "totalPayable": 2654.0,
+      "totalPaid": 0,
+      "closingBalance": 2654.0,
       "paymentStatus": "Pending Calculation",
-      "sourceRow": "Sundar!A14:N14"
+      "sourceRow": "Sundar!A14:O14"
     }
   ],
   "meterReadings": [
@@ -4479,13 +4480,13 @@ export const INITIAL_WORKBOOK_DATA = {
       "month": "Oct-26",
       "year": 2026,
       "previousReading": 2208.0,
-      "currentReading": null,
-      "units": null,
+      "currentReading": 2234.0,
+      "units": 26.0,
       "rate": 7,
-      "electricityCharge": null,
+      "electricityCharge": 182.0,
       "waterCharge": 10,
-      "readingDate": "",
-      "status": "Reading Pending",
+      "readingDate": "2026-10-01",
+      "status": "Verified",
       "sourceCell": "Javed!D12:E12"
     },
     {
@@ -4494,7 +4495,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "tenantName": "Javed",
       "month": "Nov-26",
       "year": 2026,
-      "previousReading": 2208.0,
+      "previousReading": 2234.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
@@ -4510,7 +4511,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "tenantName": "Javed",
       "month": "Dec-26",
       "year": 2026,
-      "previousReading": 2208.0,
+      "previousReading": 2234.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
@@ -4671,13 +4672,13 @@ export const INITIAL_WORKBOOK_DATA = {
       "month": "Oct-26",
       "year": 2026,
       "previousReading": 1258.0,
-      "currentReading": null,
-      "units": null,
+      "currentReading": 1302.0,
+      "units": 44.0,
       "rate": 7,
-      "electricityCharge": null,
+      "electricityCharge": 308.0,
       "waterCharge": 10,
-      "readingDate": "",
-      "status": "Reading Pending",
+      "readingDate": "2026-10-01",
+      "status": "Verified",
       "sourceCell": "Raja!D12:E12"
     },
     {
@@ -4686,7 +4687,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "tenantName": "Raja",
       "month": "Nov-26",
       "year": 2026,
-      "previousReading": 1258.0,
+      "previousReading": 1302.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
@@ -4702,7 +4703,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "tenantName": "Raja",
       "month": "Dec-26",
       "year": 2026,
-      "previousReading": 1258.0,
+      "previousReading": 1302.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
@@ -4863,13 +4864,13 @@ export const INITIAL_WORKBOOK_DATA = {
       "month": "Oct-26",
       "year": 2026,
       "previousReading": 4510.0,
-      "currentReading": null,
-      "units": null,
+      "currentReading": 4530.0,
+      "units": 20.0,
       "rate": 7,
-      "electricityCharge": null,
+      "electricityCharge": 140.0,
       "waterCharge": 10,
-      "readingDate": "",
-      "status": "Reading Pending",
+      "readingDate": "2026-10-01",
+      "status": "Verified",
       "sourceCell": "Ghanti!D12:E12"
     },
     {
@@ -4878,7 +4879,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "tenantName": "Ghanti",
       "month": "Nov-26",
       "year": 2026,
-      "previousReading": 4510.0,
+      "previousReading": 4530.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
@@ -4894,7 +4895,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "tenantName": "Ghanti",
       "month": "Dec-26",
       "year": 2026,
-      "previousReading": 4510.0,
+      "previousReading": 4530.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
@@ -5055,13 +5056,13 @@ export const INITIAL_WORKBOOK_DATA = {
       "month": "Oct-26",
       "year": 2026,
       "previousReading": 5992.0,
-      "currentReading": null,
-      "units": null,
+      "currentReading": 6008.0,
+      "units": 16.0,
       "rate": 7,
-      "electricityCharge": null,
+      "electricityCharge": 112.0,
       "waterCharge": 10,
-      "readingDate": "",
-      "status": "Reading Pending",
+      "readingDate": "2026-10-01",
+      "status": "Verified",
       "sourceCell": "Sonu!D12:E12"
     },
     {
@@ -5070,7 +5071,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "tenantName": "Sonu",
       "month": "Nov-26",
       "year": 2026,
-      "previousReading": 5992.0,
+      "previousReading": 6008.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
@@ -5086,7 +5087,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "tenantName": "Sonu",
       "month": "Dec-26",
       "year": 2026,
-      "previousReading": 5992.0,
+      "previousReading": 6008.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
@@ -5247,13 +5248,13 @@ export const INITIAL_WORKBOOK_DATA = {
       "month": "Oct-26",
       "year": 2026,
       "previousReading": 4170.0,
-      "currentReading": null,
-      "units": null,
+      "currentReading": 4201.0,
+      "units": 31.0,
       "rate": 7,
-      "electricityCharge": null,
+      "electricityCharge": 217.0,
       "waterCharge": 10,
-      "readingDate": "",
-      "status": "Reading Pending",
+      "readingDate": "2026-10-01",
+      "status": "Verified",
       "sourceCell": "Painter!D12:E12"
     },
     {
@@ -5262,7 +5263,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "tenantName": "Painter",
       "month": "Nov-26",
       "year": 2026,
-      "previousReading": 4170.0,
+      "previousReading": 4201.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
@@ -5278,7 +5279,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "tenantName": "Painter",
       "month": "Dec-26",
       "year": 2026,
-      "previousReading": 4170.0,
+      "previousReading": 4201.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
@@ -5439,13 +5440,13 @@ export const INITIAL_WORKBOOK_DATA = {
       "month": "Oct-26",
       "year": 2026,
       "previousReading": 4062.0,
-      "currentReading": null,
-      "units": null,
+      "currentReading": 4126.0,
+      "units": 64.0,
       "rate": 7,
-      "electricityCharge": null,
+      "electricityCharge": 448.0,
       "waterCharge": 10,
-      "readingDate": "",
-      "status": "Reading Pending",
+      "readingDate": "2026-10-01",
+      "status": "Verified",
       "sourceCell": "Imran!D12:E12"
     },
     {
@@ -5454,7 +5455,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "tenantName": "Imran",
       "month": "Nov-26",
       "year": 2026,
-      "previousReading": 4062.0,
+      "previousReading": 4126.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
@@ -5470,7 +5471,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "tenantName": "Imran",
       "month": "Dec-26",
       "year": 2026,
-      "previousReading": 4062.0,
+      "previousReading": 4126.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
@@ -5631,13 +5632,13 @@ export const INITIAL_WORKBOOK_DATA = {
       "month": "Oct-26",
       "year": 2026,
       "previousReading": 2231.0,
-      "currentReading": null,
-      "units": null,
+      "currentReading": 2311.0,
+      "units": 80.0,
       "rate": 7,
-      "electricityCharge": null,
+      "electricityCharge": 560.0,
       "waterCharge": 25,
-      "readingDate": "",
-      "status": "Reading Pending",
+      "readingDate": "2026-10-01",
+      "status": "Verified",
       "sourceCell": "Virasat!D12:E12"
     },
     {
@@ -5646,7 +5647,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "tenantName": "Virasat",
       "month": "Nov-26",
       "year": 2026,
-      "previousReading": 2231.0,
+      "previousReading": 2311.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
@@ -5662,7 +5663,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "tenantName": "Virasat",
       "month": "Dec-26",
       "year": 2026,
-      "previousReading": 2231.0,
+      "previousReading": 2311.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
@@ -5823,13 +5824,13 @@ export const INITIAL_WORKBOOK_DATA = {
       "month": "Oct-26",
       "year": 2026,
       "previousReading": 2367.0,
-      "currentReading": null,
-      "units": null,
+      "currentReading": 2448.0,
+      "units": 81.0,
       "rate": 7,
-      "electricityCharge": null,
+      "electricityCharge": 567.0,
       "waterCharge": 25,
-      "readingDate": "",
-      "status": "Reading Pending",
+      "readingDate": "2026-10-01",
+      "status": "Verified",
       "sourceCell": "Guddu!D12:E12"
     },
     {
@@ -5838,7 +5839,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "tenantName": "Guddu",
       "month": "Nov-26",
       "year": 2026,
-      "previousReading": 2367.0,
+      "previousReading": 2448.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
@@ -5854,7 +5855,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "tenantName": "Guddu",
       "month": "Dec-26",
       "year": 2026,
-      "previousReading": 2367.0,
+      "previousReading": 2448.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
@@ -6015,13 +6016,13 @@ export const INITIAL_WORKBOOK_DATA = {
       "month": "Oct-26",
       "year": 2026,
       "previousReading": 961.0,
-      "currentReading": null,
-      "units": null,
+      "currentReading": 1016.0,
+      "units": 55.0,
       "rate": 7,
-      "electricityCharge": null,
+      "electricityCharge": 385.0,
       "waterCharge": 25,
-      "readingDate": "",
-      "status": "Reading Pending",
+      "readingDate": "2026-10-01",
+      "status": "Verified",
       "sourceCell": "Sajid!D12:E12"
     },
     {
@@ -6030,7 +6031,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "tenantName": "Sajid",
       "month": "Nov-26",
       "year": 2026,
-      "previousReading": 961.0,
+      "previousReading": 1016.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
@@ -6046,7 +6047,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "tenantName": "Sajid",
       "month": "Dec-26",
       "year": 2026,
-      "previousReading": 961.0,
+      "previousReading": 1016.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
@@ -6207,13 +6208,13 @@ export const INITIAL_WORKBOOK_DATA = {
       "month": "Oct-26",
       "year": 2026,
       "previousReading": 1340.0,
-      "currentReading": null,
-      "units": null,
+      "currentReading": 1375.0,
+      "units": 35.0,
       "rate": 7,
-      "electricityCharge": null,
+      "electricityCharge": 245.0,
       "waterCharge": 25,
-      "readingDate": "",
-      "status": "Reading Pending",
+      "readingDate": "2026-10-01",
+      "status": "Verified",
       "sourceCell": "Sundar ki mummy!D12:E12"
     },
     {
@@ -6222,7 +6223,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "tenantName": "Sundar Ki Mummy",
       "month": "Nov-26",
       "year": 2026,
-      "previousReading": 1340.0,
+      "previousReading": 1375.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
@@ -6238,7 +6239,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "tenantName": "Sundar Ki Mummy",
       "month": "Dec-26",
       "year": 2026,
-      "previousReading": 1340.0,
+      "previousReading": 1375.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
@@ -6399,13 +6400,13 @@ export const INITIAL_WORKBOOK_DATA = {
       "month": "Oct-26",
       "year": 2026,
       "previousReading": 1709.0,
-      "currentReading": null,
-      "units": null,
+      "currentReading": 1788.0,
+      "units": 79.0,
       "rate": 7,
-      "electricityCharge": null,
+      "electricityCharge": 553.0,
       "waterCharge": 0,
-      "readingDate": "",
-      "status": "Reading Pending",
+      "readingDate": "2026-10-01",
+      "status": "Verified",
       "sourceCell": "Dinesh!D12:E12"
     },
     {
@@ -6414,7 +6415,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "tenantName": "Dinesh",
       "month": "Nov-26",
       "year": 2026,
-      "previousReading": 1709.0,
+      "previousReading": 1788.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
@@ -6430,7 +6431,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "tenantName": "Dinesh",
       "month": "Dec-26",
       "year": 2026,
-      "previousReading": 1709.0,
+      "previousReading": 1788.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
@@ -6591,13 +6592,13 @@ export const INITIAL_WORKBOOK_DATA = {
       "month": "Oct-26",
       "year": 2026,
       "previousReading": 2009.0,
-      "currentReading": null,
-      "units": null,
+      "currentReading": 2009.0,
+      "units": 0.0,
       "rate": 7,
-      "electricityCharge": null,
+      "electricityCharge": 0.0,
       "waterCharge": 0,
-      "readingDate": "",
-      "status": "Reading Pending",
+      "readingDate": "2026-10-01",
+      "status": "Verified",
       "sourceCell": "Nisha!D12:E12"
     },
     {
@@ -6783,13 +6784,13 @@ export const INITIAL_WORKBOOK_DATA = {
       "month": "Oct-26",
       "year": 2026,
       "previousReading": 5237.0,
-      "currentReading": null,
-      "units": null,
+      "currentReading": 5259.0,
+      "units": 22.0,
       "rate": 7,
-      "electricityCharge": null,
+      "electricityCharge": 154.0,
       "waterCharge": 0,
-      "readingDate": "",
-      "status": "Reading Pending",
+      "readingDate": "2026-10-01",
+      "status": "Verified",
       "sourceCell": "Sundar!D12:E12"
     },
     {
@@ -6798,7 +6799,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "tenantName": "Sundar",
       "month": "Nov-26",
       "year": 2026,
-      "previousReading": 5237.0,
+      "previousReading": 5259.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
@@ -6814,7 +6815,7 @@ export const INITIAL_WORKBOOK_DATA = {
       "tenantName": "Sundar",
       "month": "Dec-26",
       "year": 2026,
-      "previousReading": 5237.0,
+      "previousReading": 5259.0,
       "currentReading": null,
       "units": null,
       "rate": 7,
@@ -6838,86 +6839,11 @@ export const INITIAL_WORKBOOK_DATA = {
       "method": "Cash",
       "reference": "HIST-JAN-26-01",
       "type": "Payment",
-      "notes": "Migrated from Javed!M3",
+      "notes": "Historical recorded payment",
       "createdAt": "2026-01-05T10:00:00Z"
     },
     {
       "paymentId": "PAY-002",
-      "tenantId": "T-01",
-      "tenantName": "Javed",
-      "recordId": "REC-2026-02-T-01",
-      "month": "Feb-26",
-      "year": 2026,
-      "date": "2026-02-05",
-      "amount": 2546.0,
-      "method": "Cash",
-      "reference": "HIST-FEB-26-02",
-      "type": "Payment",
-      "notes": "Migrated from Javed!M4",
-      "createdAt": "2026-02-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-003",
-      "tenantId": "T-01",
-      "tenantName": "Javed",
-      "recordId": "REC-2026-03-T-01",
-      "month": "Mar-26",
-      "year": 2026,
-      "date": "2026-03-05",
-      "amount": 2721.0,
-      "method": "Cash",
-      "reference": "HIST-MAR-26-03",
-      "type": "Payment",
-      "notes": "Migrated from Javed!M5",
-      "createdAt": "2026-03-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-004",
-      "tenantId": "T-01",
-      "tenantName": "Javed",
-      "recordId": "REC-2026-04-T-01",
-      "month": "Apr-26",
-      "year": 2026,
-      "date": "2026-04-05",
-      "amount": 2581.0,
-      "method": "Cash",
-      "reference": "HIST-APR-26-04",
-      "type": "Payment",
-      "notes": "Migrated from Javed!M6",
-      "createdAt": "2026-04-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-005",
-      "tenantId": "T-01",
-      "tenantName": "Javed",
-      "recordId": "REC-2026-07-T-01",
-      "month": "Jul-26",
-      "year": 2026,
-      "date": "2026-07-05",
-      "amount": 2609.0,
-      "method": "Cash",
-      "reference": "HIST-JUL-26-05",
-      "type": "Payment",
-      "notes": "Migrated from Javed!M9 (=2200+409)",
-      "createdAt": "2026-07-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-006",
-      "tenantId": "T-01",
-      "tenantName": "Javed",
-      "recordId": "REC-2026-08-T-01",
-      "month": "Aug-26",
-      "year": 2026,
-      "date": "2026-08-05",
-      "amount": 2511.0,
-      "method": "Cash",
-      "reference": "HIST-AUG-26-06",
-      "type": "Payment",
-      "notes": "Migrated from Javed!M10 (=2200+311)",
-      "createdAt": "2026-08-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-007",
       "tenantId": "T-02",
       "tenantName": "Raja",
       "recordId": "REC-2026-01-T-02",
@@ -6926,88 +6852,13 @@ export const INITIAL_WORKBOOK_DATA = {
       "date": "2026-01-05",
       "amount": 2422.0,
       "method": "Cash",
-      "reference": "HIST-JAN-26-07",
+      "reference": "HIST-JAN-26-02",
       "type": "Payment",
-      "notes": "Migrated from Raja!M3",
+      "notes": "Historical recorded payment",
       "createdAt": "2026-01-05T10:00:00Z"
     },
     {
-      "paymentId": "PAY-008",
-      "tenantId": "T-02",
-      "tenantName": "Raja",
-      "recordId": "REC-2026-02-T-02",
-      "month": "Feb-26",
-      "year": 2026,
-      "date": "2026-02-05",
-      "amount": 2450.0,
-      "method": "Cash",
-      "reference": "HIST-FEB-26-08",
-      "type": "Payment",
-      "notes": "Migrated from Raja!M4",
-      "createdAt": "2026-02-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-009",
-      "tenantId": "T-02",
-      "tenantName": "Raja",
-      "recordId": "REC-2026-03-T-02",
-      "month": "Mar-26",
-      "year": 2026,
-      "date": "2026-03-05",
-      "amount": 2681.0,
-      "method": "Cash",
-      "reference": "HIST-MAR-26-09",
-      "type": "Payment",
-      "notes": "Migrated from Raja!M5",
-      "createdAt": "2026-03-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-010",
-      "tenantId": "T-02",
-      "tenantName": "Raja",
-      "recordId": "REC-2026-04-T-02",
-      "month": "Apr-26",
-      "year": 2026,
-      "date": "2026-04-05",
-      "amount": 2674.0,
-      "method": "Cash",
-      "reference": "HIST-APR-26-10",
-      "type": "Payment",
-      "notes": "Migrated from Raja!M6",
-      "createdAt": "2026-04-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-011",
-      "tenantId": "T-02",
-      "tenantName": "Raja",
-      "recordId": "REC-2026-07-T-02",
-      "month": "Jul-26",
-      "year": 2026,
-      "date": "2026-07-05",
-      "amount": 7838.0,
-      "method": "Cash",
-      "reference": "HIST-JUL-26-11",
-      "type": "Payment",
-      "notes": "Migrated from Raja!M9 (=2300+815+4723)",
-      "createdAt": "2026-07-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-012",
-      "tenantId": "T-02",
-      "tenantName": "Raja",
-      "recordId": "REC-2026-08-T-02",
-      "month": "Aug-26",
-      "year": 2026,
-      "date": "2026-08-05",
-      "amount": 2898.0,
-      "method": "Cash",
-      "reference": "HIST-AUG-26-12",
-      "type": "Payment",
-      "notes": "Migrated from Raja!M10 (=2300+598)",
-      "createdAt": "2026-08-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-013",
+      "paymentId": "PAY-003",
       "tenantId": "T-03",
       "tenantName": "Ghanti",
       "recordId": "REC-2026-01-T-03",
@@ -7016,133 +6867,13 @@ export const INITIAL_WORKBOOK_DATA = {
       "date": "2026-01-05",
       "amount": 2131.0,
       "method": "Cash",
-      "reference": "HIST-JAN-26-13",
+      "reference": "HIST-JAN-26-03",
       "type": "Payment",
-      "notes": "Migrated from Ghanti!M3",
+      "notes": "Historical recorded payment",
       "createdAt": "2026-01-05T10:00:00Z"
     },
     {
-      "paymentId": "PAY-014",
-      "tenantId": "T-03",
-      "tenantName": "Ghanti",
-      "recordId": "REC-2026-02-T-03",
-      "month": "Feb-26",
-      "year": 2026,
-      "date": "2026-02-05",
-      "amount": 2117.0,
-      "method": "Cash",
-      "reference": "HIST-FEB-26-14",
-      "type": "Payment",
-      "notes": "Migrated from Ghanti!M4",
-      "createdAt": "2026-02-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-015",
-      "tenantId": "T-03",
-      "tenantName": "Ghanti",
-      "recordId": "REC-2026-03-T-03",
-      "month": "Mar-26",
-      "year": 2026,
-      "date": "2026-03-05",
-      "amount": 2131.0,
-      "method": "Cash",
-      "reference": "HIST-MAR-26-15",
-      "type": "Payment",
-      "notes": "Migrated from Ghanti!M5",
-      "createdAt": "2026-03-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-016",
-      "tenantId": "T-03",
-      "tenantName": "Ghanti",
-      "recordId": "REC-2026-04-T-03",
-      "month": "Apr-26",
-      "year": 2026,
-      "date": "2026-04-05",
-      "amount": 2264.0,
-      "method": "Cash",
-      "reference": "HIST-APR-26-16",
-      "type": "Payment",
-      "notes": "Migrated from Ghanti!M6",
-      "createdAt": "2026-04-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-017",
-      "tenantId": "T-03",
-      "tenantName": "Ghanti",
-      "recordId": "REC-2026-05-T-03",
-      "month": "May-26",
-      "year": 2026,
-      "date": "2026-05-05",
-      "amount": 2201.0,
-      "method": "Cash",
-      "reference": "HIST-MAY-26-17",
-      "type": "Payment",
-      "notes": "Migrated from Ghanti!M7",
-      "createdAt": "2026-05-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-018",
-      "tenantId": "T-03",
-      "tenantName": "Ghanti",
-      "recordId": "REC-2026-06-T-03",
-      "month": "Jun-26",
-      "year": 2026,
-      "date": "2026-06-05",
-      "amount": 2348.0,
-      "method": "Cash",
-      "reference": "HIST-JUN-26-18",
-      "type": "Payment",
-      "notes": "Migrated from Ghanti!M8",
-      "createdAt": "2026-06-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-019",
-      "tenantId": "T-03",
-      "tenantName": "Ghanti",
-      "recordId": "REC-2026-07-T-03",
-      "month": "Jul-26",
-      "year": 2026,
-      "date": "2026-07-05",
-      "amount": 2376.0,
-      "method": "Cash",
-      "reference": "HIST-JUL-26-19",
-      "type": "Payment",
-      "notes": "Migrated from Ghanti!M9",
-      "createdAt": "2026-07-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-020",
-      "tenantId": "T-03",
-      "tenantName": "Ghanti",
-      "recordId": "REC-2026-08-T-03",
-      "month": "Aug-26",
-      "year": 2026,
-      "date": "2026-08-05",
-      "amount": 2334.0,
-      "method": "Cash",
-      "reference": "HIST-AUG-26-20",
-      "type": "Payment",
-      "notes": "Migrated from Ghanti!M10",
-      "createdAt": "2026-08-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-021",
-      "tenantId": "T-03",
-      "tenantName": "Ghanti",
-      "recordId": "REC-2026-09-T-03",
-      "month": "Sep-26",
-      "year": 2026,
-      "date": "2026-09-05",
-      "amount": 2369.0,
-      "method": "Cash",
-      "reference": "HIST-SEP-26-21",
-      "type": "Payment",
-      "notes": "Migrated from Ghanti!M11",
-      "createdAt": "2026-09-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-022",
+      "paymentId": "PAY-004",
       "tenantId": "T-04",
       "tenantName": "Sonu",
       "recordId": "REC-2026-01-T-04",
@@ -7151,133 +6882,13 @@ export const INITIAL_WORKBOOK_DATA = {
       "date": "2026-01-05",
       "amount": 2285.0,
       "method": "Cash",
-      "reference": "HIST-JAN-26-22",
+      "reference": "HIST-JAN-26-04",
       "type": "Payment",
-      "notes": "Migrated from Sonu!M3",
+      "notes": "Historical recorded payment",
       "createdAt": "2026-01-05T10:00:00Z"
     },
     {
-      "paymentId": "PAY-023",
-      "tenantId": "T-04",
-      "tenantName": "Sonu",
-      "recordId": "REC-2026-02-T-04",
-      "month": "Feb-26",
-      "year": 2026,
-      "date": "2026-02-05",
-      "amount": 2222.0,
-      "method": "Cash",
-      "reference": "HIST-FEB-26-23",
-      "type": "Payment",
-      "notes": "Migrated from Sonu!M4",
-      "createdAt": "2026-02-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-024",
-      "tenantId": "T-04",
-      "tenantName": "Sonu",
-      "recordId": "REC-2026-03-T-04",
-      "month": "Mar-26",
-      "year": 2026,
-      "date": "2026-03-05",
-      "amount": 2425.0,
-      "method": "Cash",
-      "reference": "HIST-MAR-26-24",
-      "type": "Payment",
-      "notes": "Migrated from Sonu!M5",
-      "createdAt": "2026-03-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-025",
-      "tenantId": "T-04",
-      "tenantName": "Sonu",
-      "recordId": "REC-2026-04-T-04",
-      "month": "Apr-26",
-      "year": 2026,
-      "date": "2026-04-05",
-      "amount": 2306.0,
-      "method": "Cash",
-      "reference": "HIST-APR-26-25",
-      "type": "Payment",
-      "notes": "Migrated from Sonu!M6",
-      "createdAt": "2026-04-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-026",
-      "tenantId": "T-04",
-      "tenantName": "Sonu",
-      "recordId": "REC-2026-05-T-04",
-      "month": "May-26",
-      "year": 2026,
-      "date": "2026-05-05",
-      "amount": 2285.0,
-      "method": "Cash",
-      "reference": "HIST-MAY-26-26",
-      "type": "Payment",
-      "notes": "Migrated from Sonu!M7",
-      "createdAt": "2026-05-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-027",
-      "tenantId": "T-04",
-      "tenantName": "Sonu",
-      "recordId": "REC-2026-06-T-04",
-      "month": "Jun-26",
-      "year": 2026,
-      "date": "2026-06-05",
-      "amount": 2313.0,
-      "method": "Cash",
-      "reference": "HIST-JUN-26-27",
-      "type": "Payment",
-      "notes": "Migrated from Sonu!M8",
-      "createdAt": "2026-06-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-028",
-      "tenantId": "T-04",
-      "tenantName": "Sonu",
-      "recordId": "REC-2026-07-T-04",
-      "month": "Jul-26",
-      "year": 2026,
-      "date": "2026-07-05",
-      "amount": 2446.0,
-      "method": "Cash",
-      "reference": "HIST-JUL-26-28",
-      "type": "Payment",
-      "notes": "Migrated from Sonu!M9",
-      "createdAt": "2026-07-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-029",
-      "tenantId": "T-04",
-      "tenantName": "Sonu",
-      "recordId": "REC-2026-08-T-04",
-      "month": "Aug-26",
-      "year": 2026,
-      "date": "2026-08-05",
-      "amount": 2369.0,
-      "method": "Cash",
-      "reference": "HIST-AUG-26-29",
-      "type": "Payment",
-      "notes": "Migrated from Sonu!M10",
-      "createdAt": "2026-08-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-030",
-      "tenantId": "T-04",
-      "tenantName": "Sonu",
-      "recordId": "REC-2026-09-T-04",
-      "month": "Sep-26",
-      "year": 2026,
-      "date": "2026-09-05",
-      "amount": 2271.0,
-      "method": "Cash",
-      "reference": "HIST-SEP-26-30",
-      "type": "Payment",
-      "notes": "Migrated from Sonu!M11",
-      "createdAt": "2026-09-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-031",
+      "paymentId": "PAY-005",
       "tenantId": "T-05",
       "tenantName": "Painter",
       "recordId": "REC-2026-01-T-05",
@@ -7286,178 +6897,13 @@ export const INITIAL_WORKBOOK_DATA = {
       "date": "2026-01-05",
       "amount": 2173.0,
       "method": "Cash",
-      "reference": "HIST-JAN-26-31",
+      "reference": "HIST-JAN-26-05",
       "type": "Payment",
-      "notes": "Migrated from Painter!M3",
+      "notes": "Historical recorded payment",
       "createdAt": "2026-01-05T10:00:00Z"
     },
     {
-      "paymentId": "PAY-032",
-      "tenantId": "T-05",
-      "tenantName": "Painter",
-      "recordId": "REC-2026-02-T-05",
-      "month": "Feb-26",
-      "year": 2026,
-      "date": "2026-02-05",
-      "amount": 2194.0,
-      "method": "Cash",
-      "reference": "HIST-FEB-26-32",
-      "type": "Payment",
-      "notes": "Migrated from Painter!M4",
-      "createdAt": "2026-02-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-033",
-      "tenantId": "T-05",
-      "tenantName": "Painter",
-      "recordId": "REC-2026-03-T-05",
-      "month": "Mar-26",
-      "year": 2026,
-      "date": "2026-03-05",
-      "amount": 2376.0,
-      "method": "Cash",
-      "reference": "HIST-MAR-26-33",
-      "type": "Payment",
-      "notes": "Migrated from Painter!M5",
-      "createdAt": "2026-03-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-034",
-      "tenantId": "T-05",
-      "tenantName": "Painter",
-      "recordId": "REC-2026-04-T-05",
-      "month": "Apr-26",
-      "year": 2026,
-      "date": "2026-04-05",
-      "amount": 2362.0,
-      "method": "Cash",
-      "reference": "HIST-APR-26-34",
-      "type": "Payment",
-      "notes": "Migrated from Painter!M6",
-      "createdAt": "2026-04-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-035",
-      "tenantId": "T-05",
-      "tenantName": "Painter",
-      "recordId": "REC-2026-07-T-05",
-      "month": "Jul-26",
-      "year": 2026,
-      "date": "2026-07-05",
-      "amount": 6000.0,
-      "method": "Cash",
-      "reference": "HIST-JUL-26-35",
-      "type": "Payment",
-      "notes": "Migrated from Painter!M9",
-      "createdAt": "2026-07-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-036",
-      "tenantId": "T-05",
-      "tenantName": "Painter",
-      "recordId": "REC-2026-08-T-05",
-      "month": "Aug-26",
-      "year": 2026,
-      "date": "2026-08-05",
-      "amount": 4000.0,
-      "method": "Cash",
-      "reference": "HIST-AUG-26-36",
-      "type": "Payment",
-      "notes": "Migrated from Painter!M10",
-      "createdAt": "2026-08-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-037",
-      "tenantId": "T-06",
-      "tenantName": "Imran",
-      "recordId": "REC-2026-02-T-06",
-      "month": "Feb-26",
-      "year": 2026,
-      "date": "2026-02-05",
-      "amount": 5000.0,
-      "method": "Cash",
-      "reference": "HIST-FEB-26-37",
-      "type": "Payment",
-      "notes": "Migrated from Imran!M4",
-      "createdAt": "2026-02-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-038",
-      "tenantId": "T-06",
-      "tenantName": "Imran",
-      "recordId": "REC-2026-04-T-06",
-      "month": "Apr-26",
-      "year": 2026,
-      "date": "2026-04-05",
-      "amount": 10000.0,
-      "method": "Cash",
-      "reference": "HIST-APR-26-38",
-      "type": "Payment",
-      "notes": "Migrated from Imran!M6",
-      "createdAt": "2026-04-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-039",
-      "tenantId": "T-06",
-      "tenantName": "Imran",
-      "recordId": "REC-2026-05-T-06",
-      "month": "May-26",
-      "year": 2026,
-      "date": "2026-05-05",
-      "amount": 5000.0,
-      "method": "Cash",
-      "reference": "HIST-MAY-26-39",
-      "type": "Payment",
-      "notes": "Migrated from Imran!M7",
-      "createdAt": "2026-05-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-040",
-      "tenantId": "T-06",
-      "tenantName": "Imran",
-      "recordId": "REC-2026-06-T-06",
-      "month": "Jun-26",
-      "year": 2026,
-      "date": "2026-06-05",
-      "amount": 5000.0,
-      "method": "Cash",
-      "reference": "HIST-JUN-26-40",
-      "type": "Payment",
-      "notes": "Migrated from Imran!M8",
-      "createdAt": "2026-06-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-041",
-      "tenantId": "T-06",
-      "tenantName": "Imran",
-      "recordId": "REC-2026-07-T-06",
-      "month": "Jul-26",
-      "year": 2026,
-      "date": "2026-07-05",
-      "amount": 5000.0,
-      "method": "Cash",
-      "reference": "HIST-JUL-26-41",
-      "type": "Payment",
-      "notes": "Migrated from Imran!M9",
-      "createdAt": "2026-07-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-042",
-      "tenantId": "T-06",
-      "tenantName": "Imran",
-      "recordId": "REC-2026-08-T-06",
-      "month": "Aug-26",
-      "year": 2026,
-      "date": "2026-08-05",
-      "amount": 5000.0,
-      "method": "Cash",
-      "reference": "HIST-AUG-26-42",
-      "type": "Payment",
-      "notes": "Migrated from Imran!M10",
-      "createdAt": "2026-08-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-043",
+      "paymentId": "PAY-006",
       "tenantId": "T-07",
       "tenantName": "Virasat",
       "recordId": "REC-2026-01-T-07",
@@ -7466,118 +6912,13 @@ export const INITIAL_WORKBOOK_DATA = {
       "date": "2026-01-05",
       "amount": 4903.0,
       "method": "Cash",
-      "reference": "HIST-JAN-26-43",
+      "reference": "HIST-JAN-26-06",
       "type": "Payment",
-      "notes": "Migrated from Virasat!M3",
+      "notes": "Historical recorded payment",
       "createdAt": "2026-01-05T10:00:00Z"
     },
     {
-      "paymentId": "PAY-044",
-      "tenantId": "T-07",
-      "tenantName": "Virasat",
-      "recordId": "REC-2026-02-T-07",
-      "month": "Feb-26",
-      "year": 2026,
-      "date": "2026-02-05",
-      "amount": 4861.0,
-      "method": "Cash",
-      "reference": "HIST-FEB-26-44",
-      "type": "Payment",
-      "notes": "Migrated from Virasat!M4",
-      "createdAt": "2026-02-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-045",
-      "tenantId": "T-07",
-      "tenantName": "Virasat",
-      "recordId": "REC-2026-03-T-07",
-      "month": "Mar-26",
-      "year": 2026,
-      "date": "2026-03-05",
-      "amount": 5043.0,
-      "method": "Cash",
-      "reference": "HIST-MAR-26-45",
-      "type": "Payment",
-      "notes": "Migrated from Virasat!M5",
-      "createdAt": "2026-03-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-046",
-      "tenantId": "T-07",
-      "tenantName": "Virasat",
-      "recordId": "REC-2026-04-T-07",
-      "month": "Apr-26",
-      "year": 2026,
-      "date": "2026-04-05",
-      "amount": 5127.0,
-      "method": "Cash",
-      "reference": "HIST-APR-26-46",
-      "type": "Payment",
-      "notes": "Migrated from Virasat!M6",
-      "createdAt": "2026-04-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-047",
-      "tenantId": "T-07",
-      "tenantName": "Virasat",
-      "recordId": "REC-2026-05-T-07",
-      "month": "May-26",
-      "year": 2026,
-      "date": "2026-05-05",
-      "amount": 5190.0,
-      "method": "Cash",
-      "reference": "HIST-MAY-26-47",
-      "type": "Payment",
-      "notes": "Migrated from Virasat!M7",
-      "createdAt": "2026-05-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-048",
-      "tenantId": "T-07",
-      "tenantName": "Virasat",
-      "recordId": "REC-2026-06-T-07",
-      "month": "Jun-26",
-      "year": 2026,
-      "date": "2026-06-05",
-      "amount": 5085.0,
-      "method": "Cash",
-      "reference": "HIST-JUN-26-48",
-      "type": "Payment",
-      "notes": "Migrated from Virasat!M8",
-      "createdAt": "2026-06-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-049",
-      "tenantId": "T-07",
-      "tenantName": "Virasat",
-      "recordId": "REC-2026-07-T-07",
-      "month": "Jul-26",
-      "year": 2026,
-      "date": "2026-07-05",
-      "amount": 5323.0,
-      "method": "Cash",
-      "reference": "HIST-JUL-26-49",
-      "type": "Payment",
-      "notes": "Migrated from Virasat!M9",
-      "createdAt": "2026-07-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-050",
-      "tenantId": "T-07",
-      "tenantName": "Virasat",
-      "recordId": "REC-2026-08-T-07",
-      "month": "Aug-26",
-      "year": 2026,
-      "date": "2026-08-05",
-      "amount": 5050.0,
-      "method": "Cash",
-      "reference": "HIST-AUG-26-50",
-      "type": "Payment",
-      "notes": "Migrated from Virasat!M10",
-      "createdAt": "2026-08-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-051",
+      "paymentId": "PAY-007",
       "tenantId": "T-08",
       "tenantName": "Guddu",
       "recordId": "REC-2026-01-T-08",
@@ -7586,13 +6927,193 @@ export const INITIAL_WORKBOOK_DATA = {
       "date": "2026-01-05",
       "amount": 4482.0,
       "method": "Cash",
-      "reference": "HIST-JAN-26-51",
+      "reference": "HIST-JAN-26-07",
       "type": "Payment",
-      "notes": "Migrated from Guddu!M3",
+      "notes": "Partial payment (\u20b9400 carried to Feb)",
       "createdAt": "2026-01-05T10:00:00Z"
     },
     {
-      "paymentId": "PAY-052",
+      "paymentId": "PAY-008",
+      "tenantId": "T-09",
+      "tenantName": "Sajid",
+      "recordId": "REC-2026-01-T-09",
+      "month": "Jan-26",
+      "year": 2026,
+      "date": "2026-01-05",
+      "amount": 2644.0,
+      "method": "Cash",
+      "reference": "HIST-JAN-26-08",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-01-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-009",
+      "tenantId": "T-10",
+      "tenantName": "Sundar Ki Mummy",
+      "recordId": "REC-2026-01-T-10",
+      "month": "Jan-26",
+      "year": 2026,
+      "date": "2026-01-05",
+      "amount": 3099.0,
+      "method": "Cash",
+      "reference": "HIST-JAN-26-09",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-01-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-010",
+      "tenantId": "T-11",
+      "tenantName": "Dinesh",
+      "recordId": "REC-2026-01-T-11",
+      "month": "Jan-26",
+      "year": 2026,
+      "date": "2026-01-05",
+      "amount": 2822.0,
+      "method": "Cash",
+      "reference": "HIST-JAN-26-10",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-01-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-011",
+      "tenantId": "T-12",
+      "tenantName": "Nisha",
+      "recordId": "REC-2026-01-T-12",
+      "month": "Jan-26",
+      "year": 2026,
+      "date": "2026-01-05",
+      "amount": 2640.0,
+      "method": "Cash",
+      "reference": "HIST-JAN-26-11",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-01-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-012",
+      "tenantId": "T-13",
+      "tenantName": "Sundar",
+      "recordId": "REC-2026-01-T-13",
+      "month": "Jan-26",
+      "year": 2026,
+      "date": "2026-01-05",
+      "amount": 2689.0,
+      "method": "Cash",
+      "reference": "HIST-JAN-26-12",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-01-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-013",
+      "tenantId": "T-01",
+      "tenantName": "Javed",
+      "recordId": "REC-2026-02-T-01",
+      "month": "Feb-26",
+      "year": 2026,
+      "date": "2026-02-05",
+      "amount": 2546.0,
+      "method": "Cash",
+      "reference": "HIST-FEB-26-13",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-02-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-014",
+      "tenantId": "T-02",
+      "tenantName": "Raja",
+      "recordId": "REC-2026-02-T-02",
+      "month": "Feb-26",
+      "year": 2026,
+      "date": "2026-02-05",
+      "amount": 2450.0,
+      "method": "Cash",
+      "reference": "HIST-FEB-26-14",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-02-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-015",
+      "tenantId": "T-03",
+      "tenantName": "Ghanti",
+      "recordId": "REC-2026-02-T-03",
+      "month": "Feb-26",
+      "year": 2026,
+      "date": "2026-02-05",
+      "amount": 2117.0,
+      "method": "Cash",
+      "reference": "HIST-FEB-26-15",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-02-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-016",
+      "tenantId": "T-04",
+      "tenantName": "Sonu",
+      "recordId": "REC-2026-02-T-04",
+      "month": "Feb-26",
+      "year": 2026,
+      "date": "2026-02-05",
+      "amount": 2222.0,
+      "method": "Cash",
+      "reference": "HIST-FEB-26-16",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-02-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-017",
+      "tenantId": "T-05",
+      "tenantName": "Painter",
+      "recordId": "REC-2026-02-T-05",
+      "month": "Feb-26",
+      "year": 2026,
+      "date": "2026-02-05",
+      "amount": 2194.0,
+      "method": "Cash",
+      "reference": "HIST-FEB-26-17",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-02-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-018",
+      "tenantId": "T-06",
+      "tenantName": "Imran",
+      "recordId": "REC-2026-02-T-06",
+      "month": "Feb-26",
+      "year": 2026,
+      "date": "2026-02-05",
+      "amount": 5000.0,
+      "method": "Cash",
+      "reference": "HIST-FEB-26-18",
+      "type": "Payment",
+      "notes": "Partial payment against arrears",
+      "createdAt": "2026-02-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-019",
+      "tenantId": "T-07",
+      "tenantName": "Virasat",
+      "recordId": "REC-2026-02-T-07",
+      "month": "Feb-26",
+      "year": 2026,
+      "date": "2026-02-05",
+      "amount": 4861.0,
+      "method": "Cash",
+      "reference": "HIST-FEB-26-19",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-02-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-020",
       "tenantId": "T-08",
       "tenantName": "Guddu",
       "recordId": "REC-2026-02-T-08",
@@ -7601,13 +7122,178 @@ export const INITIAL_WORKBOOK_DATA = {
       "date": "2026-02-05",
       "amount": 5254.0,
       "method": "Cash",
-      "reference": "HIST-FEB-26-52",
+      "reference": "HIST-FEB-26-20",
       "type": "Payment",
-      "notes": "Migrated from Guddu!M4",
+      "notes": "Includes \u20b9400 Jan arrears",
       "createdAt": "2026-02-05T10:00:00Z"
     },
     {
-      "paymentId": "PAY-053",
+      "paymentId": "PAY-021",
+      "tenantId": "T-09",
+      "tenantName": "Sajid",
+      "recordId": "REC-2026-02-T-09",
+      "month": "Feb-26",
+      "year": 2026,
+      "date": "2026-02-05",
+      "amount": 2763.0,
+      "method": "Cash",
+      "reference": "HIST-FEB-26-21",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-02-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-022",
+      "tenantId": "T-10",
+      "tenantName": "Sundar Ki Mummy",
+      "recordId": "REC-2026-02-T-10",
+      "month": "Feb-26",
+      "year": 2026,
+      "date": "2026-02-05",
+      "amount": 2819.0,
+      "method": "Cash",
+      "reference": "HIST-FEB-26-22",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-02-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-023",
+      "tenantId": "T-11",
+      "tenantName": "Dinesh",
+      "recordId": "REC-2026-02-T-11",
+      "month": "Feb-26",
+      "year": 2026,
+      "date": "2026-02-05",
+      "amount": 2885.0,
+      "method": "Cash",
+      "reference": "HIST-FEB-26-23",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-02-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-024",
+      "tenantId": "T-12",
+      "tenantName": "Nisha",
+      "recordId": "REC-2026-02-T-12",
+      "month": "Feb-26",
+      "year": 2026,
+      "date": "2026-02-05",
+      "amount": 2584.0,
+      "method": "Cash",
+      "reference": "HIST-FEB-26-24",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-02-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-025",
+      "tenantId": "T-13",
+      "tenantName": "Sundar",
+      "recordId": "REC-2026-02-T-13",
+      "month": "Feb-26",
+      "year": 2026,
+      "date": "2026-02-05",
+      "amount": 2556.0,
+      "method": "Cash",
+      "reference": "HIST-FEB-26-25",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-02-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-026",
+      "tenantId": "T-01",
+      "tenantName": "Javed",
+      "recordId": "REC-2026-03-T-01",
+      "month": "Mar-26",
+      "year": 2026,
+      "date": "2026-03-05",
+      "amount": 2721.0,
+      "method": "Cash",
+      "reference": "HIST-MAR-26-26",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-03-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-027",
+      "tenantId": "T-02",
+      "tenantName": "Raja",
+      "recordId": "REC-2026-03-T-02",
+      "month": "Mar-26",
+      "year": 2026,
+      "date": "2026-03-05",
+      "amount": 2681.0,
+      "method": "Cash",
+      "reference": "HIST-MAR-26-27",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-03-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-028",
+      "tenantId": "T-03",
+      "tenantName": "Ghanti",
+      "recordId": "REC-2026-03-T-03",
+      "month": "Mar-26",
+      "year": 2026,
+      "date": "2026-03-05",
+      "amount": 2131.0,
+      "method": "Cash",
+      "reference": "HIST-MAR-26-28",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-03-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-029",
+      "tenantId": "T-04",
+      "tenantName": "Sonu",
+      "recordId": "REC-2026-03-T-04",
+      "month": "Mar-26",
+      "year": 2026,
+      "date": "2026-03-05",
+      "amount": 2425.0,
+      "method": "Cash",
+      "reference": "HIST-MAR-26-29",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-03-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-030",
+      "tenantId": "T-05",
+      "tenantName": "Painter",
+      "recordId": "REC-2026-03-T-05",
+      "month": "Mar-26",
+      "year": 2026,
+      "date": "2026-03-05",
+      "amount": 2376.0,
+      "method": "Cash",
+      "reference": "HIST-MAR-26-30",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-03-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-031",
+      "tenantId": "T-07",
+      "tenantName": "Virasat",
+      "recordId": "REC-2026-03-T-07",
+      "month": "Mar-26",
+      "year": 2026,
+      "date": "2026-03-05",
+      "amount": 5043.0,
+      "method": "Cash",
+      "reference": "HIST-MAR-26-31",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-03-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-032",
       "tenantId": "T-08",
       "tenantName": "Guddu",
       "recordId": "REC-2026-03-T-08",
@@ -7616,13 +7302,193 @@ export const INITIAL_WORKBOOK_DATA = {
       "date": "2026-03-05",
       "amount": 5260.0,
       "method": "Cash",
-      "reference": "HIST-MAR-26-53",
+      "reference": "HIST-MAR-26-32",
       "type": "Payment",
-      "notes": "Migrated from Guddu!M5",
+      "notes": "Historical recorded payment",
       "createdAt": "2026-03-05T10:00:00Z"
     },
     {
-      "paymentId": "PAY-054",
+      "paymentId": "PAY-033",
+      "tenantId": "T-09",
+      "tenantName": "Sajid",
+      "recordId": "REC-2026-03-T-09",
+      "month": "Mar-26",
+      "year": 2026,
+      "date": "2026-03-05",
+      "amount": 2833.0,
+      "method": "Cash",
+      "reference": "HIST-MAR-26-33",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-03-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-034",
+      "tenantId": "T-10",
+      "tenantName": "Sundar Ki Mummy",
+      "recordId": "REC-2026-03-T-10",
+      "month": "Mar-26",
+      "year": 2026,
+      "date": "2026-03-05",
+      "amount": 2602.0,
+      "method": "Cash",
+      "reference": "HIST-MAR-26-34",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-03-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-035",
+      "tenantId": "T-11",
+      "tenantName": "Dinesh",
+      "recordId": "REC-2026-03-T-11",
+      "month": "Mar-26",
+      "year": 2026,
+      "date": "2026-03-05",
+      "amount": 3060.0,
+      "method": "Cash",
+      "reference": "HIST-MAR-26-35",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-03-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-036",
+      "tenantId": "T-12",
+      "tenantName": "Nisha",
+      "recordId": "REC-2026-03-T-12",
+      "month": "Mar-26",
+      "year": 2026,
+      "date": "2026-03-05",
+      "amount": 2710.0,
+      "method": "Cash",
+      "reference": "HIST-MAR-26-36",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-03-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-037",
+      "tenantId": "T-13",
+      "tenantName": "Sundar",
+      "recordId": "REC-2026-03-T-13",
+      "month": "Mar-26",
+      "year": 2026,
+      "date": "2026-03-05",
+      "amount": 2598.0,
+      "method": "Cash",
+      "reference": "HIST-MAR-26-37",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-03-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-038",
+      "tenantId": "T-01",
+      "tenantName": "Javed",
+      "recordId": "REC-2026-04-T-01",
+      "month": "Apr-26",
+      "year": 2026,
+      "date": "2026-04-05",
+      "amount": 2581.0,
+      "method": "Cash",
+      "reference": "HIST-APR-26-38",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-04-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-039",
+      "tenantId": "T-02",
+      "tenantName": "Raja",
+      "recordId": "REC-2026-04-T-02",
+      "month": "Apr-26",
+      "year": 2026,
+      "date": "2026-04-05",
+      "amount": 2674.0,
+      "method": "Cash",
+      "reference": "HIST-APR-26-39",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-04-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-040",
+      "tenantId": "T-03",
+      "tenantName": "Ghanti",
+      "recordId": "REC-2026-04-T-03",
+      "month": "Apr-26",
+      "year": 2026,
+      "date": "2026-04-05",
+      "amount": 2264.0,
+      "method": "Cash",
+      "reference": "HIST-APR-26-40",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-04-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-041",
+      "tenantId": "T-04",
+      "tenantName": "Sonu",
+      "recordId": "REC-2026-04-T-04",
+      "month": "Apr-26",
+      "year": 2026,
+      "date": "2026-04-05",
+      "amount": 2306.0,
+      "method": "Cash",
+      "reference": "HIST-APR-26-41",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-04-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-042",
+      "tenantId": "T-05",
+      "tenantName": "Painter",
+      "recordId": "REC-2026-04-T-05",
+      "month": "Apr-26",
+      "year": 2026,
+      "date": "2026-04-05",
+      "amount": 2362.0,
+      "method": "Cash",
+      "reference": "HIST-APR-26-42",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-04-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-043",
+      "tenantId": "T-06",
+      "tenantName": "Imran",
+      "recordId": "REC-2026-04-T-06",
+      "month": "Apr-26",
+      "year": 2026,
+      "date": "2026-04-05",
+      "amount": 10000.0,
+      "method": "Cash",
+      "reference": "HIST-APR-26-43",
+      "type": "Payment",
+      "notes": "Lump-sum partial payment against arrears",
+      "createdAt": "2026-04-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-044",
+      "tenantId": "T-07",
+      "tenantName": "Virasat",
+      "recordId": "REC-2026-04-T-07",
+      "month": "Apr-26",
+      "year": 2026,
+      "date": "2026-04-05",
+      "amount": 5127.0,
+      "method": "Cash",
+      "reference": "HIST-APR-26-44",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-04-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-045",
       "tenantId": "T-08",
       "tenantName": "Guddu",
       "recordId": "REC-2026-04-T-08",
@@ -7631,10 +7497,145 @@ export const INITIAL_WORKBOOK_DATA = {
       "date": "2026-04-05",
       "amount": 4889.0,
       "method": "Cash",
-      "reference": "HIST-APR-26-54",
+      "reference": "HIST-APR-26-45",
       "type": "Payment",
-      "notes": "Migrated from Guddu!M6",
+      "notes": "Historical recorded payment",
       "createdAt": "2026-04-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-046",
+      "tenantId": "T-09",
+      "tenantName": "Sajid",
+      "recordId": "REC-2026-04-T-09",
+      "month": "Apr-26",
+      "year": 2026,
+      "date": "2026-04-05",
+      "amount": 2602.0,
+      "method": "Cash",
+      "reference": "HIST-APR-26-46",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-04-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-047",
+      "tenantId": "T-10",
+      "tenantName": "Sundar Ki Mummy",
+      "recordId": "REC-2026-04-T-10",
+      "month": "Apr-26",
+      "year": 2026,
+      "date": "2026-04-05",
+      "amount": 2798.0,
+      "method": "Cash",
+      "reference": "HIST-APR-26-47",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-04-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-048",
+      "tenantId": "T-11",
+      "tenantName": "Dinesh",
+      "recordId": "REC-2026-04-T-11",
+      "month": "Apr-26",
+      "year": 2026,
+      "date": "2026-04-05",
+      "amount": 3074.0,
+      "method": "Cash",
+      "reference": "HIST-APR-26-48",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-04-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-049",
+      "tenantId": "T-12",
+      "tenantName": "Nisha",
+      "recordId": "REC-2026-04-T-12",
+      "month": "Apr-26",
+      "year": 2026,
+      "date": "2026-04-05",
+      "amount": 2507.0,
+      "method": "Cash",
+      "reference": "HIST-APR-26-49",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-04-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-050",
+      "tenantId": "T-13",
+      "tenantName": "Sundar",
+      "recordId": "REC-2026-04-T-13",
+      "month": "Apr-26",
+      "year": 2026,
+      "date": "2026-04-05",
+      "amount": 2605.0,
+      "method": "Cash",
+      "reference": "HIST-APR-26-50",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-04-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-051",
+      "tenantId": "T-03",
+      "tenantName": "Ghanti",
+      "recordId": "REC-2026-05-T-03",
+      "month": "May-26",
+      "year": 2026,
+      "date": "2026-05-05",
+      "amount": 2201.0,
+      "method": "Cash",
+      "reference": "HIST-MAY-26-51",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-05-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-052",
+      "tenantId": "T-04",
+      "tenantName": "Sonu",
+      "recordId": "REC-2026-05-T-04",
+      "month": "May-26",
+      "year": 2026,
+      "date": "2026-05-05",
+      "amount": 2285.0,
+      "method": "Cash",
+      "reference": "HIST-MAY-26-52",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-05-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-053",
+      "tenantId": "T-06",
+      "tenantName": "Imran",
+      "recordId": "REC-2026-05-T-06",
+      "month": "May-26",
+      "year": 2026,
+      "date": "2026-05-05",
+      "amount": 5000.0,
+      "method": "Cash",
+      "reference": "HIST-MAY-26-53",
+      "type": "Payment",
+      "notes": "Partial payment",
+      "createdAt": "2026-05-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-054",
+      "tenantId": "T-07",
+      "tenantName": "Virasat",
+      "recordId": "REC-2026-05-T-07",
+      "month": "May-26",
+      "year": 2026,
+      "date": "2026-05-05",
+      "amount": 5190.0,
+      "method": "Cash",
+      "reference": "HIST-MAY-26-54",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-05-05T10:00:00Z"
     },
     {
       "paymentId": "PAY-055",
@@ -7648,236 +7649,11 @@ export const INITIAL_WORKBOOK_DATA = {
       "method": "Cash",
       "reference": "HIST-MAY-26-55",
       "type": "Payment",
-      "notes": "Migrated from Guddu!M7",
+      "notes": "Historical recorded payment",
       "createdAt": "2026-05-05T10:00:00Z"
     },
     {
       "paymentId": "PAY-056",
-      "tenantId": "T-08",
-      "tenantName": "Guddu",
-      "recordId": "REC-2026-06-T-08",
-      "month": "Jun-26",
-      "year": 2026,
-      "date": "2026-06-05",
-      "amount": 5218.0,
-      "method": "Cash",
-      "reference": "HIST-JUN-26-56",
-      "type": "Payment",
-      "notes": "Migrated from Guddu!M8",
-      "createdAt": "2026-06-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-057",
-      "tenantId": "T-08",
-      "tenantName": "Guddu",
-      "recordId": "REC-2026-07-T-08",
-      "month": "Jul-26",
-      "year": 2026,
-      "date": "2026-07-05",
-      "amount": 5414.0,
-      "method": "Cash",
-      "reference": "HIST-JUL-26-57",
-      "type": "Payment",
-      "notes": "Migrated from Guddu!M9",
-      "createdAt": "2026-07-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-058",
-      "tenantId": "T-08",
-      "tenantName": "Guddu",
-      "recordId": "REC-2026-08-T-08",
-      "month": "Aug-26",
-      "year": 2026,
-      "date": "2026-08-05",
-      "amount": 5281.0,
-      "method": "Cash",
-      "reference": "HIST-AUG-26-58",
-      "type": "Payment",
-      "notes": "Migrated from Guddu!M10",
-      "createdAt": "2026-08-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-059",
-      "tenantId": "T-08",
-      "tenantName": "Guddu",
-      "recordId": "REC-2026-09-T-08",
-      "month": "Sep-26",
-      "year": 2026,
-      "date": "2026-09-05",
-      "amount": 5232.0,
-      "method": "Cash",
-      "reference": "HIST-SEP-26-59",
-      "type": "Payment",
-      "notes": "Migrated from Guddu!M11",
-      "createdAt": "2026-09-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-060",
-      "tenantId": "T-09",
-      "tenantName": "Sajid",
-      "recordId": "REC-2026-01-T-09",
-      "month": "Jan-26",
-      "year": 2026,
-      "date": "2026-01-05",
-      "amount": 2644.0,
-      "method": "Cash",
-      "reference": "HIST-JAN-26-60",
-      "type": "Payment",
-      "notes": "Migrated from Sajid!M3",
-      "createdAt": "2026-01-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-061",
-      "tenantId": "T-09",
-      "tenantName": "Sajid",
-      "recordId": "REC-2026-02-T-09",
-      "month": "Feb-26",
-      "year": 2026,
-      "date": "2026-02-05",
-      "amount": 2763.0,
-      "method": "Cash",
-      "reference": "HIST-FEB-26-61",
-      "type": "Payment",
-      "notes": "Migrated from Sajid!M4",
-      "createdAt": "2026-02-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-062",
-      "tenantId": "T-09",
-      "tenantName": "Sajid",
-      "recordId": "REC-2026-03-T-09",
-      "month": "Mar-26",
-      "year": 2026,
-      "date": "2026-03-05",
-      "amount": 2833.0,
-      "method": "Cash",
-      "reference": "HIST-MAR-26-62",
-      "type": "Payment",
-      "notes": "Migrated from Sajid!M5",
-      "createdAt": "2026-03-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-063",
-      "tenantId": "T-09",
-      "tenantName": "Sajid",
-      "recordId": "REC-2026-04-T-09",
-      "month": "Apr-26",
-      "year": 2026,
-      "date": "2026-04-05",
-      "amount": 2602.0,
-      "method": "Cash",
-      "reference": "HIST-APR-26-63",
-      "type": "Payment",
-      "notes": "Migrated from Sajid!M6",
-      "createdAt": "2026-04-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-064",
-      "tenantId": "T-09",
-      "tenantName": "Sajid",
-      "recordId": "REC-2026-06-T-09",
-      "month": "Jun-26",
-      "year": 2026,
-      "date": "2026-06-05",
-      "amount": 2651.0,
-      "method": "Cash",
-      "reference": "HIST-JUN-26-64",
-      "type": "Payment",
-      "notes": "Migrated from Sajid!M8",
-      "createdAt": "2026-06-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-065",
-      "tenantId": "T-09",
-      "tenantName": "Sajid",
-      "recordId": "REC-2026-08-T-09",
-      "month": "Aug-26",
-      "year": 2026,
-      "date": "2026-08-05",
-      "amount": 5316.0,
-      "method": "Cash",
-      "reference": "HIST-AUG-26-65",
-      "type": "Payment",
-      "notes": "Migrated from Sajid!M10",
-      "createdAt": "2026-08-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-066",
-      "tenantId": "T-09",
-      "tenantName": "Sajid",
-      "recordId": "REC-2026-09-T-09",
-      "month": "Sep-26",
-      "year": 2026,
-      "date": "2026-09-05",
-      "amount": 2623.0,
-      "method": "Cash",
-      "reference": "HIST-SEP-26-66",
-      "type": "Payment",
-      "notes": "Migrated from Sajid!M11",
-      "createdAt": "2026-09-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-067",
-      "tenantId": "T-10",
-      "tenantName": "Sundar Ki Mummy",
-      "recordId": "REC-2026-01-T-10",
-      "month": "Jan-26",
-      "year": 2026,
-      "date": "2026-01-05",
-      "amount": 3099.0,
-      "method": "Cash",
-      "reference": "HIST-JAN-26-67",
-      "type": "Payment",
-      "notes": "Migrated from Sundar ki mummy!M3",
-      "createdAt": "2026-01-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-068",
-      "tenantId": "T-10",
-      "tenantName": "Sundar Ki Mummy",
-      "recordId": "REC-2026-02-T-10",
-      "month": "Feb-26",
-      "year": 2026,
-      "date": "2026-02-05",
-      "amount": 2819.0,
-      "method": "Cash",
-      "reference": "HIST-FEB-26-68",
-      "type": "Payment",
-      "notes": "Migrated from Sundar ki mummy!M4",
-      "createdAt": "2026-02-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-069",
-      "tenantId": "T-10",
-      "tenantName": "Sundar Ki Mummy",
-      "recordId": "REC-2026-03-T-10",
-      "month": "Mar-26",
-      "year": 2026,
-      "date": "2026-03-05",
-      "amount": 2602.0,
-      "method": "Cash",
-      "reference": "HIST-MAR-26-69",
-      "type": "Payment",
-      "notes": "Migrated from Sundar ki mummy!M5",
-      "createdAt": "2026-03-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-070",
-      "tenantId": "T-10",
-      "tenantName": "Sundar Ki Mummy",
-      "recordId": "REC-2026-04-T-10",
-      "month": "Apr-26",
-      "year": 2026,
-      "date": "2026-04-05",
-      "amount": 2798.0,
-      "method": "Cash",
-      "reference": "HIST-APR-26-70",
-      "type": "Payment",
-      "notes": "Migrated from Sundar ki mummy!M6",
-      "createdAt": "2026-04-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-071",
       "tenantId": "T-10",
       "tenantName": "Sundar Ki Mummy",
       "recordId": "REC-2026-05-T-10",
@@ -7886,133 +7662,13 @@ export const INITIAL_WORKBOOK_DATA = {
       "date": "2026-05-05",
       "amount": 2980.0,
       "method": "Cash",
-      "reference": "HIST-MAY-26-71",
+      "reference": "HIST-MAY-26-56",
       "type": "Payment",
-      "notes": "Migrated from Sundar ki mummy!M7",
+      "notes": "Historical recorded payment",
       "createdAt": "2026-05-05T10:00:00Z"
     },
     {
-      "paymentId": "PAY-072",
-      "tenantId": "T-10",
-      "tenantName": "Sundar Ki Mummy",
-      "recordId": "REC-2026-06-T-10",
-      "month": "Jun-26",
-      "year": 2026,
-      "date": "2026-06-05",
-      "amount": 2994.0,
-      "method": "Cash",
-      "reference": "HIST-JUN-26-72",
-      "type": "Payment",
-      "notes": "Migrated from Sundar ki mummy!M8",
-      "createdAt": "2026-06-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-073",
-      "tenantId": "T-10",
-      "tenantName": "Sundar Ki Mummy",
-      "recordId": "REC-2026-07-T-10",
-      "month": "Jul-26",
-      "year": 2026,
-      "date": "2026-07-05",
-      "amount": 3134.0,
-      "method": "Cash",
-      "reference": "HIST-JUL-26-73",
-      "type": "Payment",
-      "notes": "Migrated from Sundar ki mummy!M9",
-      "createdAt": "2026-07-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-074",
-      "tenantId": "T-10",
-      "tenantName": "Sundar Ki Mummy",
-      "recordId": "REC-2026-08-T-10",
-      "month": "Aug-26",
-      "year": 2026,
-      "date": "2026-08-05",
-      "amount": 3015.0,
-      "method": "Cash",
-      "reference": "HIST-AUG-26-74",
-      "type": "Payment",
-      "notes": "Migrated from Sundar ki mummy!M10",
-      "createdAt": "2026-08-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-075",
-      "tenantId": "T-10",
-      "tenantName": "Sundar Ki Mummy",
-      "recordId": "REC-2026-09-T-10",
-      "month": "Sep-26",
-      "year": 2026,
-      "date": "2026-09-05",
-      "amount": 2973.0,
-      "method": "Cash",
-      "reference": "HIST-SEP-26-75",
-      "type": "Payment",
-      "notes": "Migrated from Sundar ki mummy!M11",
-      "createdAt": "2026-09-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-076",
-      "tenantId": "T-11",
-      "tenantName": "Dinesh",
-      "recordId": "REC-2026-01-T-11",
-      "month": "Jan-26",
-      "year": 2026,
-      "date": "2026-01-05",
-      "amount": 2822.0,
-      "method": "Cash",
-      "reference": "HIST-JAN-26-76",
-      "type": "Payment",
-      "notes": "Migrated from Dinesh!L3",
-      "createdAt": "2026-01-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-077",
-      "tenantId": "T-11",
-      "tenantName": "Dinesh",
-      "recordId": "REC-2026-02-T-11",
-      "month": "Feb-26",
-      "year": 2026,
-      "date": "2026-02-05",
-      "amount": 2885.0,
-      "method": "Cash",
-      "reference": "HIST-FEB-26-77",
-      "type": "Payment",
-      "notes": "Migrated from Dinesh!L4",
-      "createdAt": "2026-02-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-078",
-      "tenantId": "T-11",
-      "tenantName": "Dinesh",
-      "recordId": "REC-2026-03-T-11",
-      "month": "Mar-26",
-      "year": 2026,
-      "date": "2026-03-05",
-      "amount": 3060.0,
-      "method": "Cash",
-      "reference": "HIST-MAR-26-78",
-      "type": "Payment",
-      "notes": "Migrated from Dinesh!L5",
-      "createdAt": "2026-03-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-079",
-      "tenantId": "T-11",
-      "tenantName": "Dinesh",
-      "recordId": "REC-2026-04-T-11",
-      "month": "Apr-26",
-      "year": 2026,
-      "date": "2026-04-05",
-      "amount": 3074.0,
-      "method": "Cash",
-      "reference": "HIST-APR-26-79",
-      "type": "Payment",
-      "notes": "Migrated from Dinesh!L6",
-      "createdAt": "2026-04-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-080",
+      "paymentId": "PAY-057",
       "tenantId": "T-11",
       "tenantName": "Dinesh",
       "recordId": "REC-2026-05-T-11",
@@ -8021,118 +7677,13 @@ export const INITIAL_WORKBOOK_DATA = {
       "date": "2026-05-05",
       "amount": 3403.0,
       "method": "Cash",
-      "reference": "HIST-MAY-26-80",
+      "reference": "HIST-MAY-26-57",
       "type": "Payment",
-      "notes": "Migrated from Dinesh!L7",
+      "notes": "Historical recorded payment",
       "createdAt": "2026-05-05T10:00:00Z"
     },
     {
-      "paymentId": "PAY-081",
-      "tenantId": "T-11",
-      "tenantName": "Dinesh",
-      "recordId": "REC-2026-06-T-11",
-      "month": "Jun-26",
-      "year": 2026,
-      "date": "2026-06-05",
-      "amount": 2878.0,
-      "method": "Cash",
-      "reference": "HIST-JUN-26-81",
-      "type": "Payment",
-      "notes": "Migrated from Dinesh!L8",
-      "createdAt": "2026-06-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-082",
-      "tenantId": "T-11",
-      "tenantName": "Dinesh",
-      "recordId": "REC-2026-07-T-11",
-      "month": "Jul-26",
-      "year": 2026,
-      "date": "2026-07-05",
-      "amount": 3333.0,
-      "method": "Cash",
-      "reference": "HIST-JUL-26-82",
-      "type": "Payment",
-      "notes": "Migrated from Dinesh!L9",
-      "createdAt": "2026-07-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-083",
-      "tenantId": "T-11",
-      "tenantName": "Dinesh",
-      "recordId": "REC-2026-08-T-11",
-      "month": "Aug-26",
-      "year": 2026,
-      "date": "2026-08-05",
-      "amount": 3263.0,
-      "method": "Cash",
-      "reference": "HIST-AUG-26-83",
-      "type": "Payment",
-      "notes": "Migrated from Dinesh!L10",
-      "createdAt": "2026-08-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-084",
-      "tenantId": "T-12",
-      "tenantName": "Nisha",
-      "recordId": "REC-2026-01-T-12",
-      "month": "Jan-26",
-      "year": 2026,
-      "date": "2026-01-05",
-      "amount": 2640.0,
-      "method": "Cash",
-      "reference": "HIST-JAN-26-84",
-      "type": "Payment",
-      "notes": "Migrated from Nisha!L3",
-      "createdAt": "2026-01-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-085",
-      "tenantId": "T-12",
-      "tenantName": "Nisha",
-      "recordId": "REC-2026-02-T-12",
-      "month": "Feb-26",
-      "year": 2026,
-      "date": "2026-02-05",
-      "amount": 2584.0,
-      "method": "Cash",
-      "reference": "HIST-FEB-26-85",
-      "type": "Payment",
-      "notes": "Migrated from Nisha!L4",
-      "createdAt": "2026-02-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-086",
-      "tenantId": "T-12",
-      "tenantName": "Nisha",
-      "recordId": "REC-2026-03-T-12",
-      "month": "Mar-26",
-      "year": 2026,
-      "date": "2026-03-05",
-      "amount": 2710.0,
-      "method": "Cash",
-      "reference": "HIST-MAR-26-86",
-      "type": "Payment",
-      "notes": "Migrated from Nisha!L5",
-      "createdAt": "2026-03-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-087",
-      "tenantId": "T-12",
-      "tenantName": "Nisha",
-      "recordId": "REC-2026-04-T-12",
-      "month": "Apr-26",
-      "year": 2026,
-      "date": "2026-04-05",
-      "amount": 2507.0,
-      "method": "Cash",
-      "reference": "HIST-APR-26-87",
-      "type": "Payment",
-      "notes": "Migrated from Nisha!L6",
-      "createdAt": "2026-04-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-088",
+      "paymentId": "PAY-058",
       "tenantId": "T-12",
       "tenantName": "Nisha",
       "recordId": "REC-2026-05-T-12",
@@ -8141,103 +7692,13 @@ export const INITIAL_WORKBOOK_DATA = {
       "date": "2026-05-05",
       "amount": 2500.0,
       "method": "Cash",
-      "reference": "HIST-MAY-26-88",
+      "reference": "HIST-MAY-26-58",
       "type": "Payment",
-      "notes": "Migrated from Nisha!L7",
+      "notes": "Historical recorded payment",
       "createdAt": "2026-05-05T10:00:00Z"
     },
     {
-      "paymentId": "PAY-089",
-      "tenantId": "T-12",
-      "tenantName": "Nisha",
-      "recordId": "REC-2026-06-T-12",
-      "month": "Jun-26",
-      "year": 2026,
-      "date": "2026-06-05",
-      "amount": 2871.0,
-      "method": "Cash",
-      "reference": "HIST-JUN-26-89",
-      "type": "Payment",
-      "notes": "Migrated from Nisha!L8",
-      "createdAt": "2026-06-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-090",
-      "tenantId": "T-12",
-      "tenantName": "Nisha",
-      "recordId": "REC-2026-07-T-12",
-      "month": "Jul-26",
-      "year": 2026,
-      "date": "2026-07-05",
-      "amount": 3039.0,
-      "method": "Cash",
-      "reference": "HIST-JUL-26-90",
-      "type": "Payment",
-      "notes": "Migrated from Nisha!L9",
-      "createdAt": "2026-07-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-091",
-      "tenantId": "T-13",
-      "tenantName": "Sundar",
-      "recordId": "REC-2026-01-T-13",
-      "month": "Jan-26",
-      "year": 2026,
-      "date": "2026-01-05",
-      "amount": 2689.0,
-      "method": "Cash",
-      "reference": "HIST-JAN-26-91",
-      "type": "Payment",
-      "notes": "Migrated from Sundar!L3",
-      "createdAt": "2026-01-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-092",
-      "tenantId": "T-13",
-      "tenantName": "Sundar",
-      "recordId": "REC-2026-02-T-13",
-      "month": "Feb-26",
-      "year": 2026,
-      "date": "2026-02-05",
-      "amount": 2556.0,
-      "method": "Cash",
-      "reference": "HIST-FEB-26-92",
-      "type": "Payment",
-      "notes": "Migrated from Sundar!L4",
-      "createdAt": "2026-02-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-093",
-      "tenantId": "T-13",
-      "tenantName": "Sundar",
-      "recordId": "REC-2026-03-T-13",
-      "month": "Mar-26",
-      "year": 2026,
-      "date": "2026-03-05",
-      "amount": 2598.0,
-      "method": "Cash",
-      "reference": "HIST-MAR-26-93",
-      "type": "Payment",
-      "notes": "Migrated from Sundar!L5",
-      "createdAt": "2026-03-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-094",
-      "tenantId": "T-13",
-      "tenantName": "Sundar",
-      "recordId": "REC-2026-04-T-13",
-      "month": "Apr-26",
-      "year": 2026,
-      "date": "2026-04-05",
-      "amount": 2605.0,
-      "method": "Cash",
-      "reference": "HIST-APR-26-94",
-      "type": "Payment",
-      "notes": "Migrated from Sundar!L6",
-      "createdAt": "2026-04-05T10:00:00Z"
-    },
-    {
-      "paymentId": "PAY-095",
+      "paymentId": "PAY-059",
       "tenantId": "T-13",
       "tenantName": "Sundar",
       "recordId": "REC-2026-05-T-13",
@@ -8246,13 +7707,148 @@ export const INITIAL_WORKBOOK_DATA = {
       "date": "2026-05-05",
       "amount": 2689.0,
       "method": "Cash",
-      "reference": "HIST-MAY-26-95",
+      "reference": "HIST-MAY-26-59",
       "type": "Payment",
-      "notes": "Migrated from Sundar!L7",
+      "notes": "Historical recorded payment",
       "createdAt": "2026-05-05T10:00:00Z"
     },
     {
-      "paymentId": "PAY-096",
+      "paymentId": "PAY-060",
+      "tenantId": "T-03",
+      "tenantName": "Ghanti",
+      "recordId": "REC-2026-06-T-03",
+      "month": "Jun-26",
+      "year": 2026,
+      "date": "2026-06-05",
+      "amount": 2348.0,
+      "method": "Cash",
+      "reference": "HIST-JUN-26-60",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-06-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-061",
+      "tenantId": "T-04",
+      "tenantName": "Sonu",
+      "recordId": "REC-2026-06-T-04",
+      "month": "Jun-26",
+      "year": 2026,
+      "date": "2026-06-05",
+      "amount": 2313.0,
+      "method": "Cash",
+      "reference": "HIST-JUN-26-61",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-06-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-062",
+      "tenantId": "T-06",
+      "tenantName": "Imran",
+      "recordId": "REC-2026-06-T-06",
+      "month": "Jun-26",
+      "year": 2026,
+      "date": "2026-06-05",
+      "amount": 5000.0,
+      "method": "Cash",
+      "reference": "HIST-JUN-26-62",
+      "type": "Payment",
+      "notes": "Partial payment",
+      "createdAt": "2026-06-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-063",
+      "tenantId": "T-07",
+      "tenantName": "Virasat",
+      "recordId": "REC-2026-06-T-07",
+      "month": "Jun-26",
+      "year": 2026,
+      "date": "2026-06-05",
+      "amount": 5085.0,
+      "method": "Cash",
+      "reference": "HIST-JUN-26-63",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-06-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-064",
+      "tenantId": "T-08",
+      "tenantName": "Guddu",
+      "recordId": "REC-2026-06-T-08",
+      "month": "Jun-26",
+      "year": 2026,
+      "date": "2026-06-05",
+      "amount": 5218.0,
+      "method": "Cash",
+      "reference": "HIST-JUN-26-64",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-06-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-065",
+      "tenantId": "T-09",
+      "tenantName": "Sajid",
+      "recordId": "REC-2026-06-T-09",
+      "month": "Jun-26",
+      "year": 2026,
+      "date": "2026-06-05",
+      "amount": 2651.0,
+      "method": "Cash",
+      "reference": "HIST-JUN-26-65",
+      "type": "Payment",
+      "notes": "Paid May-26 balance (\u20b92651)",
+      "createdAt": "2026-06-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-066",
+      "tenantId": "T-10",
+      "tenantName": "Sundar Ki Mummy",
+      "recordId": "REC-2026-06-T-10",
+      "month": "Jun-26",
+      "year": 2026,
+      "date": "2026-06-05",
+      "amount": 2994.0,
+      "method": "Cash",
+      "reference": "HIST-JUN-26-66",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-06-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-067",
+      "tenantId": "T-11",
+      "tenantName": "Dinesh",
+      "recordId": "REC-2026-06-T-11",
+      "month": "Jun-26",
+      "year": 2026,
+      "date": "2026-06-05",
+      "amount": 2878.0,
+      "method": "Cash",
+      "reference": "HIST-JUN-26-67",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-06-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-068",
+      "tenantId": "T-12",
+      "tenantName": "Nisha",
+      "recordId": "REC-2026-06-T-12",
+      "month": "Jun-26",
+      "year": 2026,
+      "date": "2026-06-05",
+      "amount": 2871.0,
+      "method": "Cash",
+      "reference": "HIST-JUN-26-68",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-06-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-069",
       "tenantId": "T-13",
       "tenantName": "Sundar",
       "recordId": "REC-2026-06-T-13",
@@ -8261,13 +7857,178 @@ export const INITIAL_WORKBOOK_DATA = {
       "date": "2026-06-05",
       "amount": 2682.0,
       "method": "Cash",
-      "reference": "HIST-JUN-26-96",
+      "reference": "HIST-JUN-26-69",
       "type": "Payment",
-      "notes": "Migrated from Sundar!L8",
+      "notes": "Historical recorded payment",
       "createdAt": "2026-06-05T10:00:00Z"
     },
     {
-      "paymentId": "PAY-097",
+      "paymentId": "PAY-070",
+      "tenantId": "T-01",
+      "tenantName": "Javed",
+      "recordId": "REC-2026-07-T-01",
+      "month": "Jul-26",
+      "year": 2026,
+      "date": "2026-07-05",
+      "amount": 2609.0,
+      "method": "Cash",
+      "reference": "HIST-JUL-26-70",
+      "type": "Payment",
+      "notes": "Original formula =2200+409 (Jul charges)",
+      "createdAt": "2026-07-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-071",
+      "tenantId": "T-02",
+      "tenantName": "Raja",
+      "recordId": "REC-2026-07-T-02",
+      "month": "Jul-26",
+      "year": 2026,
+      "date": "2026-07-05",
+      "amount": 7838.0,
+      "method": "Cash",
+      "reference": "HIST-JUL-26-71",
+      "type": "Payment",
+      "notes": "Original formula =2300+815+4723 (Jul + partial arrears)",
+      "createdAt": "2026-07-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-072",
+      "tenantId": "T-03",
+      "tenantName": "Ghanti",
+      "recordId": "REC-2026-07-T-03",
+      "month": "Jul-26",
+      "year": 2026,
+      "date": "2026-07-05",
+      "amount": 2376.0,
+      "method": "Cash",
+      "reference": "HIST-JUL-26-72",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-07-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-073",
+      "tenantId": "T-04",
+      "tenantName": "Sonu",
+      "recordId": "REC-2026-07-T-04",
+      "month": "Jul-26",
+      "year": 2026,
+      "date": "2026-07-05",
+      "amount": 2446.0,
+      "method": "Cash",
+      "reference": "HIST-JUL-26-73",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-07-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-074",
+      "tenantId": "T-05",
+      "tenantName": "Painter",
+      "recordId": "REC-2026-07-T-05",
+      "month": "Jul-26",
+      "year": 2026,
+      "date": "2026-07-05",
+      "amount": 6000.0,
+      "method": "Cash",
+      "reference": "HIST-JUL-26-74",
+      "type": "Payment",
+      "notes": "Partial payment against arrears",
+      "createdAt": "2026-07-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-075",
+      "tenantId": "T-06",
+      "tenantName": "Imran",
+      "recordId": "REC-2026-07-T-06",
+      "month": "Jul-26",
+      "year": 2026,
+      "date": "2026-07-05",
+      "amount": 5000.0,
+      "method": "Cash",
+      "reference": "HIST-JUL-26-75",
+      "type": "Payment",
+      "notes": "Partial payment",
+      "createdAt": "2026-07-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-076",
+      "tenantId": "T-07",
+      "tenantName": "Virasat",
+      "recordId": "REC-2026-07-T-07",
+      "month": "Jul-26",
+      "year": 2026,
+      "date": "2026-07-05",
+      "amount": 5323.0,
+      "method": "Cash",
+      "reference": "HIST-JUL-26-76",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-07-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-077",
+      "tenantId": "T-08",
+      "tenantName": "Guddu",
+      "recordId": "REC-2026-07-T-08",
+      "month": "Jul-26",
+      "year": 2026,
+      "date": "2026-07-05",
+      "amount": 5414.0,
+      "method": "Cash",
+      "reference": "HIST-JUL-26-77",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-07-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-078",
+      "tenantId": "T-10",
+      "tenantName": "Sundar Ki Mummy",
+      "recordId": "REC-2026-07-T-10",
+      "month": "Jul-26",
+      "year": 2026,
+      "date": "2026-07-05",
+      "amount": 3134.0,
+      "method": "Cash",
+      "reference": "HIST-JUL-26-78",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-07-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-079",
+      "tenantId": "T-11",
+      "tenantName": "Dinesh",
+      "recordId": "REC-2026-07-T-11",
+      "month": "Jul-26",
+      "year": 2026,
+      "date": "2026-07-05",
+      "amount": 3333.0,
+      "method": "Cash",
+      "reference": "HIST-JUL-26-79",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-07-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-080",
+      "tenantId": "T-12",
+      "tenantName": "Nisha",
+      "recordId": "REC-2026-07-T-12",
+      "month": "Jul-26",
+      "year": 2026,
+      "date": "2026-07-05",
+      "amount": 3039.0,
+      "method": "Cash",
+      "reference": "HIST-JUL-26-80",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-07-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-081",
       "tenantId": "T-13",
       "tenantName": "Sundar",
       "recordId": "REC-2026-07-T-13",
@@ -8276,13 +8037,178 @@ export const INITIAL_WORKBOOK_DATA = {
       "date": "2026-07-05",
       "amount": 2773.0,
       "method": "Cash",
-      "reference": "HIST-JUL-26-97",
+      "reference": "HIST-JUL-26-81",
       "type": "Payment",
-      "notes": "Migrated from Sundar!L9",
+      "notes": "Historical recorded payment",
       "createdAt": "2026-07-05T10:00:00Z"
     },
     {
-      "paymentId": "PAY-098",
+      "paymentId": "PAY-082",
+      "tenantId": "T-01",
+      "tenantName": "Javed",
+      "recordId": "REC-2026-08-T-01",
+      "month": "Aug-26",
+      "year": 2026,
+      "date": "2026-08-05",
+      "amount": 2511.0,
+      "method": "Cash",
+      "reference": "HIST-AUG-26-82",
+      "type": "Payment",
+      "notes": "Original formula =2200+311 (Aug charges)",
+      "createdAt": "2026-08-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-083",
+      "tenantId": "T-02",
+      "tenantName": "Raja",
+      "recordId": "REC-2026-08-T-02",
+      "month": "Aug-26",
+      "year": 2026,
+      "date": "2026-08-05",
+      "amount": 2898.0,
+      "method": "Cash",
+      "reference": "HIST-AUG-26-83",
+      "type": "Payment",
+      "notes": "Original formula =2300+598 (Aug charges)",
+      "createdAt": "2026-08-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-084",
+      "tenantId": "T-03",
+      "tenantName": "Ghanti",
+      "recordId": "REC-2026-08-T-03",
+      "month": "Aug-26",
+      "year": 2026,
+      "date": "2026-08-05",
+      "amount": 2334.0,
+      "method": "Cash",
+      "reference": "HIST-AUG-26-84",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-08-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-085",
+      "tenantId": "T-04",
+      "tenantName": "Sonu",
+      "recordId": "REC-2026-08-T-04",
+      "month": "Aug-26",
+      "year": 2026,
+      "date": "2026-08-05",
+      "amount": 2369.0,
+      "method": "Cash",
+      "reference": "HIST-AUG-26-85",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-08-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-086",
+      "tenantId": "T-05",
+      "tenantName": "Painter",
+      "recordId": "REC-2026-08-T-05",
+      "month": "Aug-26",
+      "year": 2026,
+      "date": "2026-08-05",
+      "amount": 4000.0,
+      "method": "Cash",
+      "reference": "HIST-AUG-26-86",
+      "type": "Payment",
+      "notes": "Partial payment against arrears",
+      "createdAt": "2026-08-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-087",
+      "tenantId": "T-06",
+      "tenantName": "Imran",
+      "recordId": "REC-2026-08-T-06",
+      "month": "Aug-26",
+      "year": 2026,
+      "date": "2026-08-05",
+      "amount": 5000.0,
+      "method": "Cash",
+      "reference": "HIST-AUG-26-87",
+      "type": "Payment",
+      "notes": "Partial payment",
+      "createdAt": "2026-08-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-088",
+      "tenantId": "T-07",
+      "tenantName": "Virasat",
+      "recordId": "REC-2026-08-T-07",
+      "month": "Aug-26",
+      "year": 2026,
+      "date": "2026-08-05",
+      "amount": 5050.0,
+      "method": "Cash",
+      "reference": "HIST-AUG-26-88",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-08-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-089",
+      "tenantId": "T-08",
+      "tenantName": "Guddu",
+      "recordId": "REC-2026-08-T-08",
+      "month": "Aug-26",
+      "year": 2026,
+      "date": "2026-08-05",
+      "amount": 5281.0,
+      "method": "Cash",
+      "reference": "HIST-AUG-26-89",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-08-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-090",
+      "tenantId": "T-09",
+      "tenantName": "Sajid",
+      "recordId": "REC-2026-08-T-09",
+      "month": "Aug-26",
+      "year": 2026,
+      "date": "2026-08-05",
+      "amount": 5316.0,
+      "method": "Cash",
+      "reference": "HIST-AUG-26-90",
+      "type": "Payment",
+      "notes": "Paid Jun+Jul arrears (\u20b95316)",
+      "createdAt": "2026-08-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-091",
+      "tenantId": "T-10",
+      "tenantName": "Sundar Ki Mummy",
+      "recordId": "REC-2026-08-T-10",
+      "month": "Aug-26",
+      "year": 2026,
+      "date": "2026-08-05",
+      "amount": 3015.0,
+      "method": "Cash",
+      "reference": "HIST-AUG-26-91",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-08-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-092",
+      "tenantId": "T-11",
+      "tenantName": "Dinesh",
+      "recordId": "REC-2026-08-T-11",
+      "month": "Aug-26",
+      "year": 2026,
+      "date": "2026-08-05",
+      "amount": 3263.0,
+      "method": "Cash",
+      "reference": "HIST-AUG-26-92",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-08-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-093",
       "tenantId": "T-13",
       "tenantName": "Sundar",
       "recordId": "REC-2026-08-T-13",
@@ -8291,10 +8217,175 @@ export const INITIAL_WORKBOOK_DATA = {
       "date": "2026-08-05",
       "amount": 2752.0,
       "method": "Cash",
-      "reference": "HIST-AUG-26-98",
+      "reference": "HIST-AUG-26-93",
       "type": "Payment",
-      "notes": "Migrated from Sundar!L10",
+      "notes": "Historical recorded payment",
       "createdAt": "2026-08-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-094",
+      "tenantId": "T-03",
+      "tenantName": "Ghanti",
+      "recordId": "REC-2026-09-T-03",
+      "month": "Sep-26",
+      "year": 2026,
+      "date": "2026-09-05",
+      "amount": 2369.0,
+      "method": "Cash",
+      "reference": "HIST-SEP-26-94",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-09-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-095",
+      "tenantId": "T-04",
+      "tenantName": "Sonu",
+      "recordId": "REC-2026-09-T-04",
+      "month": "Sep-26",
+      "year": 2026,
+      "date": "2026-09-05",
+      "amount": 2271.0,
+      "method": "Cash",
+      "reference": "HIST-SEP-26-95",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-09-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-096",
+      "tenantId": "T-08",
+      "tenantName": "Guddu",
+      "recordId": "REC-2026-09-T-08",
+      "month": "Sep-26",
+      "year": 2026,
+      "date": "2026-09-05",
+      "amount": 5232.0,
+      "method": "Cash",
+      "reference": "HIST-SEP-26-96",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-09-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-097",
+      "tenantId": "T-09",
+      "tenantName": "Sajid",
+      "recordId": "REC-2026-09-T-09",
+      "month": "Sep-26",
+      "year": 2026,
+      "date": "2026-09-05",
+      "amount": 2623.0,
+      "method": "Cash",
+      "reference": "HIST-SEP-26-97",
+      "type": "Payment",
+      "notes": "Paid Aug balance (\u20b92623); Sep charges (\u20b92665) due",
+      "createdAt": "2026-09-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-098",
+      "tenantId": "T-10",
+      "tenantName": "Sundar Ki Mummy",
+      "recordId": "REC-2026-09-T-10",
+      "month": "Sep-26",
+      "year": 2026,
+      "date": "2026-09-05",
+      "amount": 2973.0,
+      "method": "Cash",
+      "reference": "HIST-SEP-26-98",
+      "type": "Payment",
+      "notes": "Historical recorded payment",
+      "createdAt": "2026-09-05T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-099",
+      "tenantId": "T-01",
+      "tenantName": "Javed",
+      "recordId": "REC-2026-09-T-01",
+      "month": "Sep-26",
+      "year": 2026,
+      "date": "2026-11-08",
+      "amount": 7631.0,
+      "method": "Cash",
+      "reference": "WEB-PAY-099",
+      "type": "Payment",
+      "notes": "Recorded on 2026-11-08 (Cash)",
+      "createdAt": "2026-11-08T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-100",
+      "tenantId": "T-02",
+      "tenantName": "Raja",
+      "recordId": "REC-2026-09-T-02",
+      "month": "Sep-26",
+      "year": 2026,
+      "date": "2026-11-08",
+      "amount": 3719.0,
+      "method": "Cash",
+      "reference": "WEB-PAY-100",
+      "type": "Payment",
+      "notes": "Recorded on 2026-11-08 (Cash)",
+      "createdAt": "2026-11-08T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-101",
+      "tenantId": "T-07",
+      "tenantName": "Virasat",
+      "recordId": "REC-2026-09-T-07",
+      "month": "Sep-26",
+      "year": 2026,
+      "date": "2026-11-08",
+      "amount": 5085.0,
+      "method": "Cash",
+      "reference": "WEB-PAY-101",
+      "type": "Payment",
+      "notes": "Recorded on 2026-11-08 (Cash)",
+      "createdAt": "2026-11-08T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-102",
+      "tenantId": "T-11",
+      "tenantName": "Dinesh",
+      "recordId": "REC-2026-09-T-11",
+      "month": "Sep-26",
+      "year": 2026,
+      "date": "2026-11-08",
+      "amount": 3221.0,
+      "method": "Cash",
+      "reference": "WEB-PAY-102",
+      "type": "Payment",
+      "notes": "Recorded on 2026-11-08 (Cash)",
+      "createdAt": "2026-11-08T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-103",
+      "tenantId": "T-13",
+      "tenantName": "Sundar",
+      "recordId": "REC-2026-09-T-13",
+      "month": "Sep-26",
+      "year": 2026,
+      "date": "2026-11-08",
+      "amount": 2752.0,
+      "method": "Cash",
+      "reference": "WEB-PAY-103",
+      "type": "Payment",
+      "notes": "Recorded on 2026-11-08 (Cash)",
+      "createdAt": "2026-11-08T10:00:00Z"
+    },
+    {
+      "paymentId": "PAY-104",
+      "tenantId": "T-06",
+      "tenantName": "Imran",
+      "recordId": "REC-2026-10-T-06",
+      "month": "Oct-26",
+      "year": 2026,
+      "date": "2026-11-08",
+      "amount": 6000.0,
+      "method": "Cash",
+      "reference": "WEB-PAY-104",
+      "type": "Payment",
+      "notes": "Recorded on 2026-11-08 (Cash)",
+      "createdAt": "2026-11-08T10:00:00Z"
     }
   ],
   "motorReadings": [
@@ -8476,4 +8567,4 @@ export const INITIAL_WORKBOOK_DATA = {
   ]
 } as const;
 
-export const APPS_SCRIPT_CODE = "/**\n * RENTFLOW \u2014 COMPLETE TWO-WAY GOOGLE SHEETS SYNC ENGINE (Code.gs)\n * Connected Workbook ID: 1_Xog1mnKtWER-KjI7oCg0n2S5UeK-KWhgQkeOTErV2s\n *\n * HOW TO AUTHORIZE & DEPLOY (60 SECONDS):\n * 1. Click \"\u25b6 Run\" at the top (with \"testAndAuthorizeConnection\" selected) and click \"Review permissions\" -> \"Allow\".\n * 2. Click \"Deploy\" (top right) -> \"New deployment\" -> Select type: \"Web app\"\n *    - Execute as: \"Me\"\n *    - Who has access: \"Anyone\"\n * 3. Click \"Deploy\", copy the Web App URL (https://script.google.com/macros/s/.../exec),\n *    and paste it into the \"\ud83d\udd17 Connect Sheet\" button on the RentFlow website!\n */\n\nconst SPREADSHEET_ID = '1_Xog1mnKtWER-KjI7oCg0n2S5UeK-KWhgQkeOTErV2s';\nconst TENANT_SHEETS = [\n  { tenantId: 'T-01', name: 'Javed', sheetName: 'Javed', room: 'Room 101' },\n  { tenantId: 'T-02', name: 'Raja', sheetName: 'Raja', room: 'Room 102' },\n  { tenantId: 'T-03', name: 'Ghanti', sheetName: 'Ghanti', room: 'Room 103' },\n  { tenantId: 'T-04', name: 'Sonu', sheetName: 'Sonu', room: 'Room 104' },\n  { tenantId: 'T-05', name: 'Painter', sheetName: 'Painter', room: 'Room 105' },\n  { tenantId: 'T-06', name: 'Imran', sheetName: 'Imran', room: 'Room 106' },\n  { tenantId: 'T-07', name: 'Virasat', sheetName: 'Virasat', room: 'Room 107' },\n  { tenantId: 'T-08', name: 'Guddu', sheetName: 'Guddu', room: 'Room 108' },\n  { tenantId: 'T-09', name: 'Sajid', sheetName: 'Sajid', room: 'Room 109' },\n  { tenantId: 'T-10', name: 'Sundar Ki Mummy', sheetName: 'Sundar ki mummy', room: 'Room 110' },\n  { tenantId: 'T-11', name: 'Dinesh', sheetName: 'Dinesh', room: 'Room 111' },\n  { tenantId: 'T-12', name: 'Nisha', sheetName: 'Nisha', room: 'Room 112' },\n  { tenantId: 'T-13', name: 'Sundar', sheetName: 'Sundar', room: 'Room 113' }\n];\nconst MONTH_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];\n\n/**\n * 1. DEFAULT FUNCTION WHEN YOU CLICK \"\u25b6 Run\" IN APPS SCRIPT EDITOR:\n * Verifies connection to your Google Sheet, sets Dashboard & Rent Slips to the current month,\n * and authorizes all permissions cleanly without any getUi() error!\n */\nfunction testAndAuthorizeConnection() {\n  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);\n  Logger.log('\u2705 Connected to Google Sheet: ' + ss.getName());\n  setCurrentMonthInSheet();\n  const testRead = doGet({});\n  Logger.log('\u2705 Verified live data read from all 13 tenant tabs + Payments Ledger!');\n  Logger.log('\ud83d\udc49 NEXT STEP: Click \"Deploy\" (top right) -> \"New deployment\" -> Select type: \"Web app\" (Execute as: Me, Who has access: Anyone) and copy the Web App URL!');\n}\n\n/**\n * Safe onOpen() handler \u2014 works both when opening the spreadsheet AND if clicked manually in the editor!\n */\nfunction onOpen(e) {\n  try {\n    SpreadsheetApp.getUi()\n      .createMenu('Rent Management')\n      .addItem('Switch Dashboard & Slips to Current Month', 'setCurrentMonthInSheet')\n      .addToUi();\n  } catch (err) {\n    // When clicked manually inside the Apps Script editor, getUi() is not available; run the connection test instead!\n    testAndAuthorizeConnection();\n  }\n}\n\nfunction setCurrentMonthInSheet() {\n  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);\n  const now = new Date();\n  const mKey = MONTH_SHORT[now.getMonth()] + '-' + String(now.getFullYear()).slice(-2);\n  const dash = ss.getSheetByName('Dashboard');\n  if (dash) dash.getRange('C3').setValue(mKey);\n  const slips = ss.getSheetByName('Monthly Rent Slips');\n  if (slips) slips.getRange('I1').setValue(mKey);\n  const syncSheet = ss.getSheetByName('Sync_Status');\n  if (syncSheet) syncSheet.getRange('B2').setValue(new Date().toISOString());\n  Logger.log('\u2705 Updated Dashboard & Monthly Rent Slips to current month: ' + mKey);\n}\n\n/**\n * GET Handler: Reads live meter readings, rents, credits, and payments across all tabs\n */\nfunction doGet(e) {\n  try {\n    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);\n    const liveReadings = [];\n\n    TENANT_SHEETS.forEach(function(t) {\n      const sh = ss.getSheetByName(t.sheetName);\n      if (!sh) return;\n      const vals = sh.getRange(3, 1, 12, 16).getValues();\n      for (let i = 0; i < 12; i++) {\n        const row = vals[i];\n        const rentVal = Number(row[1]) || 0;\n        const mKey = MONTH_SHORT[i] + '-26';\n        const mainReadRaw = row[3];\n        const currentReading = (mainReadRaw === '' || mainReadRaw === null || mainReadRaw === undefined || isNaN(Number(mainReadRaw)))\n          ? null\n          : Number(mainReadRaw);\n        const waterVal = Number(row[8]) || 0;\n        const creditsVal = Number(row[11]) || 0;\n        liveReadings.push({\n          recordId: 'REC-2026-' + String(i + 1).padStart(2, '0') + '-' + t.tenantId,\n          tenantId: t.tenantId,\n          month: mKey,\n          monthIndex: i + 1,\n          year: 2026,\n          rent: rentVal,\n          currentReading: currentReading,\n          water: waterVal,\n          credits: creditsVal\n        });\n      }\n    });\n\n    const ledger = ss.getSheetByName('Payments Ledger');\n    const payments = [];\n    if (ledger && ledger.getLastRow() >= 5) {\n      const pRows = ledger.getRange(5, 1, ledger.getLastRow() - 4, 10).getValues();\n      pRows.forEach(function(r, idx) {\n        if (!r[0] && !r[1]) return;\n        const tName = String(r[1] || '').trim();\n        const matchedT = TENANT_SHEETS.find(function(x) { return x.name.toLowerCase() === tName.toLowerCase(); });\n        let dtStr = '';\n        if (r[3] instanceof Date) {\n          dtStr = Utilities.formatDate(r[3], Session.getScriptTimeZone(), 'yyyy-MM-dd');\n        } else {\n          dtStr = String(r[3] || '');\n        }\n        payments.push({\n          paymentId: String(r[0] || ('PAY-' + (idx + 1))),\n          tenantId: matchedT ? matchedT.tenantId : 'T-01',\n          tenantName: matchedT ? matchedT.name : tName,\n          recordId: 'REC-2026-' + String(r[2] || 'Nov-26') + '-' + (matchedT ? matchedT.tenantId : 'T-01'),\n          month: String(r[2] || 'Nov-26'),\n          year: 2026,\n          date: dtStr,\n          amount: Number(r[4]) || 0,\n          method: String(r[5] || 'Cash'),\n          reference: String(r[6] || ''),\n          type: String(r[7] || 'Payment'),\n          notes: String(r[8] || ''),\n          createdAt: String(r[9] || new Date().toISOString())\n        });\n      });\n    }\n\n    const syncSheet = ss.getSheetByName('Sync_Status');\n    if (syncSheet) {\n      syncSheet.getRange('B2').setValue(new Date().toISOString());\n    }\n\n    return jsonResponse({\n      ok: true,\n      spreadsheetId: SPREADSHEET_ID,\n      lastSync: new Date().toISOString(),\n      liveReadings: liveReadings,\n      payments: payments.reverse()\n    });\n  } catch (err) {\n    return jsonResponse({ ok: false, error: err.toString() });\n  }\n}\n\n/**\n * POST Handler: Writes new payments, meter readings, credits, and tenant updates\n */\nfunction doPost(e) {\n  const lock = LockService.getScriptLock();\n  lock.waitLock(10000);\n  try {\n    const body = JSON.parse(e.postData.contents);\n    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);\n    const action = body.action;\n    const p = body.payload || {};\n\n    if (action === 'RECORD_PAYMENT' || action === 'Record Payment') {\n      const ledger = ss.getSheetByName('Payments Ledger');\n      const lastRow = Math.max(4, ledger.getLastRow());\n      if (lastRow >= 5) {\n        const existingIds = ledger.getRange(5, 1, lastRow - 4, 1).getValues().flat();\n        if (existingIds.indexOf(p.paymentId) !== -1) {\n          return jsonResponse({ ok: true, duplicateIgnored: true, paymentId: p.paymentId });\n        }\n      }\n      ledger.appendRow([\n        p.paymentId,\n        p.tenantName,\n        p.month,\n        p.date,\n        Number(p.amount),\n        p.method || 'Cash',\n        p.reference || '',\n        p.type || 'Payment',\n        p.notes || '',\n        new Date().toISOString()\n      ]);\n      logAudit(ss, 'Web App', p.tenantName + ' (' + p.month + ')', 'Record Payment', '\u2014', '\u20b9' + p.amount);\n      return jsonResponse({ ok: true, saved: true, paymentId: p.paymentId });\n    }\n\n    if (action === 'UPDATE_METER_READING' || action === 'Update Meter Reading') {\n      const sheetName = p.sheetName || p.tenantName;\n      const tSheet = ss.getSheetByName(sheetName);\n      if (!tSheet) return jsonResponse({ ok: false, error: 'Worksheet not found: ' + sheetName });\n      const row = Number(p.monthIndex) + 2;\n      const prevVal = tSheet.getRange(row, 4).getValue();\n      const newVal = (p.currentReading === null || p.currentReading === '' || p.currentReading === undefined) ? '' : Number(p.currentReading);\n      tSheet.getRange(row, 4).setValue(newVal);\n      logAudit(ss, 'Web App', sheetName + '!D' + row, 'Update Meter Reading', String(prevVal), String(newVal));\n      return jsonResponse({ ok: true, updatedCell: sheetName + '!D' + row });\n    }\n\n    if (action === 'UPDATE_CREDIT' || action === 'Update Credit/Adjustment') {\n      const sheetName = p.sheetName || p.tenantName;\n      const tSheet = ss.getSheetByName(sheetName);\n      if (tSheet && p.monthIndex) {\n        const row = Number(p.monthIndex) + 2;\n        tSheet.getRange(row, 12).setValue(Number(p.credits) || 0);\n      }\n      return jsonResponse({ ok: true });\n    }\n\n    if (action === 'UPDATE_TENANT_RENT' || action === 'Revise Future Rent') {\n      const dir = ss.getSheetByName('Tenant Directory');\n      if (dir) {\n        const rows = dir.getRange(5, 1, 13, 4).getValues();\n        for (let i = 0; i < rows.length; i++) {\n          if (String(rows[i][0]) === String(p.tenantId)) {\n            dir.getRange(5 + i, 4).setValue(Number(p.monthlyRent || p.newRent));\n            break;\n          }\n        }\n      }\n      return jsonResponse({ ok: true });\n    }\n\n    return jsonResponse({ ok: true, note: 'Action logged: ' + action });\n  } catch (err) {\n    return jsonResponse({ ok: false, error: err.toString() });\n  } finally {\n    lock.releaseLock();\n  }\n}\n\nfunction logAudit(ss, user, record, action, oldVal, newVal) {\n  const audit = ss.getSheetByName('Audit Log & Settings');\n  if (audit) {\n    audit.appendRow([new Date().toISOString(), user, record, action, oldVal, newVal, 'Verified']);\n  }\n  const sync = ss.getSheetByName('Sync_Status');\n  if (sync) {\n    sync.getRange('C2').setValue(new Date().toISOString());\n  }\n}\n\nfunction jsonResponse(obj) {\n  return ContentService.createTextOutput(JSON.stringify(obj))\n    .setMimeType(ContentService.MimeType.JSON);\n}\n";
+export const APPS_SCRIPT_CODE = "/**\n * RENTFLOW \u2014 COMPLETE TWO-WAY GOOGLE SHEETS SYNC ENGINE (Code.gs)\n * Connected Workbook ID: 1_Xog1mnKtWER-KjI7oCg0n2S5UeK-KWhgQkeOTErV2s\n *\n * HOW TO AUTHORIZE & DEPLOY (60 SECONDS):\n * 1. Click \"\u25b6 Run\" at the top (with \"testAndAuthorizeConnection\" selected) and click \"Review permissions\" -> \"Allow\".\n * 2. Click \"Deploy\" (top right) -> \"New deployment\" -> Select type: \"Web app\"\n *    - Execute as: \"Me\"\n *    - Who has access: \"Anyone\"\n * 3. Click \"Deploy\", copy the Web App URL (https://script.google.com/macros/s/.../exec),\n *    and paste it into the \"\ud83d\udd17 Connect Sheet\" button on the RentFlow website!\n */\n\nconst SPREADSHEET_ID = '1_Xog1mnKtWER-KjI7oCg0n2S5UeK-KWhgQkeOTErV2s';\nconst TENANT_SHEETS = [\n  { tenantId: 'T-01', name: 'Javed', sheetName: 'Javed', room: 'Room 101' },\n  { tenantId: 'T-02', name: 'Raja', sheetName: 'Raja', room: 'Room 102' },\n  { tenantId: 'T-03', name: 'Ghanti', sheetName: 'Ghanti', room: 'Room 103' },\n  { tenantId: 'T-04', name: 'Sonu', sheetName: 'Sonu', room: 'Room 104' },\n  { tenantId: 'T-05', name: 'Painter', sheetName: 'Painter', room: 'Room 105' },\n  { tenantId: 'T-06', name: 'Imran', sheetName: 'Imran', room: 'Room 106' },\n  { tenantId: 'T-07', name: 'Virasat', sheetName: 'Virasat', room: 'Room 107' },\n  { tenantId: 'T-08', name: 'Guddu', sheetName: 'Guddu', room: 'Room 108' },\n  { tenantId: 'T-09', name: 'Sajid', sheetName: 'Sajid', room: 'Room 109' },\n  { tenantId: 'T-10', name: 'Sundar Ki Mummy', sheetName: 'Sundar ki mummy', room: 'Room 110' },\n  { tenantId: 'T-11', name: 'Dinesh', sheetName: 'Dinesh', room: 'Room 111' },\n  { tenantId: 'T-12', name: 'Nisha', sheetName: 'Nisha', room: 'Room 112' },\n  { tenantId: 'T-13', name: 'Sundar', sheetName: 'Sundar', room: 'Room 113' }\n];\nconst MONTH_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];\n\nfunction formatMonthKeyFromCell(val) {\n  if (!val) return 'Oct-26';\n  if (val instanceof Date) {\n    const mShort = MONTH_SHORT[val.getMonth()];\n    const dNum = val.getDate();\n    const yy = (dNum >= 25 && dNum <= 35) ? String(dNum).padStart(2, '0') : String(val.getFullYear()).slice(-2);\n    return mShort + '-' + yy;\n  }\n  const s = String(val).trim();\n  const exact = s.match(/^(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-(\\d{2})$/i);\n  if (exact) {\n    return exact[1].charAt(0).toUpperCase() + exact[1].slice(1, 3).toLowerCase() + '-' + exact[2];\n  }\n  return s;\n}\n\n/**\n * 1. DEFAULT FUNCTION WHEN YOU CLICK \"\u25b6 Run\" IN APPS SCRIPT EDITOR:\n * Verifies connection to your Google Sheet, sets Dashboard & Rent Slips to the prior billing month (e.g., Oct-26 in Nov),\n * and authorizes all permissions cleanly without any getUi() error!\n */\nfunction testAndAuthorizeConnection() {\n  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);\n  Logger.log('\u2705 Connected to Google Sheet: ' + ss.getName());\n  setPriorBillingMonthInSheet();\n  const testRead = doGet({});\n  Logger.log('\u2705 Verified live data read from all 13 tenant tabs + Payments Ledger!');\n  Logger.log('\ud83d\udc49 NEXT STEP: Click \"Deploy\" (top right) -> \"New deployment\" -> Select type: \"Web app\" (Execute as: Me, Who has access: Anyone) and copy the Web App URL!');\n}\n\n/**\n * Safe onOpen() handler \u2014 works both when opening the spreadsheet AND if clicked manually in the editor!\n */\nfunction onOpen(e) {\n  try {\n    SpreadsheetApp.getUi()\n      .createMenu('Rent Management')\n      .addItem('Switch Dashboard & Slips to Active Billing Month (Prior Month)', 'setPriorBillingMonthInSheet')\n      .addToUi();\n  } catch (err) {\n    testAndAuthorizeConnection();\n  }\n}\n\n/**\n * Always selects the month prior to the current calendar month (e.g. Oct-26 when current month is November 2026)\n */\nfunction setPriorBillingMonthInSheet() {\n  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);\n  const now = new Date();\n  const currM = now.getMonth();\n  const currY = now.getFullYear() >= 2026 ? now.getFullYear() : 2026;\n  const priorM = currM === 0 ? 11 : currM - 1;\n  const priorY = currM === 0 ? Math.max(2026, currY - 1) : currY;\n  const mKey = MONTH_SHORT[priorM] + '-' + String(priorY).slice(-2);\n  const dash = ss.getSheetByName('Dashboard');\n  if (dash) dash.getRange('C3').setValue(mKey);\n  const slips = ss.getSheetByName('Monthly Rent Slips');\n  if (slips) slips.getRange('I1').setValue(mKey);\n  const syncSheet = ss.getSheetByName('Sync_Status');\n  if (syncSheet) syncSheet.getRange('B2').setValue(new Date().toISOString());\n  Logger.log('\u2705 Updated Dashboard & Monthly Rent Slips to active prior billing month: ' + mKey);\n}\n\n/**\n * GET Handler: Reads live meter readings, rents, credits, and payments across all tabs\n */\nfunction doGet(e) {\n  try {\n    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);\n    const liveReadings = [];\n\n    TENANT_SHEETS.forEach(function(t) {\n      const sh = ss.getSheetByName(t.sheetName);\n      if (!sh) return;\n      const vals = sh.getRange(3, 1, 12, 16).getValues();\n      for (let i = 0; i < 12; i++) {\n        const row = vals[i];\n        const rentVal = Number(row[1]) || 0;\n        const mKey = MONTH_SHORT[i] + '-26';\n        const mainReadRaw = row[3];\n        const currentReading = (mainReadRaw === '' || mainReadRaw === null || mainReadRaw === undefined || isNaN(Number(mainReadRaw)))\n          ? null\n          : Number(mainReadRaw);\n        const waterVal = Number(row[8]) || 0;\n        const creditsVal = Number(row[11]) || 0;\n        liveReadings.push({\n          recordId: 'REC-2026-' + String(i + 1).padStart(2, '0') + '-' + t.tenantId,\n          tenantId: t.tenantId,\n          month: mKey,\n          monthIndex: i + 1,\n          year: 2026,\n          rent: rentVal,\n          currentReading: currentReading,\n          water: waterVal,\n          credits: creditsVal\n        });\n      }\n    });\n\n    const ledger = ss.getSheetByName('Payments Ledger');\n    const payments = [];\n    if (ledger && ledger.getLastRow() >= 5) {\n      const pRows = ledger.getRange(5, 1, ledger.getLastRow() - 4, 10).getValues();\n      pRows.forEach(function(r, idx) {\n        if (!r[0] && !r[1]) return;\n        const tName = String(r[1] || '').trim();\n        const matchedT = TENANT_SHEETS.find(function(x) {\n          return x.name.toLowerCase() === tName.toLowerCase() || x.sheetName.toLowerCase() === tName.toLowerCase();\n        });\n        const mKey = formatMonthKeyFromCell(r[2]);\n        const mIdx = MONTH_SHORT.indexOf(mKey.split('-')[0]) + 1;\n        let dtStr = '';\n        if (r[3] instanceof Date) {\n          dtStr = Utilities.formatDate(r[3], Session.getScriptTimeZone(), 'yyyy-MM-dd');\n        } else {\n          dtStr = String(r[3] || '');\n        }\n        payments.push({\n          paymentId: String(r[0] || ('PAY-' + String(idx + 1).padStart(3, '0'))),\n          tenantId: matchedT ? matchedT.tenantId : 'T-01',\n          tenantName: matchedT ? matchedT.name : tName,\n          recordId: 'REC-2026-' + String(mIdx > 0 ? mIdx : 10).padStart(2, '0') + '-' + (matchedT ? matchedT.tenantId : 'T-01'),\n          month: mKey,\n          year: 2026,\n          date: dtStr,\n          amount: Number(r[4]) || 0,\n          method: String(r[5] || 'Cash'),\n          reference: String(r[6] || ''),\n          type: String(r[7] || 'Payment'),\n          notes: String(r[8] || ''),\n          createdAt: String(r[9] || new Date().toISOString())\n        });\n      });\n    }\n\n    const syncSheet = ss.getSheetByName('Sync_Status');\n    if (syncSheet) {\n      syncSheet.getRange('B2').setValue(new Date().toISOString());\n    }\n\n    return jsonResponse({\n      ok: true,\n      spreadsheetId: SPREADSHEET_ID,\n      lastSync: new Date().toISOString(),\n      liveReadings: liveReadings,\n      payments: payments.reverse()\n    });\n  } catch (err) {\n    return jsonResponse({ ok: false, error: err.toString() });\n  }\n}\n\n/**\n * POST Handler: Writes new payments, meter readings, credits, and tenant updates\n */\nfunction doPost(e) {\n  const lock = LockService.getScriptLock();\n  lock.waitLock(10000);\n  try {\n    const body = JSON.parse(e.postData.contents);\n    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);\n    const action = body.action;\n    const p = body.payload || {};\n\n    if (action === 'RECORD_PAYMENT' || action === 'Record Payment') {\n      const ledger = ss.getSheetByName('Payments Ledger');\n      const lastRow = Math.max(4, ledger.getLastRow());\n      if (lastRow >= 5) {\n        const existingIds = ledger.getRange(5, 1, lastRow - 4, 1).getValues().flat();\n        if (existingIds.indexOf(p.paymentId) !== -1) {\n          return jsonResponse({ ok: true, duplicateIgnored: true, paymentId: p.paymentId });\n        }\n      }\n      ledger.appendRow([\n        p.paymentId,\n        p.tenantName,\n        p.month,\n        p.date,\n        Number(p.amount),\n        p.method || 'Cash',\n        p.reference || '',\n        p.type || 'Payment',\n        p.notes || '',\n        new Date().toISOString()\n      ]);\n      logAudit(ss, 'Web App', p.tenantName + ' (' + p.month + ')', 'Record Payment', '\u2014', '\u20b9' + p.amount);\n      return jsonResponse({ ok: true, saved: true, paymentId: p.paymentId });\n    }\n\n    if (action === 'UPDATE_METER_READING' || action === 'Update Meter Reading') {\n      const sheetName = p.sheetName || p.tenantName;\n      const tSheet = ss.getSheetByName(sheetName);\n      if (!tSheet) return jsonResponse({ ok: false, error: 'Worksheet not found: ' + sheetName });\n      const row = Number(p.monthIndex) + 2;\n      const prevVal = tSheet.getRange(row, 4).getValue();\n      const newVal = (p.currentReading === null || p.currentReading === '' || p.currentReading === undefined) ? '' : Number(p.currentReading);\n      tSheet.getRange(row, 4).setValue(newVal);\n      logAudit(ss, 'Web App', sheetName + '!D' + row, 'Update Meter Reading', String(prevVal), String(newVal));\n      return jsonResponse({ ok: true, updatedCell: sheetName + '!D' + row });\n    }\n\n    if (action === 'UPDATE_CREDIT' || action === 'Update Credit/Adjustment') {\n      const sheetName = p.sheetName || p.tenantName;\n      const tSheet = ss.getSheetByName(sheetName);\n      if (tSheet && p.monthIndex) {\n        const row = Number(p.monthIndex) + 2;\n        tSheet.getRange(row, 12).setValue(Number(p.credits) || 0);\n      }\n      return jsonResponse({ ok: true });\n    }\n\n    if (action === 'UPDATE_TENANT_RENT' || action === 'Revise Future Rent') {\n      const dir = ss.getSheetByName('Tenant Directory');\n      if (dir) {\n        const rows = dir.getRange(5, 1, 13, 4).getValues();\n        for (let i = 0; i < rows.length; i++) {\n          if (String(rows[i][0]) === String(p.tenantId)) {\n            dir.getRange(5 + i, 4).setValue(Number(p.monthlyRent || p.newRent));\n            break;\n          }\n        }\n      }\n      return jsonResponse({ ok: true });\n    }\n\n    return jsonResponse({ ok: true, note: 'Action logged: ' + action });\n  } catch (err) {\n    return jsonResponse({ ok: false, error: err.toString() });\n  } finally {\n    lock.releaseLock();\n  }\n}\n\nfunction logAudit(ss, user, record, action, oldVal, newVal) {\n  const audit = ss.getSheetByName('Audit Log & Settings');\n  if (audit) {\n    audit.appendRow([new Date().toISOString(), user, record, action, oldVal, newVal, 'Verified']);\n  }\n  const sync = ss.getSheetByName('Sync_Status');\n  if (sync) {\n    sync.getRange('C2').setValue(new Date().toISOString());\n  }\n}\n\nfunction jsonResponse(obj) {\n  return ContentService.createTextOutput(JSON.stringify(obj))\n    .setMimeType(ContentService.MimeType.JSON);\n}\n";

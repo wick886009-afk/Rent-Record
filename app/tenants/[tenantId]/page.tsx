@@ -1,9 +1,10 @@
 import RentFlowWorkspace from '@/components/RentFlowWorkspace';
 
-export default function TenantProfilePage({
+export default async function TenantProfilePage({
   params,
 }: {
-  params: { tenantId: string };
+  params: Promise<{ tenantId: string }>;
 }) {
-  return <RentFlowWorkspace initialTab="tenants" initialTenantId={params?.tenantId || 'T-01'} />;
+  const { tenantId } = await params;
+  return <RentFlowWorkspace initialTab="tenants" initialTenantId={tenantId} />;
 }

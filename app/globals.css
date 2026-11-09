@@ -3,55 +3,25 @@
 @tailwind utilities;
 
 :root {
-  --bg-cream: #F8FAFC;
-  --navy-primary: #0F172A;
+  --bg-cream: #FAF8F5;
+  --navy-primary: #1B365D;
   --charcoal-text: #1E293B;
 }
 
 body {
-  background: radial-gradient(circle at 15% 10%, rgba(16, 185, 129, 0.08), transparent 35%),
-              radial-gradient(circle at 85% 15%, rgba(59, 130, 246, 0.08), transparent 40%),
-              radial-gradient(circle at 50% 90%, rgba(245, 158, 11, 0.05), transparent 40%),
-              #F8FAFC;
+  background-color: var(--bg-cream);
   color: var(--charcoal-text);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  overflow-x: hidden;
-}
-
-.scene-3d {
-  perspective: 1200px;
-}
-
-.card-3d-tilt {
-  transform-style: preserve-3d;
-  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
-  position: relative;
-  overflow: hidden;
-}
-
-.card-3d-tilt:hover {
-  transform: perspective(1000px) rotateX(2.5deg) rotateY(-2.5deg) translateY(-4px);
-  box-shadow: 0 22px 45px -12px rgba(15, 23, 42, 0.16), 0 4px 16px -2px rgba(16, 185, 129, 0.14);
-}
-
-@keyframes reveal3d {
-  0% {
-    opacity: 0;
-    transform: perspective(1000px) translateY(20px) rotateX(-6deg) scale(0.98);
-  }
-  100% {
-    opacity: 1;
-    transform: perspective(1000px) translateY(0) rotateX(0deg) scale(1);
-  }
-}
-
-.animate-reveal-3d {
-  animation: reveal3d 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @media print {
   .no-print {
     display: none !important;
+  }
+  .print-only-a4 {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0;
+    padding: 8mm;
   }
 }

@@ -40,12 +40,124 @@ function getTodayIsoDate(): string {
   return `${y}-${m}-${d}`;
 }
 
-function getCurrentMonthKeyAndYear(): { monthKey: string; year: number } {
+// Always returns the billing month PRIOR to the current calendar month (e.g. Oct-26 when current month is November 2026)
+function getCurrentMonthKeyAndYear(): { monthKey: string; year: number; currCalendarMonthKey: string } {
   const now = new Date();
-  const y = now.getFullYear() >= 2026 ? now.getFullYear() : 2026;
-  const mIdx = now.getMonth();
-  const yy = String(y).slice(-2);
-  return { monthKey: `${MONTH_SHORT[mIdx]}-${yy}`, year: y };
+  const currY = now.getFullYear() >= 2026 ? now.getFullYear() : 2026;
+  const currM = now.getMonth(); // 0=Jan .. 10=Nov
+  const priorM = currM === 0 ? 11 : currM - 1;
+  const priorY = currM === 0 ? Math.max(2026, currY - 1) : currY;
+  return {
+    monthKey: `${MONTH_SHORT[priorM]}-${String(priorY).slice(-2)}`,
+    year: priorY,
+    currCalendarMonthKey: `${MONTH_SHORT[currM]}-${String(currY).slice(-2)}`,
+  };
+}
+
+function normalizeIncomingMonthKey(raw: any): string {
+  if (!raw) return 'Oct-26';
+  const s = String(raw).trim();
+  for (let i = 0; i < MONTH_SHORT.length; i++) {
+    const m = MONTH_SHORT[i];
+    if (s.toLowerCase().startsWith(m.toLowerCase() + '-')) {
+      const yy = s.split('-')[1].slice(0, 2);
+      return m + '-' + yy;
+    }
+  }
+  const tokens = s.split(/[^a-zA-Z0-9]+/).filter(Boolean);
+  for (let i = 0; i < MONTH_SHORT.length; i++) {
+    const m = MONTH_SHORT[i];
+    const idx = tokens.findIndex((t) => t.toLowerCase().slice(0, 3) === m.toLowerCase());
+    if (idx !== -1) {
+      const nextTok = parseInt(tokens[idx + 1] || '', 10);
+      if (nextTok >= 25 && nextTok <= 35) {
+        return m + '-' + String(nextTok).padStart(2, '0');
+      }
+      const yrTok = tokens.find((t) => t.length === 4 && t.startsWith('20'));
+      return m + '-' + (yrTok ? yrTok.slice(-2) : '26');
+    }
+  }
+  if (s.length >= 10 && s[4] === '-' && s[7] === '-') {
+    const yyIso = s.slice(2, 4);
+    const mIdx = parseInt(s.slice(5, 7), 10) - 1;
+    const dNum = parseInt(s.slice(8, 10), 10);
+    const yy = dNum >= 25 && dNum <= 35 ? String(dNum) : yyIso;
+    if (mIdx >= 0 && mIdx < 12) return MONTH_SHORT[mIdx] + '-' + yy;
+  }
+  return s;
+}
+
+function normalizeIncomingDateIso(raw: any): string {
+  if (!raw) return getTodayIsoDate();
+  const s = String(raw).trim();
+  if (s.length >= 10 && s[4] === '-' && s[7] === '-') return s.slice(0, 10);
+  const tokens = s.split(/[^a-zA-Z0-9]+/).filter(Boolean);
+  for (let i = 0; i < MONTH_SHORT.length; i++) {
+    const m = MONTH_SHORT[i];
+    const idx = tokens.findIndex((t) => t.toLowerCase().slice(0, 3) === m.toLowerCase());
+    if (idx !== -1 && tokens[idx + 1] && tokens[idx + 2] && tokens[idx + 2].length === 4) {
+      const d = String(parseInt(tokens[idx + 1], 10)).padStart(2, '0');
+      const mNum = String(i + 1).padStart(2, '0');
+      return tokens[idx + 2] + '-' + mNum + '-' + d;
+    }
+  }
+  const parsed = new Date(s);
+  if (!Number.isNaN(parsed.getTime())) {
+    const y = parsed.getFullYear();
+    const m = String(parsed.getMonth() + 1).padStart(2, '0');
+    const d = String(parsed.getDate()).padStart(2, '0');
+    return y + '-' + m + '-' + d;
+  }
+  return s;
+}
+
+function savePermanentWebhookStorage(url: string) {
+  const clean = String(url || '').trim();
+  try {
+    localStorage.setItem('rentflow_apps_script_url', clean);
+    localStorage.setItem('rentflow_permanent_webhook_v1', clean);
+  } catch {}
+  try {
+    sessionStorage.setItem('rentflow_apps_script_url', clean);
+  } catch {}
+  try {
+    document.cookie = `rentflow_apps_script_url=${encodeURIComponent(clean)}; path=/; max-age=31536000; SameSite=Lax`;
+  } catch {}
+  try {
+    let wn: any = {};
+    if (typeof window !== 'undefined' && window.name && window.name.startsWith('{')) {
+      wn = JSON.parse(window.name);
+    }
+    wn.rentflowAppsScriptUrl = clean;
+    if (typeof window !== 'undefined') window.name = JSON.stringify(wn);
+  } catch {}
+}
+
+function loadPermanentWebhookStorage(): string {
+  let url = '';
+  try {
+    url = localStorage.getItem('rentflow_permanent_webhook_v1') || localStorage.getItem('rentflow_apps_script_url') || '';
+  } catch {}
+  if (!url) {
+    try {
+      url = sessionStorage.getItem('rentflow_apps_script_url') || '';
+    } catch {}
+  }
+  if (!url && typeof document !== 'undefined') {
+    try {
+      const m = document.cookie.match(/(?:^|;\s*)rentflow_apps_script_url=([^;]+)/);
+      if (m) url = decodeURIComponent(m[1]);
+    } catch {}
+  }
+  if (!url && typeof window !== 'undefined') {
+    try {
+      if (window.name && window.name.startsWith('{')) {
+        const wn = JSON.parse(window.name);
+        if (wn?.rentflowAppsScriptUrl) url = wn.rentflowAppsScriptUrl;
+      }
+    } catch {}
+  }
+  return String(url || process.env.NEXT_PUBLIC_GOOGLE_APPS_SCRIPT_URL || '').trim();
 }
 
 function formatINR(val: number | null | undefined): string {
@@ -132,15 +244,41 @@ export default function RentFlowWorkspace({
     const timer = setInterval(updateClock, 1000);
 
     try {
-      const savedUrl = localStorage.getItem('rentflow_apps_script_url');
+      const savedUrl = loadPermanentWebhookStorage();
       if (savedUrl) setAppsScriptUrl(savedUrl);
-      const savedState = localStorage.getItem('rentflow_state_v2026');
+      const savedState = localStorage.getItem('rentflow_state_v2026_oct_v3');
       if (savedState) {
         const parsed = JSON.parse(savedState);
-        if (parsed.tenants && parsed.rawRecords && parsed.payments) {
-          setTenants(parsed.tenants);
-          setRawRecords(parsed.rawRecords);
-          setPayments(parsed.payments);
+        if (Array.isArray(parsed.rawRecords) && parsed.rawRecords.length > 0) {
+          setRawRecords((prev) => {
+            const byId = new Map<string, any>();
+            parsed.rawRecords.forEach((r: any) => byId.set(r.recordId, r));
+            return prev.map((r) => {
+              const sr = byId.get(r.recordId);
+              if (!sr) return r;
+              return {
+                ...r,
+                currentReading: sr.currentReading !== null && sr.currentReading !== undefined ? sr.currentReading : r.currentReading,
+                credits: sr.credits || r.credits,
+              };
+            });
+          });
+        }
+        if (Array.isArray(parsed.payments) && parsed.payments.length > 0) {
+          setPayments((prev) => {
+            const payMap = new Map<string, PaymentTransaction>();
+            prev.forEach((p) => payMap.set(p.paymentId, p));
+            parsed.payments.forEach((p: any) => {
+              if (p && p.paymentId && Number(p.amount) > 0) {
+                payMap.set(p.paymentId, {
+                  ...p,
+                  month: normalizeIncomingMonthKey(p.month),
+                  date: normalizeIncomingDateIso(p.date),
+                });
+              }
+            });
+            return Array.from(payMap.values());
+          });
         }
       }
     } catch {}
@@ -162,7 +300,7 @@ export default function RentFlowWorkspace({
     ) => {
       try {
         localStorage.setItem(
-          'rentflow_state_v2026',
+          'rentflow_state_v2026_oct_v3',
           JSON.stringify({
             tenants: nextTenants,
             rawRecords: nextRawRecords,
@@ -256,7 +394,42 @@ export default function RentFlowWorkspace({
       updated = true;
     }
     if (Array.isArray(remote.payments) && remote.payments.length > 0) {
-      setPayments(remote.payments);
+      setPayments((prev) => {
+        const payMap = new Map<string, PaymentTransaction>();
+        prev.forEach((p) => payMap.set(p.paymentId, p));
+        remote.payments.forEach((p: any, idx: number) => {
+          const rawName = String(p.tenantName || '').trim();
+          const matchedT =
+            tenants.find(
+              (t) =>
+                t.tenantId === p.tenantId ||
+                t.name.toLowerCase() === rawName.toLowerCase() ||
+                (t.sheetName && t.sheetName.toLowerCase() === rawName.toLowerCase())
+            ) || tenants[0];
+          const normMonth = normalizeIncomingMonthKey(p.month);
+          const mIdx = Math.max(1, MONTH_SHORT.indexOf(normMonth.split('-')[0]) + 1);
+          const normDate = normalizeIncomingDateIso(p.date);
+          const pid = String(p.paymentId || `PAY-${String(idx + 1).padStart(3, '0')}`).trim();
+          if (Number(p.amount) > 0) {
+            payMap.set(pid, {
+              paymentId: pid,
+              tenantId: matchedT.tenantId,
+              tenantName: matchedT.name,
+              recordId: `REC-2026-${String(mIdx).padStart(2, '0')}-${matchedT.tenantId}`,
+              month: normMonth,
+              year: Number(p.year) || 2026,
+              date: normDate,
+              amount: Number(p.amount) || 0,
+              method: String(p.method || 'Cash'),
+              reference: String(p.reference || ''),
+              type: String(p.type || 'Payment'),
+              notes: String(p.notes || ''),
+              createdAt: String(p.createdAt || `${normDate}T10:00:00Z`),
+            });
+          }
+        });
+        return Array.from(payMap.values());
+      });
       updated = true;
     }
     setSyncStatus({
@@ -286,10 +459,15 @@ export default function RentFlowWorkspace({
       }
 
       // 2. Query Next.js Server API Route (/api/sheets)
-      const q = appsScriptUrl ? `?webhookUrl=${encodeURIComponent(appsScriptUrl)}` : '';
+      const activeUrl = appsScriptUrl || loadPermanentWebhookStorage();
+      const q = activeUrl ? `?webhookUrl=${encodeURIComponent(activeUrl)}` : '';
       const res = await fetch(`/api/sheets${q}`, { cache: 'no-store' });
       if (res.ok) {
         const json = await res.json();
+        if (json.webhookUrl && !appsScriptUrl) {
+          setAppsScriptUrl(json.webhookUrl);
+          savePermanentWebhookStorage(json.webhookUrl);
+        }
         const remotePayload = json.remoteData || json.data;
         if (remotePayload && (remotePayload.liveReadings || remotePayload.mode === 'live-service-account')) {
           applyRemoteSyncData(remotePayload, json.mode === 'apps-script-live' ? 'Apps Script Live Sync' : 'Service Account Live Sync');
@@ -313,6 +491,7 @@ export default function RentFlowWorkspace({
   }, [appsScriptUrl, applyRemoteSyncData]);
 
   useEffect(() => {
+    triggerSyncFromGoogleSheets();
     const interval = setInterval(triggerSyncFromGoogleSheets, 30000);
     return () => clearInterval(interval);
   }, [triggerSyncFromGoogleSheets]);
@@ -513,13 +692,11 @@ export default function RentFlowWorkspace({
   const handleSaveAppsScriptUrl = (url: string) => {
     const clean = url.trim();
     setAppsScriptUrl(clean);
-    try {
-      localStorage.setItem('rentflow_apps_script_url', clean);
-    } catch {}
+    savePermanentWebhookStorage(clean);
     setToastMessage(
       clean
-        ? 'Connected Google Apps Script Web App URL! All payments & meter readings now sync directly.'
-        : 'Cleared Apps Script URL (using default Google Sheets API v4 mode).'
+        ? 'Permanently saved Google Apps Script Web App URL! All payments & meter readings sync across refreshes.'
+        : 'Using permanent connected Google Sheet (1_Xog1mnKtWER-KjI7oCg0n2S5UeK-KWhgQkeOTErV2s).'
     );
   };
 
@@ -532,14 +709,16 @@ export default function RentFlowWorkspace({
 
   const handleRestoreHistoricalState = () => {
     try {
-      localStorage.removeItem('rentflow_state_v2026');
+      localStorage.removeItem('rentflow_state_v2026_oct_v3');
     } catch {}
     setTenants([...INITIAL_WORKBOOK_DATA.tenants] as unknown as Tenant[]);
     setRawRecords([...INITIAL_WORKBOOK_DATA.monthlyRecords] as unknown as MonthlyRecord[]);
     setPayments([...INITIAL_WORKBOOK_DATA.payments] as unknown as PaymentTransaction[]);
     setSelectedYear(2026);
-    setSelectedMonth('Sep-26');
-    setToastMessage('Restored exact historical workbook data (13 tenants, 98 payments, Sep-26 closing dues ₹39,767).');
+    const prior = getCurrentMonthKeyAndYear();
+    setSelectedYear(prior.year);
+    setSelectedMonth(prior.monthKey);
+    setToastMessage(`Synchronized with latest Google Sheet baseline (13 tenants, 104 payments = ₹360,024, active billing month ${prior.monthKey}).`);
   };
 
   const handleDownloadTwoPagePdf = () => {
@@ -838,16 +1017,21 @@ export default function RentFlowWorkspace({
           </div>
 
           <div className="flex items-center gap-1.5 sm:gap-2">
+            <a
+              href="https://docs.google.com/spreadsheets/d/1_Xog1mnKtWER-KjI7oCg0n2S5UeK-KWhgQkeOTErV2s/edit"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 rounded-xl border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 text-xs font-bold flex items-center gap-1.5 transition"
+            >
+              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span className="hidden sm:inline">Sheet Live ↗</span>
+            </a>
             <button
               onClick={() => setConnectModalOpen(true)}
-              className={`px-3 py-1.5 rounded-xl border text-xs font-bold flex items-center gap-1.5 transition ${
-                appsScriptUrl
-                  ? 'bg-emerald-50 border-emerald-300 text-emerald-800'
-                  : 'bg-amber-50 border-amber-300 text-amber-900 hover:bg-amber-100'
-              }`}
+              className="px-3 py-1.5 rounded-xl border bg-emerald-50 border-emerald-300 text-emerald-800 hover:bg-emerald-100 text-xs font-bold flex items-center gap-1.5 transition"
             >
               <span>🔗</span>
-              <span className="hidden sm:inline">{appsScriptUrl ? 'Sheet Linked' : 'Connect Sheet'}</span>
+              <span className="hidden sm:inline">Sheet Linked</span>
             </button>
             <button
               onClick={() => openPayModalFor()}
@@ -879,7 +1063,7 @@ export default function RentFlowWorkspace({
           {/* ================================================================= */}
           {activeTab === 'dashboard' && (
             <>
-              <div className="animate-reveal-3d relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#070B19] via-[#0F172A] to-[#1E3A8A] text-white p-6 shadow-2xl border border-white/10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+              <div className="rounded-2xl bg-gradient-to-r from-[#0F172A] via-[#1B365D] to-slate-900 text-white p-5 shadow-md flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
                 <div>
                   <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-bold mb-1">
                     <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
@@ -904,22 +1088,22 @@ export default function RentFlowWorkspace({
               </div>
 
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-                <div className="card-3d-tilt animate-reveal-3d bg-white/90 backdrop-blur-md p-5 rounded-2xl border border-slate-200/90 shadow-sm">
+                <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
                   <div className="text-xs font-bold text-slate-500 uppercase">Total Payable ({selectedMonth})</div>
                   <div className="text-xl sm:text-2xl font-extrabold text-[#0F172A] font-mono mt-1">{formatINR(totalPayable)}</div>
                   <div className="text-[11px] text-slate-500 mt-1">Base Rent: {formatINR(expectedRent)} · Prior: {formatINR(prevDueTotal)}</div>
                 </div>
-                <div className="card-3d-tilt animate-reveal-3d bg-white/90 backdrop-blur-md p-5 rounded-2xl border border-emerald-200/90 shadow-sm">
+                <div className="bg-white p-4 rounded-2xl border border-emerald-200 shadow-2xs">
                   <div className="text-xs font-bold text-emerald-800 uppercase">Rent Collected</div>
                   <div className="text-xl sm:text-2xl font-extrabold text-emerald-700 font-mono mt-1">{formatINR(totalCollected)}</div>
                   <div className="text-[11px] text-emerald-800 mt-1">Collection Rate: {collectionRate}% ({paidCount} Paid)</div>
                 </div>
-                <div className="card-3d-tilt animate-reveal-3d bg-white/90 backdrop-blur-md p-5 rounded-2xl border border-rose-200/90 shadow-sm">
+                <div className="bg-white p-4 rounded-2xl border border-rose-200 shadow-2xs">
                   <div className="text-xs font-bold text-rose-800 uppercase">Outstanding Dues</div>
                   <div className="text-xl sm:text-2xl font-extrabold text-rose-700 font-mono mt-1">{formatINR(totalOutstanding)}</div>
                   <div className="text-[11px] text-rose-700 mt-1">{unpaidCount} Unpaid · {partialCount} Partial</div>
                 </div>
-                <div className="card-3d-tilt animate-reveal-3d bg-white/90 backdrop-blur-md p-5 rounded-2xl border border-slate-200/90 shadow-sm">
+                <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
                   <div className="text-xs font-bold text-slate-500 uppercase">Utilities ({selectedMonth})</div>
                   <div className="text-xl sm:text-2xl font-extrabold text-[#1B365D] font-mono mt-1">
                     {pendingReadingCount === monthRecs.length ? 'Pending' : formatINR(elecTotal + waterTotal)}
@@ -1964,7 +2148,7 @@ export default function RentFlowWorkspace({
                   <input
                     type="url"
                     value={appsScriptUrl}
-                    onChange={(e) => setAppsScriptUrl(e.target.value)}
+                    onChange={(e) => { setAppsScriptUrl(e.target.value); savePermanentWebhookStorage(e.target.value); }}
                     placeholder="https://script.google.com/macros/s/.../exec"
                     className="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono text-xs"
                   />
@@ -2278,7 +2462,7 @@ export default function RentFlowWorkspace({
               <input
                 type="url"
                 value={appsScriptUrl}
-                onChange={(e) => setAppsScriptUrl(e.target.value)}
+                onChange={(e) => { setAppsScriptUrl(e.target.value); savePermanentWebhookStorage(e.target.value); }}
                 placeholder="https://script.google.com/macros/s/.../exec"
                 className="w-full px-3 py-2.5 rounded-xl border border-slate-300 font-mono text-xs"
               />

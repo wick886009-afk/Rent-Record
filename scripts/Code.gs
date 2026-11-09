@@ -29,15 +29,31 @@ const TENANT_SHEETS = [
 ];
 const MONTH_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
+function formatMonthKeyFromCell(val) {
+  if (!val) return 'Oct-26';
+  if (val instanceof Date) {
+    const mShort = MONTH_SHORT[val.getMonth()];
+    const dNum = val.getDate();
+    const yy = (dNum >= 25 && dNum <= 35) ? String(dNum).padStart(2, '0') : String(val.getFullYear()).slice(-2);
+    return mShort + '-' + yy;
+  }
+  const s = String(val).trim();
+  const exact = s.match(/^(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-(\d{2})$/i);
+  if (exact) {
+    return exact[1].charAt(0).toUpperCase() + exact[1].slice(1, 3).toLowerCase() + '-' + exact[2];
+  }
+  return s;
+}
+
 /**
  * 1. DEFAULT FUNCTION WHEN YOU CLICK "▶ Run" IN APPS SCRIPT EDITOR:
- * Verifies connection to your Google Sheet, sets Dashboard & Rent Slips to the current month,
+ * Verifies connection to your Google Sheet, sets Dashboard & Rent Slips to the prior billing month (e.g., Oct-26 in Nov),
  * and authorizes all permissions cleanly without any getUi() error!
  */
 function testAndAuthorizeConnection() {
   const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
   Logger.log('✅ Connected to Google Sheet: ' + ss.getName());
-  setCurrentMonthInSheet();
+  setPriorBillingMonthInSheet();
   const testRead = doGet({});
   Logger.log('✅ Verified live data read from all 13 tenant tabs + Payments Ledger!');
   Logger.log('👉 NEXT STEP: Click "Deploy" (top right) -> "New deployment" -> Select type: "Web app" (Execute as: Me, Who has access: Anyone) and copy the Web App URL!');
@@ -50,25 +66,31 @@ function onOpen(e) {
   try {
     SpreadsheetApp.getUi()
       .createMenu('Rent Management')
-      .addItem('Switch Dashboard & Slips to Current Month', 'setCurrentMonthInSheet')
+      .addItem('Switch Dashboard & Slips to Active Billing Month (Prior Month)', 'setPriorBillingMonthInSheet')
       .addToUi();
   } catch (err) {
-    // When clicked manually inside the Apps Script editor, getUi() is not available; run the connection test instead!
     testAndAuthorizeConnection();
   }
 }
 
-function setCurrentMonthInSheet() {
+/**
+ * Always selects the month prior to the current calendar month (e.g. Oct-26 when current month is November 2026)
+ */
+function setPriorBillingMonthInSheet() {
   const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
   const now = new Date();
-  const mKey = MONTH_SHORT[now.getMonth()] + '-' + String(now.getFullYear()).slice(-2);
+  const currM = now.getMonth();
+  const currY = now.getFullYear() >= 2026 ? now.getFullYear() : 2026;
+  const priorM = currM === 0 ? 11 : currM - 1;
+  const priorY = currM === 0 ? Math.max(2026, currY - 1) : currY;
+  const mKey = MONTH_SHORT[priorM] + '-' + String(priorY).slice(-2);
   const dash = ss.getSheetByName('Dashboard');
   if (dash) dash.getRange('C3').setValue(mKey);
   const slips = ss.getSheetByName('Monthly Rent Slips');
   if (slips) slips.getRange('I1').setValue(mKey);
   const syncSheet = ss.getSheetByName('Sync_Status');
   if (syncSheet) syncSheet.getRange('B2').setValue(new Date().toISOString());
-  Logger.log('✅ Updated Dashboard & Monthly Rent Slips to current month: ' + mKey);
+  Logger.log('✅ Updated Dashboard & Monthly Rent Slips to active prior billing month: ' + mKey);
 }
 
 /**
@@ -114,7 +136,11 @@ function doGet(e) {
       pRows.forEach(function(r, idx) {
         if (!r[0] && !r[1]) return;
         const tName = String(r[1] || '').trim();
-        const matchedT = TENANT_SHEETS.find(function(x) { return x.name.toLowerCase() === tName.toLowerCase(); });
+        const matchedT = TENANT_SHEETS.find(function(x) {
+          return x.name.toLowerCase() === tName.toLowerCase() || x.sheetName.toLowerCase() === tName.toLowerCase();
+        });
+        const mKey = formatMonthKeyFromCell(r[2]);
+        const mIdx = MONTH_SHORT.indexOf(mKey.split('-')[0]) + 1;
         let dtStr = '';
         if (r[3] instanceof Date) {
           dtStr = Utilities.formatDate(r[3], Session.getScriptTimeZone(), 'yyyy-MM-dd');
@@ -122,11 +148,11 @@ function doGet(e) {
           dtStr = String(r[3] || '');
         }
         payments.push({
-          paymentId: String(r[0] || ('PAY-' + (idx + 1))),
+          paymentId: String(r[0] || ('PAY-' + String(idx + 1).padStart(3, '0'))),
           tenantId: matchedT ? matchedT.tenantId : 'T-01',
           tenantName: matchedT ? matchedT.name : tName,
-          recordId: 'REC-2026-' + String(r[2] || 'Nov-26') + '-' + (matchedT ? matchedT.tenantId : 'T-01'),
-          month: String(r[2] || 'Nov-26'),
+          recordId: 'REC-2026-' + String(mIdx > 0 ? mIdx : 10).padStart(2, '0') + '-' + (matchedT ? matchedT.tenantId : 'T-01'),
+          month: mKey,
           year: 2026,
           date: dtStr,
           amount: Number(r[4]) || 0,
