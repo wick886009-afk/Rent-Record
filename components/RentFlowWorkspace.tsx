@@ -175,6 +175,38 @@ function getStatusBadgeClass(status: string): string {
   return 'bg-rose-100 text-rose-800 border border-rose-300';
 }
 
+
+const EXTRA_TENANTS_2026: Tenant[] = [{"tenantId": "T-14", "name": "Khurshid", "room": "Room 114", "monthlyRent": 5500, "dueDay": 5, "electricityRate": 0, "waterCharge": 0, "waterBillingType": "Exempt", "electricityBillingType": "Exempt (\u20b90)", "status": "Active", "startDate": "2026-01-01", "endDate": "", "contact": "", "billingGroupId": "", "sheetName": "Khurshid", "initialMeterReading": 0, "openingArrears": 0, "notes": "Rent-only tenancy (no electricity or water)"}, {"tenantId": "T-15", "name": "Budhiya", "room": "Room 115", "monthlyRent": 5000, "dueDay": 5, "electricityRate": 0, "waterCharge": 0, "waterBillingType": "Exempt", "electricityBillingType": "Exempt (\u20b90)", "status": "Active", "startDate": "2026-01-01", "endDate": "", "contact": "", "billingGroupId": "", "sheetName": "Budhiya", "initialMeterReading": 0, "openingArrears": 0, "notes": "Rent-only tenancy (no electricity or water)"}] as unknown as Tenant[];
+const EXTRA_RECORDS_2026: MonthlyRecord[] = [{"recordId": "REC-2026-01-T-14", "tenantId": "T-14", "tenantName": "Khurshid", "room": "Room 114", "month": "Jan-26", "monthName": "January", "monthIndex": 1, "year": 2026, "rent": 5500, "previousReading": 0, "currentReading": 0.0, "units": 0.0, "rate": 0, "electricity": 0.0, "water": 0, "totalBill": 0.0, "previousOutstanding": 0, "otherCharges": 0, "credits": 0, "totalPayable": 5500.0, "totalPaid": 5500.0, "closingBalance": 0.0, "paymentStatus": "Paid", "sourceRow": "Khurshid!A3:O3"}, {"recordId": "REC-2026-02-T-14", "tenantId": "T-14", "tenantName": "Khurshid", "room": "Room 114", "month": "Feb-26", "monthName": "February", "monthIndex": 2, "year": 2026, "rent": 5500, "previousReading": 0.0, "currentReading": 0.0, "units": 0.0, "rate": 0, "electricity": 0.0, "water": 0, "totalBill": 0.0, "previousOutstanding": 0.0, "otherCharges": 0, "credits": 0, "totalPayable": 5500.0, "totalPaid": 5500.0, "closingBalance": 0.0, "paymentStatus": "Paid", "sourceRow": "Khurshid!A4:O4"}, {"recordId": "REC-2026-03-T-14", "tenantId": "T-14", "tenantName": "Khurshid", "room": "Room 114", "month": "Mar-26", "monthName": "March", "monthIndex": 3, "year": 2026, "rent": 5500, "previousReading": 0.0, "currentReading": 0.0, "units": 0.0, "rate": 0, "electricity": 0.0, "water": 0, "totalBill": 0.0, "previousOutstanding": 0.0, "otherCharges": 0, "credits": 0, "totalPayable": 5500.0, "totalPaid": 5500.0, "closingBalance": 0.0, "paymentStatus": "Paid", "sourceRow": "Khurshid!A5:O5"}, {"recordId": "REC-2026-04-T-14", "tenantId": "T-14", "tenantName": "Khurshid", "room": "Room 114", "month": "Apr-26", "monthName": "April", "monthIndex": 4, "year": 2026, "rent": 5500, "previousReading": 0.0, "currentReading": 0.0, "units": 0.0, "rate": 0, "electricity": 0.0, "water": 0, "totalBill": 0.0, "previousOutstanding": 0.0, "otherCharges": 0, "credits": 0, "totalPayable": 5500.0, "totalPaid": 5500.0, "closingBalance": 0.0, "paymentStatus": "Paid", "sourceRow": "Khurshid!A6:O6"}, {"recordId": "REC-2026-05-T-14", "tenantId": "T-14", "tenantName": "Khurshid", "room": "Room 114", "month": "May-26", "monthName": "May", "monthIndex": 5, "year": 2026, "rent": 5500, "previousReading": 0.0, "currentReading": 0.0, "units": 0.0, "rate": 0, "electricity": 0.0, "water": 0, "totalBill": 0.0, "previousOutstanding": 0.0, "otherCharges": 0, "credits": 0, "totalPayable": 5500.0, "totalPaid": 5500.0, "closingBalance": 0.0, "paymentStatus": "Paid", "sourceRow": "Khurshid!A7:O7"}, {"recordId": "REC-2026-06-T-14", "tenantId": "T-14", "tenantName": "Khurshid", "room": "Room 114", "month": "Jun-26", "monthName": "June", "monthIndex": 6, "year": 2026, "rent": 5500, "previousReading": 0.0, "currentReading": 0.0, "units": 0.0, "rate": 0, "electricity": 0.0, "water": 0, "totalBill": 0.0, "previousOutstanding": 0.0, "otherCharges": 0, "credits": 0, "totalPayable": 5500.0, "totalPaid": 5500.0, "closingBalance": 0.0, "paymentStatus": "Paid", "sourceRow": "Khurshid!A8:O8"}, {"recordId": "REC-2026-07-T-14", "tenantId": "T-14", "tenantName": "Khurshid", "room": "Room 114", "month": "Jul-26", "monthName": "July", "monthIndex": 7, "year": 2026, "rent": 5500, "previousReading": 0.0, "currentReading": 0.0, "units": 0.0, "rate": 0, "electricity": 0.0, "water": 0, "totalBill": 0.0, "previousOutstanding": 0.0, "otherCharges": 0, "credits": 0, "totalPayable": 5500.0, "totalPaid": 5500.0, "closingBalance": 0.0, "paymentStatus": "Paid", "sourceRow": "Khurshid!A9:O9"}, {"recordId": "REC-2026-08-T-14", "tenantId": "T-14", "tenantName": "Khurshid", "room": "Room 114", "month": "Aug-26", "monthName": "August", "monthIndex": 8, "year": 2026, "rent": 5500, "previousReading": 0.0, "currentReading": 0.0, "units": 0.0, "rate": 0, "electricity": 0.0, "water": 0, "totalBill": 0.0, "previousOutstanding": 0.0, "otherCharges": 0, "credits": 0, "totalPayable": 5500.0, "totalPaid": 5500.0, "closingBalance": 0.0, "paymentStatus": "Paid", "sourceRow": "Khurshid!A10:O10"}, {"recordId": "REC-2026-09-T-14", "tenantId": "T-14", "tenantName": "Khurshid", "room": "Room 114", "month": "Sep-26", "monthName": "September", "monthIndex": 9, "year": 2026, "rent": 5500, "previousReading": 0.0, "currentReading": 0.0, "units": 0.0, "rate": 0, "electricity": 0.0, "water": 0, "totalBill": 0.0, "previousOutstanding": 0.0, "otherCharges": 0, "credits": 0, "totalPayable": 5500.0, "totalPaid": 5500.0, "closingBalance": 0.0, "paymentStatus": "Paid", "sourceRow": "Khurshid!A11:O11"}, {"recordId": "REC-2026-10-T-14", "tenantId": "T-14", "tenantName": "Khurshid", "room": "Room 114", "month": "Oct-26", "monthName": "October", "monthIndex": 10, "year": 2026, "rent": 5500, "previousReading": 0.0, "currentReading": 0.0, "units": 0.0, "rate": 0, "electricity": 0.0, "water": 0, "totalBill": 0.0, "previousOutstanding": 0.0, "otherCharges": 0, "credits": 0, "totalPayable": 5500.0, "totalPaid": 5500.0, "closingBalance": 0.0, "paymentStatus": "Paid", "sourceRow": "Khurshid!A12:O12"}, {"recordId": "REC-2026-11-T-14", "tenantId": "T-14", "tenantName": "Khurshid", "room": "Room 114", "month": "Nov-26", "monthName": "November", "monthIndex": 11, "year": 2026, "rent": 5500, "previousReading": 0.0, "currentReading": null, "units": null, "rate": 0, "electricity": null, "water": 0, "totalBill": 0, "previousOutstanding": 0.0, "otherCharges": 0, "credits": 0, "totalPayable": 0.0, "totalPaid": 0, "closingBalance": 0.0, "paymentStatus": "Pending Calculation", "sourceRow": "Khurshid!A13:O13"}, {"recordId": "REC-2026-12-T-14", "tenantId": "T-14", "tenantName": "Khurshid", "room": "Room 114", "month": "Dec-26", "monthName": "December", "monthIndex": 12, "year": 2026, "rent": 5500, "previousReading": 0.0, "currentReading": null, "units": null, "rate": 0, "electricity": null, "water": 0, "totalBill": 0, "previousOutstanding": 0.0, "otherCharges": 0, "credits": 0, "totalPayable": 0.0, "totalPaid": 0, "closingBalance": 0.0, "paymentStatus": "Pending Calculation", "sourceRow": "Khurshid!A14:O14"}, {"recordId": "REC-2026-01-T-15", "tenantId": "T-15", "tenantName": "Budhiya", "room": "Room 115", "month": "Jan-26", "monthName": "January", "monthIndex": 1, "year": 2026, "rent": 5000, "previousReading": 0, "currentReading": 0.0, "units": 0.0, "rate": 0, "electricity": 0.0, "water": 0, "totalBill": 0.0, "previousOutstanding": 0, "otherCharges": 0, "credits": 0, "totalPayable": 5000.0, "totalPaid": 5000.0, "closingBalance": 0.0, "paymentStatus": "Paid", "sourceRow": "Budhiya!A3:O3"}, {"recordId": "REC-2026-02-T-15", "tenantId": "T-15", "tenantName": "Budhiya", "room": "Room 115", "month": "Feb-26", "monthName": "February", "monthIndex": 2, "year": 2026, "rent": 5000, "previousReading": 0.0, "currentReading": 0.0, "units": 0.0, "rate": 0, "electricity": 0.0, "water": 0, "totalBill": 0.0, "previousOutstanding": 0.0, "otherCharges": 0, "credits": 0, "totalPayable": 5000.0, "totalPaid": 5000.0, "closingBalance": 0.0, "paymentStatus": "Paid", "sourceRow": "Budhiya!A4:O4"}, {"recordId": "REC-2026-03-T-15", "tenantId": "T-15", "tenantName": "Budhiya", "room": "Room 115", "month": "Mar-26", "monthName": "March", "monthIndex": 3, "year": 2026, "rent": 5000, "previousReading": 0.0, "currentReading": 0.0, "units": 0.0, "rate": 0, "electricity": 0.0, "water": 0, "totalBill": 0.0, "previousOutstanding": 0.0, "otherCharges": 0, "credits": 0, "totalPayable": 5000.0, "totalPaid": 5000.0, "closingBalance": 0.0, "paymentStatus": "Paid", "sourceRow": "Budhiya!A5:O5"}, {"recordId": "REC-2026-04-T-15", "tenantId": "T-15", "tenantName": "Budhiya", "room": "Room 115", "month": "Apr-26", "monthName": "April", "monthIndex": 4, "year": 2026, "rent": 5000, "previousReading": 0.0, "currentReading": 0.0, "units": 0.0, "rate": 0, "electricity": 0.0, "water": 0, "totalBill": 0.0, "previousOutstanding": 0.0, "otherCharges": 0, "credits": 0, "totalPayable": 5000.0, "totalPaid": 5000.0, "closingBalance": 0.0, "paymentStatus": "Paid", "sourceRow": "Budhiya!A6:O6"}, {"recordId": "REC-2026-05-T-15", "tenantId": "T-15", "tenantName": "Budhiya", "room": "Room 115", "month": "May-26", "monthName": "May", "monthIndex": 5, "year": 2026, "rent": 5000, "previousReading": 0.0, "currentReading": 0.0, "units": 0.0, "rate": 0, "electricity": 0.0, "water": 0, "totalBill": 0.0, "previousOutstanding": 0.0, "otherCharges": 0, "credits": 0, "totalPayable": 5000.0, "totalPaid": 5000.0, "closingBalance": 0.0, "paymentStatus": "Paid", "sourceRow": "Budhiya!A7:O7"}, {"recordId": "REC-2026-06-T-15", "tenantId": "T-15", "tenantName": "Budhiya", "room": "Room 115", "month": "Jun-26", "monthName": "June", "monthIndex": 6, "year": 2026, "rent": 5000, "previousReading": 0.0, "currentReading": 0.0, "units": 0.0, "rate": 0, "electricity": 0.0, "water": 0, "totalBill": 0.0, "previousOutstanding": 0.0, "otherCharges": 0, "credits": 0, "totalPayable": 5000.0, "totalPaid": 5000.0, "closingBalance": 0.0, "paymentStatus": "Paid", "sourceRow": "Budhiya!A8:O8"}, {"recordId": "REC-2026-07-T-15", "tenantId": "T-15", "tenantName": "Budhiya", "room": "Room 115", "month": "Jul-26", "monthName": "July", "monthIndex": 7, "year": 2026, "rent": 5000, "previousReading": 0.0, "currentReading": 0.0, "units": 0.0, "rate": 0, "electricity": 0.0, "water": 0, "totalBill": 0.0, "previousOutstanding": 0.0, "otherCharges": 0, "credits": 0, "totalPayable": 5000.0, "totalPaid": 5000.0, "closingBalance": 0.0, "paymentStatus": "Paid", "sourceRow": "Budhiya!A9:O9"}, {"recordId": "REC-2026-08-T-15", "tenantId": "T-15", "tenantName": "Budhiya", "room": "Room 115", "month": "Aug-26", "monthName": "August", "monthIndex": 8, "year": 2026, "rent": 5000, "previousReading": 0.0, "currentReading": 0.0, "units": 0.0, "rate": 0, "electricity": 0.0, "water": 0, "totalBill": 0.0, "previousOutstanding": 0.0, "otherCharges": 0, "credits": 0, "totalPayable": 5000.0, "totalPaid": 5000.0, "closingBalance": 0.0, "paymentStatus": "Paid", "sourceRow": "Budhiya!A10:O10"}, {"recordId": "REC-2026-09-T-15", "tenantId": "T-15", "tenantName": "Budhiya", "room": "Room 115", "month": "Sep-26", "monthName": "September", "monthIndex": 9, "year": 2026, "rent": 5000, "previousReading": 0.0, "currentReading": 0.0, "units": 0.0, "rate": 0, "electricity": 0.0, "water": 0, "totalBill": 0.0, "previousOutstanding": 0.0, "otherCharges": 0, "credits": 0, "totalPayable": 5000.0, "totalPaid": 5000.0, "closingBalance": 0.0, "paymentStatus": "Paid", "sourceRow": "Budhiya!A11:O11"}, {"recordId": "REC-2026-10-T-15", "tenantId": "T-15", "tenantName": "Budhiya", "room": "Room 115", "month": "Oct-26", "monthName": "October", "monthIndex": 10, "year": 2026, "rent": 5000, "previousReading": 0.0, "currentReading": 0.0, "units": 0.0, "rate": 0, "electricity": 0.0, "water": 0, "totalBill": 0.0, "previousOutstanding": 0.0, "otherCharges": 0, "credits": 0, "totalPayable": 5000.0, "totalPaid": 5000.0, "closingBalance": 0.0, "paymentStatus": "Paid", "sourceRow": "Budhiya!A12:O12"}, {"recordId": "REC-2026-11-T-15", "tenantId": "T-15", "tenantName": "Budhiya", "room": "Room 115", "month": "Nov-26", "monthName": "November", "monthIndex": 11, "year": 2026, "rent": 5000, "previousReading": 0.0, "currentReading": null, "units": null, "rate": 0, "electricity": null, "water": 0, "totalBill": 0, "previousOutstanding": 0.0, "otherCharges": 0, "credits": 0, "totalPayable": 0.0, "totalPaid": 0, "closingBalance": 0.0, "paymentStatus": "Pending Calculation", "sourceRow": "Budhiya!A13:O13"}, {"recordId": "REC-2026-12-T-15", "tenantId": "T-15", "tenantName": "Budhiya", "room": "Room 115", "month": "Dec-26", "monthName": "December", "monthIndex": 12, "year": 2026, "rent": 5000, "previousReading": 0.0, "currentReading": null, "units": null, "rate": 0, "electricity": null, "water": 0, "totalBill": 0, "previousOutstanding": 0.0, "otherCharges": 0, "credits": 0, "totalPayable": 0.0, "totalPaid": 0, "closingBalance": 0.0, "paymentStatus": "Pending Calculation", "sourceRow": "Budhiya!A14:O14"}] as unknown as MonthlyRecord[];
+const EXTRA_PAYMENTS_2026: PaymentTransaction[] = [{"paymentId": "PAY-105", "tenantId": "T-13", "tenantName": "Sundar", "recordId": "REC-2026-10-T-13", "month": "Oct-26", "year": 2026, "date": "2026-11-12", "amount": 2654.0, "method": "Cash", "reference": "WEB-PAY-105", "type": "Payment", "notes": "Recorded on 2026-11-12 (Cash)", "createdAt": "2026-11-12T10:00:00Z"}, {"paymentId": "PAY-106", "tenantId": "T-11", "tenantName": "Dinesh", "recordId": "REC-2026-10-T-11", "month": "Oct-26", "year": 2026, "date": "2026-11-12", "amount": 3053.0, "method": "Cash", "reference": "WEB-PAY-106", "type": "Payment", "notes": "Recorded on 2026-11-12 (Cash)", "createdAt": "2026-11-12T10:00:00Z"}, {"paymentId": "PAY-107", "tenantId": "T-08", "tenantName": "Guddu", "recordId": "REC-2026-10-T-08", "month": "Oct-26", "year": 2026, "date": "2026-11-12", "amount": 5092.0, "method": "Cash", "reference": "WEB-PAY-107", "type": "Payment", "notes": "Recorded on 2026-11-12 (Cash)", "createdAt": "2026-11-12T10:00:00Z"}, {"paymentId": "PAY-108", "tenantId": "T-14", "tenantName": "Khurshid", "recordId": "REC-2026-01-T-14", "month": "Jan-26", "year": 2026, "date": "2026-01-05", "amount": 5500.0, "method": "Cash", "reference": "HIST-JAN-26-14", "type": "Payment", "notes": "Historical recorded payment", "createdAt": "2026-01-05T10:00:00Z"}, {"paymentId": "PAY-109", "tenantId": "T-14", "tenantName": "Khurshid", "recordId": "REC-2026-02-T-14", "month": "Feb-26", "year": 2026, "date": "2026-02-05", "amount": 5500.0, "method": "Cash", "reference": "HIST-FEB-26-14", "type": "Payment", "notes": "Historical recorded payment", "createdAt": "2026-02-05T10:00:00Z"}, {"paymentId": "PAY-110", "tenantId": "T-14", "tenantName": "Khurshid", "recordId": "REC-2026-03-T-14", "month": "Mar-26", "year": 2026, "date": "2026-03-05", "amount": 5500.0, "method": "Cash", "reference": "HIST-MAR-26-14", "type": "Payment", "notes": "Historical recorded payment", "createdAt": "2026-03-05T10:00:00Z"}, {"paymentId": "PAY-111", "tenantId": "T-14", "tenantName": "Khurshid", "recordId": "REC-2026-04-T-14", "month": "Apr-26", "year": 2026, "date": "2026-04-05", "amount": 5500.0, "method": "Cash", "reference": "HIST-APR-26-14", "type": "Payment", "notes": "Historical recorded payment", "createdAt": "2026-04-05T10:00:00Z"}, {"paymentId": "PAY-112", "tenantId": "T-14", "tenantName": "Khurshid", "recordId": "REC-2026-05-T-14", "month": "May-26", "year": 2026, "date": "2026-05-05", "amount": 5500.0, "method": "Cash", "reference": "HIST-MAY-26-14", "type": "Payment", "notes": "Historical recorded payment", "createdAt": "2026-05-05T10:00:00Z"}, {"paymentId": "PAY-113", "tenantId": "T-14", "tenantName": "Khurshid", "recordId": "REC-2026-06-T-14", "month": "Jun-26", "year": 2026, "date": "2026-06-05", "amount": 5500.0, "method": "Cash", "reference": "HIST-JUN-26-14", "type": "Payment", "notes": "Historical recorded payment", "createdAt": "2026-06-05T10:00:00Z"}, {"paymentId": "PAY-114", "tenantId": "T-14", "tenantName": "Khurshid", "recordId": "REC-2026-07-T-14", "month": "Jul-26", "year": 2026, "date": "2026-07-05", "amount": 5500.0, "method": "Cash", "reference": "HIST-JUL-26-14", "type": "Payment", "notes": "Historical recorded payment", "createdAt": "2026-07-05T10:00:00Z"}, {"paymentId": "PAY-115", "tenantId": "T-14", "tenantName": "Khurshid", "recordId": "REC-2026-08-T-14", "month": "Aug-26", "year": 2026, "date": "2026-08-05", "amount": 5500.0, "method": "Cash", "reference": "HIST-AUG-26-14", "type": "Payment", "notes": "Historical recorded payment", "createdAt": "2026-08-05T10:00:00Z"}, {"paymentId": "PAY-116", "tenantId": "T-14", "tenantName": "Khurshid", "recordId": "REC-2026-09-T-14", "month": "Sep-26", "year": 2026, "date": "2026-09-05", "amount": 5500.0, "method": "Cash", "reference": "HIST-SEP-26-14", "type": "Payment", "notes": "Historical recorded payment", "createdAt": "2026-09-05T10:00:00Z"}, {"paymentId": "PAY-117", "tenantId": "T-14", "tenantName": "Khurshid", "recordId": "REC-2026-10-T-14", "month": "Oct-26", "year": 2026, "date": "2026-11-12", "amount": 5500.0, "method": "Cash", "reference": "HIST-OCT-26-14", "type": "Payment", "notes": "Historical recorded payment", "createdAt": "2026-11-12T10:00:00Z"}, {"paymentId": "PAY-118", "tenantId": "T-15", "tenantName": "Budhiya", "recordId": "REC-2026-01-T-15", "month": "Jan-26", "year": 2026, "date": "2026-01-05", "amount": 5000.0, "method": "Cash", "reference": "HIST-JAN-26-15", "type": "Payment", "notes": "Historical recorded payment", "createdAt": "2026-01-05T10:00:00Z"}, {"paymentId": "PAY-119", "tenantId": "T-15", "tenantName": "Budhiya", "recordId": "REC-2026-02-T-15", "month": "Feb-26", "year": 2026, "date": "2026-02-05", "amount": 5000.0, "method": "Cash", "reference": "HIST-FEB-26-15", "type": "Payment", "notes": "Historical recorded payment", "createdAt": "2026-02-05T10:00:00Z"}, {"paymentId": "PAY-120", "tenantId": "T-15", "tenantName": "Budhiya", "recordId": "REC-2026-03-T-15", "month": "Mar-26", "year": 2026, "date": "2026-03-05", "amount": 5000.0, "method": "Cash", "reference": "HIST-MAR-26-15", "type": "Payment", "notes": "Historical recorded payment", "createdAt": "2026-03-05T10:00:00Z"}, {"paymentId": "PAY-121", "tenantId": "T-15", "tenantName": "Budhiya", "recordId": "REC-2026-04-T-15", "month": "Apr-26", "year": 2026, "date": "2026-04-05", "amount": 5000.0, "method": "Cash", "reference": "HIST-APR-26-15", "type": "Payment", "notes": "Historical recorded payment", "createdAt": "2026-04-05T10:00:00Z"}, {"paymentId": "PAY-122", "tenantId": "T-15", "tenantName": "Budhiya", "recordId": "REC-2026-05-T-15", "month": "May-26", "year": 2026, "date": "2026-05-05", "amount": 5000.0, "method": "Cash", "reference": "HIST-MAY-26-15", "type": "Payment", "notes": "Historical recorded payment", "createdAt": "2026-05-05T10:00:00Z"}, {"paymentId": "PAY-123", "tenantId": "T-15", "tenantName": "Budhiya", "recordId": "REC-2026-06-T-15", "month": "Jun-26", "year": 2026, "date": "2026-06-05", "amount": 5000.0, "method": "Cash", "reference": "HIST-JUN-26-15", "type": "Payment", "notes": "Historical recorded payment", "createdAt": "2026-06-05T10:00:00Z"}, {"paymentId": "PAY-124", "tenantId": "T-15", "tenantName": "Budhiya", "recordId": "REC-2026-07-T-15", "month": "Jul-26", "year": 2026, "date": "2026-07-05", "amount": 5000.0, "method": "Cash", "reference": "HIST-JUL-26-15", "type": "Payment", "notes": "Historical recorded payment", "createdAt": "2026-07-05T10:00:00Z"}, {"paymentId": "PAY-125", "tenantId": "T-15", "tenantName": "Budhiya", "recordId": "REC-2026-08-T-15", "month": "Aug-26", "year": 2026, "date": "2026-08-05", "amount": 5000.0, "method": "Cash", "reference": "HIST-AUG-26-15", "type": "Payment", "notes": "Historical recorded payment", "createdAt": "2026-08-05T10:00:00Z"}, {"paymentId": "PAY-126", "tenantId": "T-15", "tenantName": "Budhiya", "recordId": "REC-2026-09-T-15", "month": "Sep-26", "year": 2026, "date": "2026-09-05", "amount": 5000.0, "method": "Cash", "reference": "HIST-SEP-26-15", "type": "Payment", "notes": "Historical recorded payment", "createdAt": "2026-09-05T10:00:00Z"}, {"paymentId": "PAY-127", "tenantId": "T-15", "tenantName": "Budhiya", "recordId": "REC-2026-10-T-15", "month": "Oct-26", "year": 2026, "date": "2026-11-12", "amount": 5000.0, "method": "Cash", "reference": "HIST-OCT-26-15", "type": "Payment", "notes": "Historical recorded payment", "createdAt": "2026-11-12T10:00:00Z"}] as unknown as PaymentTransaction[];
+
+function buildMergedTenants(base: readonly any[]): Tenant[] {
+  const map = new Map<string, Tenant>();
+  (base as unknown as Tenant[]).forEach((t) => map.set(t.tenantId, t));
+  EXTRA_TENANTS_2026.forEach((t) => {
+    if (!map.has(t.tenantId)) map.set(t.tenantId, t);
+  });
+  return Array.from(map.values());
+}
+
+function buildMergedRecords(base: readonly any[]): MonthlyRecord[] {
+  const map = new Map<string, MonthlyRecord>();
+  (base as unknown as MonthlyRecord[]).forEach((r) => map.set(r.recordId, r));
+  EXTRA_RECORDS_2026.forEach((r) => {
+    if (!map.has(r.recordId)) map.set(r.recordId, r);
+  });
+  return Array.from(map.values());
+}
+
+function buildMergedPayments(base: readonly any[]): PaymentTransaction[] {
+  const map = new Map<string, PaymentTransaction>();
+  (base as unknown as PaymentTransaction[]).forEach((p) => map.set(p.paymentId, p));
+  EXTRA_PAYMENTS_2026.forEach((p) => {
+    if (!map.has(p.paymentId)) map.set(p.paymentId, p);
+  });
+  return Array.from(map.values());
+}
+
 export default function RentFlowWorkspace({
   initialTab = 'dashboard',
   initialTenantId = '',
@@ -214,9 +246,9 @@ export default function RentFlowWorkspace({
   const [payRef, setPayRef] = useState<string>('');
   const [payNotes, setPayNotes] = useState<string>('');
 
-  const [tenants, setTenants] = useState<Tenant[]>(() => [...INITIAL_WORKBOOK_DATA.tenants] as unknown as Tenant[]);
-  const [rawRecords, setRawRecords] = useState<MonthlyRecord[]>(() => [...INITIAL_WORKBOOK_DATA.monthlyRecords] as unknown as MonthlyRecord[]);
-  const [payments, setPayments] = useState<PaymentTransaction[]>(() => [...INITIAL_WORKBOOK_DATA.payments] as unknown as PaymentTransaction[]);
+  const [tenants, setTenants] = useState<Tenant[]>(() => buildMergedTenants(INITIAL_WORKBOOK_DATA.tenants));
+  const [rawRecords, setRawRecords] = useState<MonthlyRecord[]>(() => buildMergedRecords(INITIAL_WORKBOOK_DATA.monthlyRecords));
+  const [payments, setPayments] = useState<PaymentTransaction[]>(() => buildMergedPayments(INITIAL_WORKBOOK_DATA.payments));
   const [auditLog, setAuditLog] = useState<Array<{ timestamp: string; user: string; record: string; action: string; oldVal: string; newVal: string }>>([
     { timestamp: '2026-11-08 13:30:00', user: 'System Audit', record: 'All 13 Tenant Sheets (Oct-Dec)', action: 'Formula Repair', oldVal: '=IMSUB(D12,E12) -> Negative Bills', newVal: 'IF(ISBLANK(D12),"Reading Pending",D12-E12)' },
     { timestamp: '2026-11-08 13:32:00', user: 'System Audit', record: 'Javed & Raja (BG-01)', action: 'Combined Slip Preserved', oldVal: 'Javed!A34:C34 Blank in Sep', newVal: 'Curr Only (₹5,360) & Full Total (₹11,350) Linked' },
@@ -246,7 +278,7 @@ export default function RentFlowWorkspace({
     try {
       const savedUrl = loadPermanentWebhookStorage();
       if (savedUrl) setAppsScriptUrl(savedUrl);
-      const savedState = localStorage.getItem('rentflow_state_v2026_oct_v3');
+      const savedState = localStorage.getItem('rentflow_state_v2026_15tenants_v4');
       if (savedState) {
         const parsed = JSON.parse(savedState);
         if (Array.isArray(parsed.rawRecords) && parsed.rawRecords.length > 0) {
@@ -300,7 +332,7 @@ export default function RentFlowWorkspace({
     ) => {
       try {
         localStorage.setItem(
-          'rentflow_state_v2026_oct_v3',
+          'rentflow_state_v2026_15tenants_v4',
           JSON.stringify({
             tenants: nextTenants,
             rawRecords: nextRawRecords,
@@ -375,13 +407,49 @@ export default function RentFlowWorkspace({
   const applyRemoteSyncData = useCallback((remote: any, sourceLabel: string) => {
     if (!remote) return false;
     let updated = false;
+    if (Array.isArray(remote.tenants) && remote.tenants.length > 0) {
+      setTenants((prev) => {
+        const byId = new Map<string, Tenant>();
+        prev.forEach((t) => byId.set(t.tenantId, t));
+        remote.tenants.forEach((rt: any) => {
+          if (!rt || !rt.tenantId) return;
+          const ex = byId.get(rt.tenantId);
+          byId.set(rt.tenantId, {
+            ...(ex || {
+              tenantId: rt.tenantId,
+              name: rt.name,
+              room: rt.room || `Room ${100 + byId.size + 1}`,
+              monthlyRent: Number(rt.monthlyRent) || 0,
+              dueDay: 5,
+              electricityRate: rt.electricityRate !== undefined ? Number(rt.electricityRate) : 0,
+              waterCharge: rt.waterCharge !== undefined ? Number(rt.waterCharge) : 0,
+              waterBillingType: rt.waterBillingType || 'Exempt',
+              electricityBillingType: Number(rt.electricityRate) > 0 ? `Metered (₹${rt.electricityRate}/Unit)` : 'Exempt (₹0)',
+              status: rt.status || 'Active',
+              startDate: '2026-01-01',
+              endDate: '',
+              contact: '',
+              billingGroupId: '',
+              sheetName: rt.sheetName || rt.name,
+              initialMeterReading: Number(rt.initialMeterReading) || 0,
+              openingArrears: Number(rt.openingArrears) || 0,
+              notes: 'Synced from Google Sheet',
+            }),
+            monthlyRent: Number(rt.monthlyRent) || ex?.monthlyRent || 0,
+          });
+        });
+        return Array.from(byId.values());
+      });
+      updated = true;
+    }
     if (Array.isArray(remote.liveReadings) && remote.liveReadings.length > 0) {
       setRawRecords((prev) => {
         const byId = new Map<string, any>();
         remote.liveReadings.forEach((lr: any) => byId.set(lr.recordId, lr));
-        return prev.map((r) => {
+        const updatedList = prev.map((r) => {
           const match = byId.get(r.recordId);
           if (!match) return r;
+          byId.delete(r.recordId);
           return {
             ...r,
             rent: match.rent !== undefined ? Number(match.rent) : r.rent,
@@ -390,6 +458,38 @@ export default function RentFlowWorkspace({
             credits: match.credits !== undefined ? Number(match.credits) : r.credits,
           };
         });
+        byId.forEach((lr: any) => {
+          if (lr && lr.recordId && lr.tenantId) {
+            const mIdx = Number(lr.monthIndex) || Math.max(1, MONTH_SHORT.indexOf(String(lr.month || 'Oct-26').split('-')[0]) + 1);
+            updatedList.push({
+              recordId: lr.recordId,
+              tenantId: lr.tenantId,
+              tenantName: lr.tenantName || lr.tenantId,
+              room: lr.room || '',
+              month: lr.month || `${MONTH_SHORT[mIdx - 1]}-26`,
+              monthName: MONTH_NAMES[mIdx - 1] || 'October',
+              monthIndex: mIdx,
+              year: 2026,
+              rent: Number(lr.rent) || 0,
+              previousReading: 0,
+              currentReading: lr.currentReading,
+              units: 0,
+              rate: lr.rate !== undefined ? Number(lr.rate) : 0,
+              electricity: 0,
+              water: Number(lr.water) || 0,
+              totalBill: Number(lr.water) || 0,
+              previousOutstanding: 0,
+              otherCharges: 0,
+              credits: Number(lr.credits) || 0,
+              totalPayable: Number(lr.rent) || 0,
+              totalPaid: 0,
+              closingBalance: 0,
+              paymentStatus: 'Paid',
+              sourceRow: '',
+            });
+          }
+        });
+        return updatedList;
       });
       updated = true;
     }
@@ -569,7 +669,7 @@ export default function RentFlowWorkspace({
       scene.add(group);
 
       const cubes: Array<{ mesh: any; baseH: number; phase: number }> = [];
-      for (let i = 0; i < 13; i++) {
+      for (let i = 0; i < Math.max(15, monthRecs.length); i++) {
         const r = monthRecs[i];
         const isPaid = r && r.paymentStatus === 'Paid';
         const hasDue = r && r.closingBalance > 0;
@@ -877,16 +977,16 @@ export default function RentFlowWorkspace({
 
   const handleRestoreHistoricalState = () => {
     try {
-      localStorage.removeItem('rentflow_state_v2026_oct_v3');
+      localStorage.removeItem('rentflow_state_v2026_15tenants_v4');
     } catch {}
-    setTenants([...INITIAL_WORKBOOK_DATA.tenants] as unknown as Tenant[]);
-    setRawRecords([...INITIAL_WORKBOOK_DATA.monthlyRecords] as unknown as MonthlyRecord[]);
-    setPayments([...INITIAL_WORKBOOK_DATA.payments] as unknown as PaymentTransaction[]);
+    setTenants(buildMergedTenants(INITIAL_WORKBOOK_DATA.tenants));
+    setRawRecords(buildMergedRecords(INITIAL_WORKBOOK_DATA.monthlyRecords));
+    setPayments(buildMergedPayments(INITIAL_WORKBOOK_DATA.payments));
     setSelectedYear(2026);
     const prior = getCurrentMonthKeyAndYear();
     setSelectedYear(prior.year);
     setSelectedMonth(prior.monthKey);
-    setToastMessage(`Synchronized with latest Google Sheet baseline (13 tenants, 104 payments = ₹360,024, active billing month ${prior.monthKey}).`);
+    setToastMessage(`Synchronized with latest Google Sheet baseline (15 tenants including Khurshid & Budhiya, 127 payments = ₹475,823, active billing month ${prior.monthKey}).`);
   };
 
   const handleDownloadTwoPagePdf = () => {
@@ -1294,7 +1394,7 @@ export default function RentFlowWorkspace({
                   <div className="space-y-2 max-w-2xl pointer-events-auto">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 backdrop-blur-md border border-emerald-400/40 text-emerald-300 text-[11px] font-extrabold tracking-wide shadow-sm">
                       <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                      <span>LIVE 3D PROPERTY TWIN · {selectedMonth} · 13 ROOMS</span>
+                      <span>LIVE 3D PROPERTY TWIN · {selectedMonth} · {tenants.length} ROOMS</span>
                     </div>
                     <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-100 to-emerald-200 bg-clip-text text-transparent">
                       RentFlow 3D Financial Command Center
@@ -1425,7 +1525,7 @@ export default function RentFlowWorkspace({
                   </div>
                   <div className="grid grid-cols-12 gap-1.5 items-end h-40 pt-4 px-1 border-b border-slate-200">
                     {monthlyTrendSummary.map((m) => {
-                      const maxVal = 60000;
+                      const maxVal = 78000;
                       const expH = Math.max(8, Math.min(100, Math.round((m.expected / maxVal) * 100)));
                       const colH = Math.max(4, Math.min(100, Math.round((m.collected / maxVal) * 100)));
                       const isSel = m.month === selectedMonth;
@@ -2264,6 +2364,22 @@ export default function RentFlowWorkspace({
                   {renderSlipCardUI(byNameMap['sundar ki mummy'], '12')}
                 </div>
               </div>
+
+              {/* A4 PAGE 3 OF 3 (NEW RENT-ONLY TENANTS: KHURSHID & BUDHIYA) */}
+              <div className="bg-white rounded-2xl border border-slate-300 shadow-md p-5 max-w-5xl mx-auto space-y-4">
+                <div className="flex items-center justify-between border-b-2 border-[#0F172A] pb-2.5">
+                  <div>
+                    <h3 className="text-sm font-extrabold text-[#0F172A] uppercase">{propertyName} — Monthly Rent Slips ({mName} {selectedYear})</h3>
+                    <p className="text-[11px] text-slate-500">Page 3 of 3 (Slips 13–14: Khurshid &amp; Budhiya — Rent-Only Tenancies, Zero Electricity &amp; Water)</p>
+                  </div>
+                  <span className="px-2.5 py-1 rounded-lg bg-slate-900 text-white font-mono text-xs font-bold">A4 PAGE 3 / 3</span>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {renderSlipCardUI(byNameMap['khurshid'], '13')}
+                  {renderSlipCardUI(byNameMap['budhiya'], '14')}
+                </div>
+              </div>
             </div>
           )}
 
@@ -2389,7 +2505,7 @@ export default function RentFlowWorkspace({
           {activeTab === 'directory' && (
             <div className="space-y-4">
               <div>
-                <h2 className="text-xl font-extrabold text-[#0F172A]">Master Tenant Directory (13 Active Tenants — Zero Security Deposit)</h2>
+                <h2 className="text-xl font-extrabold text-[#0F172A]">Master Tenant Directory ({tenants.length} Active Tenants — Zero Security Deposit)</h2>
                 <p className="text-xs text-slate-600">Synchronized with <span className="font-mono">Tenant Directory!A1:P17</span>. Edit scheduled monthly rent or status inline.</p>
               </div>
 
